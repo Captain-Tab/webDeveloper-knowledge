@@ -17,4 +17,4 @@
 
 #### [Vue.JS4-绑定指令v-bind](/Vue.JS%20Note/vue.JS4-绑定指令v-bind.md)
 
-#### [VueJS5-内置指令](/Vue.JS%20Note/Vue.JS5-内置指令.md)
+#### [Vue.JS5-内置指令](/Vue.JS%20Note/Vue.JS5-内置指令.md)
