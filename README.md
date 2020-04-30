@@ -24,3 +24,5 @@
 #### [Vue.JS(7)组件](/Vue.JS%20Note/Vue.JS(7)组件.md)
 
 #### [Vue.JS(8)自定义指令](/Vue.JS%20Note/Vue.JS(8)自定义指令.md)
+
+#### [Vue.JS(9)render函数](/Vue.JS%20Note/Vue.JS(9)render函数.md)
