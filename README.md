@@ -27,4 +27,6 @@
 
 #### [Vue.JS(9)render函数](/Vue.JS%20Note/Vue.JS(9)render函数.md)
 
-#### [Vue.JS(10)使用vue-cli搭建项目](/Vue.JS%20Note/Vue.JS(10)使用vue-cli脚手架.md)
+#### [Vue.JS(10)使用vue-cli搭建项目](/Vue.JS%20Note/Vue.JS(10)使用vue-cli搭建项目.md)
+
+#### [Vue.JS(11)前端路由](/Vue.JS%20Note/Vue.JS(11)前端路由.md)
