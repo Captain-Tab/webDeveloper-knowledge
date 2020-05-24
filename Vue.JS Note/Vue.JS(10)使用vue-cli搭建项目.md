@@ -1,9 +1,13 @@
-### 使用vue-cli搭建项目
-#### 下载Node.JS
+## 目录
+1. [下载Node.JS](#下载Node.JS)
+2. [搭建项目步骤](#搭建项目步骤)
+3. [项目结构分析](#项目结构分析)
+
+### 下载Node.JS
 ```
 npm install -g cnpm --registry=https://registry.npm.taobao.org
 ```
-#### 搭建项目步骤
+### 搭建项目步骤
 * 全局安装`vue-cli`
 ```
 npm install -g vue-cli
@@ -24,7 +28,7 @@ npm install
 ```
 npm run dev
 ```
-#### 项目结构分析
+### 项目结构分析
 ```
 第一部分
 ├── build // 项目构建(webpack)相关代码 记忆：（够贱） 9个

@@ -1,8 +1,8 @@
 ## 目录
 
-1. [v-bind 的运用](###v-bind的运用)
-2. [如何绑定class](###如何绑定class)
-3. [如何绑定style](###如何绑定style)
+1. [v-bind 的运用](#v-bind的运用)
+2. [如何绑定class](#如何绑定class)
+3. [如何绑定style](#如何绑定style)
 
 ### v-bind 的运用
 

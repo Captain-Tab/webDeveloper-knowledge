@@ -1,8 +1,7 @@
 ## 目录
-- [目录](#%e7%9b%ae%e5%bd%95)
-  - [Computed计算属性](#computed%e8%ae%a1%e7%ae%97%e5%b1%9e%e6%80%a7)
-  - [watch监听属性](#watch%e7%9b%91%e5%90%ac%e5%b1%9e%e6%80%a7)
-  - [computed vs watch](#computed-vs-watch)
+1. [Computed计算属性](#computed计算属性)
+2. [watch监听属性](#watch监听属性)
+3. [computed vs watch](#computed-vs-watch)
 
 
 
