@@ -18,12 +18,41 @@
 
 ## 技巧
 * 遇到比较抽象的题目就具体化（举例），遇到比较具体的题目就抽象化（阐述）
-* 抽象题目搜知乎，代码题目搜 Stackoverflow 或博客
+* 抽象题目搜知乎，代码题目搜`Stackoverflow`或博客
 * 『XXX 的原理』这种题目一般都是说源代码思路，但你不需要看源码，直接看别人的博客即可（再次强调，不要用百度）
 
 ## HTML
-- [ ] 必考：你是如何理解 HTML 语义化的？
-- [ ] meta viewport 是做什么用的，怎么写？
+- [x] 必考：你是如何理解`HTML`语义化的？
+  
+  定义：`HTML`语义化是指使用恰当语义的`html`标签、`class`类名等内容，让页面具有良好的结构与含义，从而让人和机器都能快速理解网页内容。
+
+  举例：具体来说就是使用正确的标签，例如段落就写`p`标签,标题就写`h1`标签，文章就写`article`,视频就写`video`标签等等。同时也要尽可能少的使用无语义的标签`div`和`span`等等
+
+  总结：
+    * 正确的标签做正确的事情
+    * 页面内容结构化
+    * 无CSS样子时也容易阅读，便于阅读维护和理解
+    * 便于浏览器、搜索引擎解析。 利于爬虫标记、利于SEO
+
+- [x] meta viewport 是做什么用的，怎么写？
+  
+  `meta`定义: 元素可提供有关页面的元信息（meta-information），比如针对搜索引擎和更新频度的描述和关键词。简单来说`meta`标签主要用于描述页面的一些信息。
+
+  `viewport`定义: `viewport`是`meta`标签的`name`属性中可选值中的一个，指`web`页面上用户可见的区域，用于移动端页面设计
+
+  举例：移动端的`viewport`宽度会从默认的`980px`变成各个设备的 device-width 。
+  ```
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+  ```
+  属性解释：`content`定义了`viewport`的属性
+
+    | 属性   |      含义      |  实例 |
+    |----------|:-------------:|------:|
+    | `width`|  `viewport`的宽度 | `width=device-width` 指缩放为 100% 时以 `CSS` 像素计量的屏幕宽度 |
+    | `initial-scale` |   初始化缩放比例  |  	`initial-scale=1.0` 初始化不进行缩放 |
+    | `maximum-scale` | 用户最大缩放比例 |    `maximum-scale=1.0` 不允许用户缩放 |
+
+
 - [ ] 你用过哪些 HTML 5 标签？
 H5 是什么？
 ## CSS
