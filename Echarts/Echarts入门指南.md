@@ -7,7 +7,8 @@
 6. [点击事件](#点击事件)
 7. [移动端适配](#移动端适配)
 8. [echarts适配Vue](#echarts适配Vue)
-9. [更多资料](#更多资料)
+9. [echarts适配React](#echarts适配react)
+10. [更多资料](#更多资料)
 
 
 ## 引入echarts
@@ -78,6 +79,7 @@ import echarts from 'echarts'或者`var echarts = require('echarts')`
 </html>
 ```
 3. 效果图
+   
 ![](https://user-gold-cdn.xitu.io/2020/5/24/172440884faea39d?w=770&h=385&f=jpeg&s=32762)
 
 ## 更新主题
@@ -288,6 +290,90 @@ export default {
   }
 </script>
 ```
+
+## echarts适配React
+```
+// 子组件 React-echarts
+import React,{useState} from 'react'
+import echarts from 'echarts'
+
+export function ReactEcharts(props){
+   const {option, loading} = props
+   const container = useRef(null)
+   const chart= useRef(null)
+   useEffect(()=>{
+     const width = document.documentElement.clientWidth
+     container.current.style.width = `${width}px`
+     container.current.style.height = `${width * 1.2}px`
+     chart.current = echarts.init(container.current,'dark')
+   },[])
+   useEffect(()=>{
+       chart.current.setOpiton(option)
+   },[option])
+   useEffect(()=>{
+       if(loading){
+           chart.current.showLoading()
+       }else(){
+           chart.current.hideLoading()
+       }
+   },[loading])
+    return(
+        <div ref={container}></div>
+        )
+}
+```
+```
+// 父组件，包含echarts子组件
+import React from 'react'
+import {ReactEcharts} from './react-echarts'
+
+function ReactEcharts(){
+    const [loading, setLoading] = useState(false)
+    const [option, setOption] = useState({
+         title: {
+                text: 'ECharts 入门示例'
+            },
+            tooltip: {},
+            legend: {
+                data:['销量']
+            },
+            xAxis: {
+                data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+            },
+            yAxis: {},
+            series: [{
+                name: '销量',
+                type: 'bar',
+                data: [5, 20, 36, 10, 10, 20]
+            }]
+    })
+    
+    const onClick =()=>{
+        if(loading){return}
+        setLoading(true)
+        setTimeout(()=>{
+            setLoading(false)
+            setOption({
+               xAxis:{
+                    data:[...prviousData, newKey] //整合新旧数据生成新的数据
+                },
+               series:[{
+                    data:[...value, newValue]  //整合新旧数据生
+                       }]
+           })
+        },3000)
+    }
+    
+    return(
+      <div>
+        <h1>在React里使用Echarts</h1>
+        <ReactEcharts option={option} loading={loading}/>
+        <button onClick={onClick}></button>
+      </div>
+  )
+}
+```
+
 ## 更多资料
 >[Echarts更复杂的setOption实例](https://echarts.apache.org/examples/zh/editor.html?c=doc-example/tutorial-dynamic-data)
 

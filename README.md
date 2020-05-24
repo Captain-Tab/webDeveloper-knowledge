@@ -1,14 +1,6 @@
 ![Header](assets/developer-3.png)
 # 前端开发笔记
-
-## 前端面试
-### [2020面试题目](/InterviewPreparation/Interview-1.md)
-
 ## 前端基础学习
-
-## 前端扩展学习
-### Echart
-#### [Echarts入门指南](/Echarts/Echarts入门指南.md)
 
 ## 前端框架学习
 
@@ -36,3 +28,9 @@
 
 #### [(11)前端路由](/Vue.JS%20Note/Vue.JS(11)前端路由.md)
 
+## 前端扩展学习
+### Echart
+#### [Echarts入门指南](/Echarts/Echarts入门指南.md)
+
+## 前端面试
+### [2020面试题目](/InterviewPreparation/Interview-1.md)
