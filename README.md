@@ -1,12 +1,11 @@
 ![Header](assets/developer-3.png)
 
-# 前端开发笔记
-
 ## 前端基础学习
+#### [1-学习方法](/Basic/1-学习方法.md)
 
 ## 前端框架学习
 
-### Vue 框架
+### Vue框架
 
 #### [(1)概述](</Vue.JS%20Note/Vue.JS(1)概述.md>)
 
@@ -34,7 +33,7 @@
 
 ### Echarts
 
-#### [Echarts 入门指南](/Echarts/Echarts入门指南.md)
+#### [Echarts入门指南](/Echarts/Echarts入门指南.md)
 
 ## 前端面试
 

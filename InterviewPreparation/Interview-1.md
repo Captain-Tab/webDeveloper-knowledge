@@ -31,13 +31,22 @@
   总结：
     * 正确的标签做正确的事情
     * 页面内容结构化
-    * 无CSS样子时也容易阅读，便于阅读维护和理解
+    * 无`CSS`样子时也容易阅读，便于阅读维护和理解
     * 便于浏览器、搜索引擎解析。 利于爬虫标记、利于SEO
 
-- [x] meta viewport 是做什么用的，怎么写？
+- [x] `meta viewport` 是做什么用的，怎么写？
   
   `meta`定义: 元素可提供有关页面的元信息（meta-information），比如针对搜索引擎和更新频度的描述和关键词。简单来说`meta`标签主要用于描述页面的一些信息。
 
+  * `charset`: 定义`HTML`文档的字符集
+  ```
+   <meta charset="UTF-8">
+  ```
+  * `http-equiv`:可用于模拟`http`请求头，可设置过期时间，缓存，刷新
+  ```
+   <meta http-equiv="expires" content="wed, 20 Jun 2019 22:33:00 GMT">
+  ```
+  
   `viewport`定义: `viewport`是`meta`标签的`name`属性中可选值中的一个，指`web`页面上用户可见的区域，用于移动端页面设计
 
   举例：移动端的`viewport`宽度会从默认的`980px`变成各个设备的 device-width 。
@@ -46,15 +55,18 @@
   ```
   属性解释：`content`定义了`viewport`的属性
 
-    | 属性   |      含义      |  实例 |
+    | 属性   | 含义 |             实例   |
     |----------|:-------------:|------:|
     | `width`|  `viewport`的宽度 | `width=device-width` 指缩放为 100% 时以 `CSS` 像素计量的屏幕宽度 |
     | `initial-scale` |   初始化缩放比例  |  	`initial-scale=1.0` 初始化不进行缩放 |
     | `maximum-scale` | 用户最大缩放比例 |    `maximum-scale=1.0` 不允许用户缩放 |
+    | `user-scalable` | 用户是否可以缩放 |    `user-scale=no` 不允许用户缩放 |
+    
+
 
 
 - [ ] 你用过哪些 HTML 5 标签？
-H5 是什么？
+- [ ] H5 是什么？
 ## CSS
 - [ ] 必考：两种盒模型分别说一下。
 - [ ] 必考：如何垂直居中？
