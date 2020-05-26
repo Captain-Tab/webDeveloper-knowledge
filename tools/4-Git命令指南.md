@@ -125,7 +125,7 @@ git config --global user.name  // 设置用户信息
 git config --global user.email // 设置用户邮箱信息
 git config --global push.default simple
 git config --global core.quotepath false
-git config --global core.editor "code --wait
+git config --global core.editor "code --wait"
 git config --global core.autocrlf input
 ```
 查询是否配置成功, `git config --global --list`
