@@ -1,15 +1,25 @@
-<img src="assets/developer-3.png" width="514px" hight="331px">
+<img src="assets/developer-3.png" width="900px" hight="331px">
 
 ## 学习工具与方法
+
 #### [1-学习方法](/tools/1-学习方法.md)
+
 #### [2-前端书籍汇总](/tools/2-前端书籍汇总.md)
-#### [3-Markdown语法](https://www.iminho.me/wiki/docs/mindoc/markdown-basic.md#6hv2v6)
-#### [4-Git命令指南](/tools/4-Git命令指南.md)
-#### [5-Hugo搭建个人博客](/tools/5-Hugo搭建个人博客.md)
+
+#### [3-Markdown 语法](https://www.iminho.me/wiki/docs/mindoc/markdown-basic.md#6hv2v6)
+
+#### [4-Git 命令指南](/tools/4-Git命令指南.md)
+
+#### [5-Hugo 搭建个人博客](/tools/5-Hugo搭建个人博客.md)
+
+## 前端入门
+#### [1.HTML入门](/basic/1.HTML入门.md)
+
+#### [2.HTML重点](/basic/2.HTML重点.md)
 
 ## 前端框架学习
 
-### Vue框架
+### Vue 框架
 
 #### [(1)概述](</Vue.JS%20Note/Vue.JS(1)概述.md>)
 
@@ -37,7 +47,7 @@
 
 ### Echarts
 
-#### [Echarts入门指南](/Echarts/Echarts入门指南.md)
+#### [Echarts 入门指南](/Echarts/Echarts入门指南.md)
 
 ## 前端面试
 
