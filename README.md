@@ -1,8 +1,11 @@
 ![Header](assets/developer-3.png)
 
-## 前端基础学习
-#### [1-学习方法](/Basic/1-学习方法.md)
-#### [2-前端书籍汇总](/Basic/2-前端书籍汇总.md)
+## 学习工具与方法
+#### [1-学习方法](/tools/1-学习方法.md)
+#### [2-前端书籍汇总](/tools/2-前端书籍汇总.md)
+#### [3-Markdown语法](https://www.iminho.me/wiki/docs/mindoc/markdown-basic.md#6hv2v6)
+#### [4-Git命令指南](/tools/4-Git命令指南.md)
+
 ## 前端框架学习
 
 ### Vue框架
