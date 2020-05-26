@@ -1,4 +1,4 @@
-<img src="assets/developer-3.png" width="900px" hight="331px">
+<img src="assets/developer-3.png" width="600px" hight="231px">
 
 ## 学习工具与方法
 
@@ -16,6 +16,8 @@
 #### [1.HTML入门](/basic/1.HTML入门.md)
 
 #### [2.HTML重点](/basic/2.HTML重点.md)
+
+#### [3.CSS入门](/basic/3.CSS入门.md) 
 
 ## 前端框架学习
 
