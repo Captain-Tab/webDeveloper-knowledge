@@ -25,6 +25,8 @@
 
 #### [6.CSS动画](/basic/6.CSS动画.md)
 
+#### [7.HTTP入门](/basic/7.HTTP入门.md)
+
 ## 前端框架学习
 
 ### Vue 框架
