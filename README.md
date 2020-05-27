@@ -27,6 +27,12 @@
 
 #### [7.HTTP入门](/basic/7.HTTP入门.md)
 
+#### [8.HTTP重点](/basic/8.HTTP重点.md)
+
+#### [9.JavaScript历史](/basic/9.JavaScript历史.md)
+
+#### [10.10.JavaScript内存图](/basic/10.JavaScript内存图.md)
+
 ## 前端框架学习
 
 ### Vue 框架
