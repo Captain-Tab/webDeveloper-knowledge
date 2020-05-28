@@ -31,7 +31,9 @@
 
 #### [9.JavaScript历史](/basic/9.JavaScript历史.md)
 
-#### [10.10.JavaScript内存图](/basic/10.JavaScript内存图.md)
+#### [10.JavaScript内存图](/basic/10.JavaScript内存图.md)
+
+#### [11.JavaScript基本语法](/basic/11.JavaScript基本语法.md)
 
 ## 前端框架学习
 
