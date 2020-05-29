@@ -35,6 +35,8 @@
 
 #### [11.JavaScript基本语法](/basic/11.JavaScript基本语法.md)
 
+#### [12.JavaScript基本数据类型](/basic/12.JavaScript基本数据类型.md)
+
 ## 前端框架学习
 
 ### Vue 框架
