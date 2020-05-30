@@ -46,6 +46,8 @@
 
 > [16.JavaScript函数(上)](/basic/16.JavaScript函数(上).md)
 
+> [17.JavaScript函数(下)](/basic/17.JavaScript函数(下).md)
+
 ## 前端框架学习
 
 ### Vue 框架
