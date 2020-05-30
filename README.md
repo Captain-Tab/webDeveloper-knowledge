@@ -50,6 +50,8 @@
 
 > [18.JavaScript的this](/basic/18.JavaScript的this.md)
 
+> [19.JavaScript运算符](/basic/19.JavaScript运算符.md)
+
 ## 前端框架学习
 
 ### Vue 框架
