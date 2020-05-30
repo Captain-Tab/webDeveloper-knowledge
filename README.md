@@ -52,6 +52,8 @@
 
 > [19.JavaScript运算符](/basic/19.JavaScript运算符.md)
 
+> [20.JavaScript小总结](/basic/20.JavaScript小总结.md)
+
 ## 前端框架学习
 
 ### Vue 框架
