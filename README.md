@@ -37,6 +37,12 @@
 
 #### [12.JavaScript基本数据类型](/basic/12.JavaScript基本数据类型.md)
 
+#### [13.JavaScript对象](/basic/13.JavaScript对象.md)
+
+#### [14.JavaScript对象分类](/basic/14.JavaScript对象分类.md)
+
+#### [15.JavaScript数组](/basic/15.JavaScript数组.md)
+
 ## 前端框架学习
 
 ### Vue 框架
