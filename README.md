@@ -76,7 +76,7 @@
 
 >[31.JavaScript要点](/basic/31.JavaScript要点.md)
 
-
+>[32.MVC与设计模式](basic/32.MVC与设计模式.md)
 
 
 
