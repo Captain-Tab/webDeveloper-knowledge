@@ -14,21 +14,21 @@
 
 ## 前端入门
 
-> [1.HTML 入门](/basic/1.HTML入门.md)
+> [1.HTML入门](/basic/1.HTML入门.md)
 
-> [2.HTML 重点](/basic/2.HTML重点.md)
+> [2.HTML重点](/basic/2.HTML重点.md)
 
-> [3.CSS 入门](/basic/3.CSS入门.md)
+> [3.CSS入门](/basic/3.CSS入门.md)
 
-> [4.CSS 布局](/basic/4.CSS布局.md)
+> [4.CSS布局](/basic/4.CSS布局.md)
 
-> [5.CSS 定位](/basic/5.CSS定位.md)
+> [5.CSS定位](/basic/5.CSS定位.md)
 
-> [6.CSS 动画](/basic/6.CSS动画.md)
+> [6.CSS动画](/basic/6.CSS动画.md)
 
-> [7.HTTP 入门](/basic/7.HTTP入门.md)
+> [7.HTTP入门](/basic/7.HTTP入门.md)
 
-> [8.HTTP 重点](/basic/8.HTTP重点.md)
+> [8.HTTP重点](/basic/8.HTTP重点.md)
 
 > [9.JavaScript历史](/basic/9.JavaScript历史.md)
 
@@ -65,6 +65,40 @@
 >[25.封装DOM库](/basic/25.封装DOM库.md)
 
 >[26.JQuery设计模式](/basic/26.JQuery设计模式.md)
+
+>[27.AJAX原理](/basic/27.AJAX原理.md)
+
+>[28.异步与Promise](/basic/28.异步与Promise.md)
+
+>[29.跨域](basic/29.跨域.md)
+
+>[30.静态与动态服务器](/basic/30.静态与动态服务器.md)
+
+>[31.JavaScript要点](/basic/31.JavaScript要点.md)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## 前端框架学习
