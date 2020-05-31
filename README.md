@@ -85,47 +85,48 @@
 -  [ ]  [35.正则表达式](/basic/35.正则表达式.md)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## 前端框架学习
+### Vue快速入门
+> [Vue-起手式](/Vue-quickStart/Vue-起手式.md)
 
-### Vue 框架
+> [Vue-构造选项入门](/Vue-quickStart/Vue-构造选项入门.md)
 
-> [(1)概述](</Vue.JS%20Note/Vue.JS(1)概述.md>)
+> [Vue-数据响应式](/Vue-quickStart/Vue-数据响应式.md)
 
-> [(2)数据绑定指令与事件](</Vue.JS%20Note/Vue.JS(2)数据绑定指令与事件.md>)
+> [Vue-computed和watch](/Vue-quickStart/Vue-computed和watch.md)
 
-> [(3)计算属性](</Vue.JS%20Note/Vue.JS(3)计算属性.md>)
+> [Vue-模板&修饰符](/Vue-quickStart/Vue-模板&修饰符.md)
 
-> [(4)绑定指令 v-bind](</Vue.JS%20Note/Vue.JS(4)绑定指令v-bind.md>)
+> [Vue-进阶构造属性](/Vue-quickStart/Vue-进阶构造属性.md)
 
-> [(5)内置指令](</Vue.JS%20Note/Vue.JS(5)内置指令.md>)
+> [Vue-前端路由](/Vue-quickStart/Vue-前端路由.md)
 
-> [(6)表单与 v-model](</Vue.JS%20Note/Vue.JS(6)表单与v-model.md>)
+- [ ] [Vue-动画原理](/Vue-quickStart/Vue-动画原理.md)
 
-> [(7)组件](</Vue.JS%20Note/Vue.JS(7)组件.md>)
+### Vue基础
 
-> [(8)自定义指令](</Vue.JS%20Note/Vue.JS(8)自定义指令.md>)
+> [概述](</Vue.JS%20Note/Vue.JS(1)概述.md>)
 
-> [(9)render 函数](</Vue.JS%20Note/Vue.JS(9)render函数.md>)
+> [数据绑定指令与事件](</Vue.JS%20Note/Vue.JS(2)数据绑定指令与事件.md>)
 
-> [(10)使用 vue-cli 搭建项目](</Vue.JS%20Note/Vue.JS(10)使用vue-cli搭建项目.md>)
+> [计算属性](</Vue.JS%20Note/Vue.JS(3)计算属性.md>)
 
-> [(11)前端路由](</Vue.JS%20Note/Vue.JS(11)前端路由.md>)
+> [绑定指令v-bind](</Vue.JS%20Note/Vue.JS(4)绑定指令v-bind.md>)
+
+> [内置指令](</Vue.JS%20Note/Vue.JS(5)内置指令.md>)
+
+> [表单与v-model](</Vue.JS%20Note/Vue.JS(6)表单与v-model.md>)
+
+> [组件](</Vue.JS%20Note/Vue.JS(7)组件.md>)
+
+> [自定义指令](</Vue.JS%20Note/Vue.JS(8)自定义指令.md>)
+
+> [render函数](</Vue.JS%20Note/Vue.JS(9)render函数.md>)
+
+> [使用vue-cli搭建项目](</Vue.JS%20Note/Vue.JS(10)使用vue-cli搭建项目.md>)
+
+> [前端路由](</Vue.JS%20Note/Vue.JS(11)前端路由.md>)
+
 
 ## 前端扩展学习
 
