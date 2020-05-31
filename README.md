@@ -6,11 +6,11 @@
 
 > [2-前端书籍汇总](/tools/2-前端书籍汇总.md)
 
-> [3-Markdown 语法](https://www.iminho.me/wiki/docs/mindoc/markdown-basic.md#6hv2v6)
+> [3-Markdown语法](https://www.iminho.me/wiki/docs/mindoc/markdown-basic.md#6hv2v6)
 
-> [4-Git 命令指南](/tools/4-Git命令指南.md)
+> [4-Git命令指南](/tools/4-Git命令指南.md)
 
-> [5-Hugo 搭建个人博客](/tools/5-Hugo搭建个人博客.md)
+> [5-Hugo搭建个人博客](/tools/5-Hugo搭建个人博客.md)
 
 ## 前端入门
 
@@ -58,6 +58,15 @@
 
 >[22.排序算法(下)](/basic/22.排序算法(下).md)
 
+>[23.数据结构(上)](/basic/23.数据结构(上).md)
+
+>[24.DOM编程](/basic/24.DOM编程.md)
+
+>[25.封装DOM库](/basic/25.封装DOM库.md)
+
+>[26.JQuery设计模式](/basic/26.JQuery设计模式.md)
+
+
 ## 前端框架学习
 
 ### Vue 框架
@@ -88,8 +97,8 @@
 
 ### Echarts
 
-> [Echarts 入门指南](/Echarts/Echarts入门指南.md)
+> [Echarts入门指南](/Echarts/Echarts入门指南.md)
 
 ## 前端面试
 
-> [2020 面试题目](/InterviewPreparation/Interview-1.md)
+> [2020面试题目](/InterviewPreparation/Interview-1.md)
