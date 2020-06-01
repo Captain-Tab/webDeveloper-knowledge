@@ -2,7 +2,7 @@
 1. [类组件创建方式](#类组件创建方式)
 2. [props](#props)
 3. [state](#state)
-4. [生命周期React-lifeCycle](#生命周期React-lifeCycle)
+4. [React-lifeCycle生命周期](#生命周期React-lifeCycle)
 5. [更多信息](#更多信息)
 
 ### 类组件创建方式
