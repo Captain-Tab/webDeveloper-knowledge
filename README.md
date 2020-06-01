@@ -2,87 +2,89 @@
 
 ## 学习工具与方法
 
-> [1-学习方法](/tools/1-学习方法.md)
+> [学习方法](/tools/学习方法.md)
 
-> [2-前端书籍汇总](/tools/2-前端书籍汇总.md)
+> [前端书籍汇总](/tools/前端书籍汇总.md)
 
-> [3-Markdown语法](https://www.iminho.me/wiki/docs/mindoc/markdown-basic.md#6hv2v6)
+> [Markdown语法](https://www.iminho.me/wiki/docs/mindoc/markdown-basic.md#6hv2v6)
 
-> [4-Git命令指南](/tools/4-Git命令指南.md)
+> [Git命令指南](/tools/Git命令指南.md)
 
-> [5-Hugo搭建个人博客](/tools/5-Hugo搭建个人博客.md)
+> [Hugo搭建个人博客](/tools/Hugo搭建个人博客.md)
 
 ## 前端入门
 
-> [1.HTML入门](/basic/1.HTML入门.md)
+> [HTML入门](/basic/HTML入门.md)
 
-> [2.HTML重点](/basic/2.HTML重点.md)
+> [HTML重点](/basic/HTML重点.md)
 
-> [3.CSS入门](/basic/3.CSS入门.md)
+> [CSS入门](/basic/CSS入门.md)
 
-> [4.CSS布局](/basic/4.CSS布局.md)
+> [CSS布局](/basic/CSS布局.md)
 
-> [5.CSS定位](/basic/5.CSS定位.md)
+> [CSS定位](/basic/CSS定位.md)
 
-> [6.CSS动画](/basic/6.CSS动画.md)
+> [CSS动画](/basic/CSS动画.md)
 
-> [7.HTTP入门](/basic/7.HTTP入门.md)
+> [HTTP入门](/basic/HTTP入门.md)
 
-> [8.HTTP重点](/basic/8.HTTP重点.md)
+> [HTTP重点](/basic/HTTP重点.md)
 
-> [9.JavaScript历史](/basic/9.JavaScript历史.md)
+> [JavaScript历史](/basic/JavaScript历史.md)
 
-> [10.JavaScript内存图](/basic/10.JavaScript内存图.md)
+> [JavaScript内存图](/basic/JavaScript内存图.md)
 
-> [11.JavaScript基本语法](/basic/11.JavaScript基本语法.md)
+> [JavaScript基本语法](/basic/JavaScript基本语法.md)
 
-> [12.JavaScript基本数据类型](/basic/12.JavaScript基本数据类型.md)
+> [JavaScript基本数据类型](/basic/JavaScript基本数据类型.md)
 
-> [13.JavaScript对象](/basic/13.JavaScript对象.md)
+> [JavaScript对象](/basic/JavaScript对象.md)
 
-> [14.JavaScript对象分类](/basic/14.JavaScript对象分类.md)
+> [JavaScript对象分类](/basic/JavaScript对象分类.md)
 
-> [15.JavaScript数组](/basic/15.JavaScript数组.md)
+> [JavaScript数组](/basic/JavaScript数组.md)
 
-> [16.JavaScript函数(上)](/basic/16.JavaScript函数(上).md)
+> [JavaScript函数(上)](/basic/JavaScript函数(上).md)
 
-> [17.JavaScript函数(下)](/basic/17.JavaScript函数(下).md)
+> [JavaScript函数(下)](/basic/JavaScript函数(下).md)
 
-> [18.JavaScript的this](/basic/18.JavaScript的this.md)
+> [JavaScript的this](/basic/JavaScript的this.md)
 
-> [19.JavaScript运算符](/basic/19.JavaScript运算符.md)
+> [JavaScript运算符](/basic/JavaScript运算符.md)
 
-> [20.JavaScript小总结](/basic/20.JavaScript小总结.md)
+> [JavaScript小总结](/basic/JavaScript小总结.md)
 
->[21.排序算法(上)](/basic/21.排序算法(上).md)
+> [排序算法(上)](/basic/排序算法(上).md)
 
->[22.排序算法(下)](/basic/22.排序算法(下).md)
+> [排序算法(下)](/basic/排序算法(下).md)
 
->[23.数据结构(上)](/basic/23.数据结构(上).md)
+> [数据结构(上)](/basic/数据结构(上).md)
 
->[24.DOM编程](/basic/24.DOM编程.md)
+> [DOM编程](/basic/DOM编程.md)
 
->[25.封装DOM库](/basic/25.封装DOM库.md)
+> [封装DOM库](/basic/封装DOM库.md)
 
->[26.JQuery设计模式](/basic/26.JQuery设计模式.md)
+>[JQuery设计模式](/basic/JQuery设计模式.md)
 
->[27.AJAX原理](/basic/27.AJAX原理.md)
+>[AJAX原理](/basic/AJAX原理.md)
 
->[28.异步与Promise](/basic/28.异步与Promise.md)
+>[异步与Promise](/basic/异步与Promise.md)
 
->[29.跨域](basic/29.跨域.md)
+>[跨域](basic/跨域.md)
 
->[30.静态与动态服务器](/basic/30.静态与动态服务器.md)
+>[静态与动态服务器](/basic/静态与动态服务器.md)
 
->[31.JavaScript要点](/basic/31.JavaScript要点.md)
+>[JavaScript要点](/basic/JavaScript要点.md)
 
->[32.MVC与设计模式](basic/32.MVC与设计模式.md)
+>[MVC与设计模式](basic/MVC与设计模式.md)
 
- - [ ]  [33.webpack入门](/basic/33.webpack入门.md)
+- [ ] [DOM事件和事件委托](/basic/DOM事件和事件委托.md)
 
--  [ ]  [34.JSON入门](/basic/34.JSON入门.md)
+- [ ] [webpack入门](/basic/webpack入门.md)
 
--  [ ]  [35.正则表达式](/basic/35.正则表达式.md)
+- [ ] [JSON入门](/basic/JSON入门.md)
+
+- [ ] [正则表达式](/basic/正则表达式.md)
 
 
 ## 前端框架学习
@@ -103,8 +105,8 @@
 
 - [ ] [Vue-动画原理](/Vue-quickStart/Vue-动画原理.md)
 
+- [ ] [Vue-表单与v-model](/Vue-quickStart/Vue-表单与v-model.md)
 ### Vue基础
-
 > [概述](</Vue.JS%20Note/Vue.JS(1)概述.md>)
 
 > [数据绑定指令与事件](</Vue.JS%20Note/Vue.JS(2)数据绑定指令与事件.md>)
@@ -127,6 +129,8 @@
 
 > [前端路由](</Vue.JS%20Note/Vue.JS(11)前端路由.md>)
 
+### React快速入门
+> [React-起手式](/React-quickStart/React-起手式.md)
 
 ## 前端扩展学习
 
