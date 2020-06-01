@@ -62,11 +62,23 @@
     | `maximum-scale` | 用户最大缩放比例 |    `maximum-scale=1.0` 不允许用户缩放 |
     | `user-scalable` | 用户是否可以缩放 |    `user-scale=no` 不允许用户缩放 |
     
+- [x] H5 是什么？
+   * 狭义上：`HTML`的第`5`次修订版。
+   * 广义上：新的`Web`技术集
+   * `h5`是非专业叫法，现在基本上特指移动端`web`开发，如手机页面、微信小程序、微信页面等
+   新特性包括：
 
+- [x] 你用过哪些 HTML 5 标签？
+    * 语义标签: `section、article、nav、header、footer、main、autio、video、figure`
+    * 通信技术: `Web Sockets`、服务端推送事件、`WebRTC`
+    * 离线存储: `indexedDB、LocalStorage`等
+    * 多媒体: 音视频、`WebRTC`、摄像头
+    * 2D/3D绘图: `Canvas、WebGL、SVG`
+    * 性能: `Web Workers、xhr level2`、动画优化、History API
+    * 设备访问: `Camera API`、触控、定位、设备方向
+    * 样式。`CSS3`阴影、边框、动画、形变、过渡、布局
+    * 新增表单元素 `type=email、search、range、color、date、url、number`
 
-
-- [ ] 你用过哪些 HTML 5 标签？
-- [ ] H5 是什么？
 ## CSS
 - [ ] 必考：两种盒模型分别说一下。
 - [ ] 必考：如何垂直居中？
