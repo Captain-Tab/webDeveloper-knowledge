@@ -132,6 +132,10 @@
 ### React快速入门
 > [React-起手式](/React-quickStart/React-起手式.md)
 
+> [React-类组件和函数组件](/React-quickStart/React-类组件和函数组件.md)
+
+> [React-类组件详解](/React-quickStart/React-类组件详解.md)
+
 ## 前端扩展学习
 
 ### Echarts
