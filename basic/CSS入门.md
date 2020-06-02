@@ -160,7 +160,7 @@
 
 #### border-box边框盒
 * 边框才是盒子的边界
-* `border-box` `width` = 内容宽度 + `padding` = `border`
+* `border-box` `width` = 内容宽度 + `padding` + `border`
 
 #### 比较
 `border-box` 更好用，比如同时使用`padding`,`width`,`border`来测试
