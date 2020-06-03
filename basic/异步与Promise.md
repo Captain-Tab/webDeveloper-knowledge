@@ -194,7 +194,7 @@ ajax = (method, url, options) =>{
         const {success, fail} = options
         const request = new XMLHttpRequest()
         request.open(method, url)
-        request,onreadystatechange = () =>{
+        request.onreadystatechange = () =>{
             if(request.readyState === 4){
                 if(request.status < 400){
                     resolve.call(null, request.response)

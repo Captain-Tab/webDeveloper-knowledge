@@ -114,6 +114,7 @@
     * 设置`display:flex;justify-content:center`;(灵活运用,支持`Chroime，Firefox，IE9+`)
   
     垂直居中设置：
+
     1. 父元素高度确定的单行文本（内联元素）
     * 设置`text-align:center`；
     2. 父元素高度确定的多行文本（内联元素）
@@ -123,6 +124,7 @@
   块级元素居中方案
 
     水平居中设置：
+
     1. 定宽块状元素
     * 设置 左右`margin`值为`auto`；
     2. 不定宽块状元素
@@ -131,6 +133,7 @@
     * `c`:父元素设置`position:relative`和`left:50%`，子元素设置`position:relative`和`left:50%`；
 
    垂直居中设置：
+
    * 使用`position:absolute（fixed`,设置`left、top、margin-left、margin-top`的属性;
    * 利用`position:fixed（absolute）`属性，`margin:auto`这个必须不要忘记了;
    * 利用`display:table-cell`属性使内容垂直居中;
@@ -263,20 +266,581 @@
 
   
 ### 原生JS
-- [ ] 必考：ES 6 语法知道哪些，分别怎么用？
-- [ ] 必考 Promise、Promise.all、Promise.race 分别怎么用？
-- [ ] 必考：手写函数防抖和函数节流
-- [ ] 必考：手写AJAX
-- [ ] 必考：这段代码里的 this 是什么？
-- [ ] 必考：闭包/立即执行函数是什么？
-- [ ] 必考：什么是 JSONP，什么是 CORS，什么是跨域？
+- [x] 必考：ES6 语法知道哪些，分别怎么用？
+  
+    1.  `var  let  const`
+
+    *  在`js`中  通常使用`var`会发生变量提升，即脚本开始运行时，变量已经存在了，但是没有值，所以会输出`undefined`
+    *  而`let`不会发生变量提升,这表示在声明它之前，变量是不存在的，这时如果用到它，就会抛出一个错误
+    *  `var`是函数级作用域，`let`是块级作用域
+    *  `const`声明一个只读的常量  一旦声明，常量的值就不能改变
+    *  `const`命令声明的常量也是不提升，只能在声明的位置后面使用
+    *  对于复合类型的变量，变量名不指向数据，而是指向数据所在的地址。
+    
+    2. 解构赋值
+   
+    * `ES6`允许按照一定模式，从数组和对象中提取值，对变量进行赋值，这被称为解构
+
+    3. `Set`和`Map`的使用
+   
+    * `Set`用法： `ES6`提供了新的数据结构`Set`，它类似于数组，但是成员的值都是唯一的，没有重复的值。
+    * `Map`用法：`ES6`提供了`Map`数据结构。它类似于对象，也是键值对的集合，但是“键”的范围不限于字符串，各种类型的值（包括对象）都可以当作键。
+    * `Object`结构和`Map`解构的区别：`Object`结构提供了“字符串—值”的对应,`Map`结构提供了“值—值”的对应，是一种更完善的`Hash`结构实现。如果你需要“键值对”的数据结构，`Map`比`Object`更合适
+   
+   4. 箭头函数（Arrow Functions）
+   
+    * `ES6 `中，箭头函数就是函数的一种简写形式，使用括号包裹参数，跟随一个 `=>`，紧接着是函数体
+  
+   5. Promise
+   
+   * `ES6` 对 `Promise` 有了原生的支持，一个`Promise`是一个等待被异步执行的对象，当它执行完成后，其状态会变成`resolved`或者`rejected`
+
+   6. 类
+   
+   * `ES6` 中有 `class` 语法。值得注意是，这里的 `class` 不是新的对象继承模型，它只是原型链的语法糖表现形式
+  
+  7. export和import
+   
+   * `ES6` 中有 `export和import` 语法。`ES5`不支持原生的模块化，在`es6`中一个文件可以默认为一个模块，模块通过`export`向外暴露接口，实现模块间交互等功能
+
+- [x] 必考 Promise、Promise.all、Promise.race 分别怎么用？
+  
+    1. promise
+   
+     * `Promise`本意是承诺，在程序中的意思就是承诺我过一段时间后会给你一个结果。 什么时候会用到过一段时间？答案是异步操作，异步是指可能比较长时间才有结果的才做，例如网络请求、读取本地文件等
+     * `Promise`的三种状态: `Pending---`对象实例创建时的初始状态, `Fulfilled`----可以理解为成功的状态,`Rejected`----可以理解为失败的状态
+  
+    `Promise`的语法
+
+    * `return new Promise((resolve, reject)=>{})`
+    * 任务成功则调用`resolve(result)`
+    * 任务失败则调用`reject(error)`
+    * `resolve`和`reject`会再去调用成功和失败函数
+    * 使用`.then(success, fail)`传入成功和失败函数
+
+   `promise`的代码
+   ```
+    function fn(){
+     return new Promise((resolve, reject)=>{
+         成功时调用 resolve(数据)
+         失败时调用 reject(错误)
+     })
+    }
+    fn().then(success1, fail1).then(success2, fail2)
+   ```
+  
+  2. promise.all
+   
+   *  `Promise.all`可以将多个`Promise`实例包装成一个新的`Promise`实例。当两个`promise`成功时，才会调用`success`。同时，成功和失败的返回值是不同的，成功的时候返回的是一个结果数组，而失败的时候则返回最先被`reject`失败状态的值。
+   *  `Promse.all`在处理多个异步处理时非常有用，比如说一个页面上需要等两个或多个`ajax`的数据回来以后才正常显示，在此之前只显示`loading`图标。
+   * 需要特别注意的是，`Promise.all`获得的成功结果的数组里面的数据顺序和`Promise.all`接收到的数组顺序是一致的，即`p1`的结果在前，即便`p1`的结果获取的比`p2`要晚。
+
+  `promise.all`代码
+  ```
+   // promise1和promise2都成功才会调用success1
+   Promise.all([promise1, promise2]).then(success1, fail1)
+  ```
+
+  3. promise.race
+   
+   * 顾名思义，`Promse.race`就是赛跑的意思，意思就是说，`Promise.race([p1, p2, p3])`里面哪个结果获得的快，就返回那个结果，不管结果本身是成功状态还是失败状态。
+
+  `promise.race`代码
+  ```
+  // promise1和promise2只要有一个成功就会调用success1；
+  // promise1和promise2只要有一个失败就会调用fail1；
+  // 总之，谁第一个成功或失败，就认为是race的成功或失败。
+  Promise.race([promise1, promise2]).then(success1, fail1)
+  ```
+
+- [x] 必考：手写函数防抖和函数节流
+
+  1. 函数防抖
+   
+   * 函数防抖是指在事件被触发`n`秒后再执行回调，如果在这`n`秒内事件又被触发，则重新计时。
+   * 这可以使用在一些点击请求的事件上，避免因为用户的多次点击向后端发送多次请求。
+
+   函数防抖代码
+   ```
+    function debounce(fn, delay){
+     let timerId = null
+     return function(){
+         const context = this
+         if(timerId){window.clearTimeout(timerId)}
+         timerId = setTimeout(()=>{
+             fn.apply(context, arguments)
+             timerId = null
+         },delay)
+     }
+    }
+    const debounced = debounce(()=>console.log('hi'))
+    debounced()
+    debounced()
+   ```
+   2. 函数节流
+
+  * 函数节流是指规定一个单位时间，在这个单位时间内，只能有一次触发事件的回调函数执行，如果在同一个单位时间内某事件被触发多次，只有一次能生效。
+  * 节流可以使用在`scroll`函数的事件监听上，通过事件节流来降低事件调用的频率。
+  
+   函数节流代码
+   ```
+   
+    // 节流（一段时间执行一次之后，就不执行第二次）
+    function throttle(fn, delay){
+        let canUse = true
+        return function(){
+            if(canUse){
+                fn.apply(this, arguments)
+                canUse = false
+                setTimeout(()=>canUse = true, delay)
+            }
+        }
+     }
+
+    const throttled = throttle(()=>console.log('hi'))
+    throttled()
+    throttled()
+   ```
+
+- [x] 必考：手写AJAX
+  
+  *  `AJAX`全称`Asynchronous JavaScript and XML` 是让**客户端与服务器，可以在（不必刷新整个浏览器）的情况下，与服务器进行异步通讯的技术**
+  
+  `AJAX`原理
+
+  * `AJAX`是浏览器上的功能
+  * 浏览器可以发送请求，收到响应
+  * 浏览器在`window`上加了一个`XMLHttpRequest()`全局函数
+  * 通过`XMLHttpRequest()`函数构造出对象
+  * 通过这个对象来实现发送请求和收到响应
+
+  `Ajax`步骤
+  1. 创建`httpRequest`对象
+  2. 调用该对象的`open`方法
+  3. 监听对象的`onload` & `onerror`事件
+  4. `onload` & `onerror`事件可以改为`onreadystatechange && status`事件，并在这里操作文件内容，写出相应请求。
+  5. 调用该对象的`send`方法，发送请求。
+   
+  优点： 无刷新请求
+
+  缺点： 浏览器限制不能跨域。想要跨越就要用到`JSONP`或`CORS`了
+
+  `ajax`代码实例
+  ```
+  var request = new XMLHttpRequest()
+    request.open('GET', '/a/b/c?name=ff', true);
+    request.onreadystatechange = function () {
+      if(request.readyState === 4 && request.status === 200) {
+        console.log(request.responseText);
+      }};
+    request.send();
+  ```
+
+- [x] 必考：this 是什么？
+  
+  `this`指向
+  1. 第一种是函数调用模式，当一个函数不是一个对象的属性时，直接作为函数来调用时，`this` 指向全局对象。严格模式中`this`都是指向`undefined`
+  2. 第二种是方法调用模式，如果一个函数作为一个对象的方法来调用时，this 指向这个对象。
+  3. 第三种是构造器调用模式，如果一个函数用 new 调用时，函数执行前会新创建一个对象，`this` 指向这个新创建的对象。
+  4. 第四种是 `apply` 、 `call` 和 `bind` 调用模式，这三个方法都可以显示的指定调用函数的 `this` 指向。其中 `apply` 方法接收两个参数：一个是 `this` 绑定的对象，一个是参数数组。`call` 方法接收的参数，第一个是 `this` 绑定的对象，后面的其余参数是传入函数执行的参数。也就是说，在使用 `call()` 方法时，传递给函数的参数必须逐个列举出来。`bind` 方法通过传入一个对象，返回一个 `this` 绑定了传入对象的新函数。这个函数的 `this` 指向除了使用 `new` 时会被改变，其他情况下都不会改变。
+ 
+  `this`实例代码
+  ```
+  a. fn()
+    this => window/global
+  b. obj.fn()
+    this => obj
+  c. fn.call(xx)
+    this => xx
+  d. fn.apply(xx)
+    this => xx
+  e. fn.bind(xx)
+    this => xx
+  f. new Fn()
+    this => 新的对象
+  g. fn = ()=> {}
+    this => 外面的 this
+  ```
+  [了解this](https://zhuanlan.zhihu.com/p/23804247)
+
+- [X] 必考：闭包/立即执行函数是什么？
+    定义
+
+    函数与对其状态即词法环境（`lexical environment`）的引用共同构成闭包（`closure`）。也就是说，闭包可以让你从内部函数访问外部函数作用域。**简单来说，闭包 = 函数 + 函数能够访问外部变量** 在`JavaScript`，函数在每次创建时生成闭包。
+
+    原理
+
+    在下面的实例中，就存在了`closure`闭包, 如果一个函数用到了外部的变量，那在这里，外部变量`a`和`f3`函数就组成了闭包。
+
+    实例代码
+    ```
+    function f2(){
+          let a  = 2
+          function f3(){
+              console.log(a)
+          }
+      }
+    ```
+
+    用途
+    1. 闭包常常用来间接访问一个变量。通过暴露一个函数，让别人可以间接访问
+    2. 让这些变量的值始终保持在内存中，不会在外部函数被调用后被自动清除。
+
+    缺点
+    1. 闭包会使得函数中的变量都被保存在内存中，使得占用很多内存，所以不能滥用闭包，否则会造成网页的性能问题，在`IE`中可能导致内存泄露。
+    解决方法是，在退出函数之前，将不使用的局部变量全部删除。
+
+    2. 闭包会在父函数外部，改变父函数内部变量的值。
+    解决方法是, 不要随便改变父函数内部变量的值。
+
+
+    立即执行函数
+    
+    定义：`IIFE(Immediately Invoked Function Expression )` 立即调用函数表达式是一个在定义时就会立即执行的`JavaScript`函数
+
+    1. 声明一个匿名函数
+    2. 马上调用这个匿名函数
+
+   实现
+ 
+    1. 首先声明一个匿名函数 `function(){alert('我是匿名函数')}`。
+    2. 然后在匿名函数后面接一对括号 `()`，调用这个匿名函数。
+   
+   作用
+   1. 只有一个作用：创建一个独立的作用域。
+   2. 这个作用域里面的变量，外面访问不到（即避免「变量污染」）。
+
+- [x] 必考：什么是 JSONP，什么是 CORS，什么是跨域？
+  
+    `CORS`
+    定义
+
+    跨域资源共享`Cross-Origin Resource Sharing`:  定义了必须在访问跨域资源时，浏览器与服务器应该如何沟通。`CORS`背后的基本思想就是使用自定义的`HTTP`头部让浏览器与服务器进行沟通，从而决定请求或响应是应该成功还是失败。
+
+    原理
+
+    浏览器会自动进行`CORS`通信，实现`CORS` 通信的关键是后端。只要后端实现了`CORS`，就实现了跨域。如果浏览器检测到相应的设置，就可以允许`Ajax`进行跨域的访问。
+
+    **服务端通过设置`Access-Control-Allow-Origin`就可以开启`CORS`**。 该属性表示哪些域名可以访问资源，如果设置通配符则表示所有网站都可以访问资源。
+    
+    * 简单跨域请求：**只服务端设置`Access-Control-Allow-Origin`即可，前端无须设置**。只要同时满足以下两大条件，就属于简单请求:
+    ```
+    条件1：使用下列方法之一：
+    GET
+    HEAD
+    POST
+  
+    条件2：`Content-Type`的值仅限于下列三者之一：
+    text/plain
+    multipart/form-data
+    application/x-www-form-urlencoded
+    
+    ```
+    * 复杂跨域请求: **若要带`cookie`请求,那么前后端都需要设置**。话句话说，不符合以上条件的请求就肯定是复杂请求了。
+    复杂请求的`CORS`请求，会在正式通信之前，增加一次`HTTP`查询请求，称为”预检”请求,该请求是`option` 方法的，通过该请求来知道服务端是否允许跨域请求。
+  
+    优点是通过简单的配置就能跨域
+
+    缺点是某些古老浏览器不支持 `CORS` 或不支持 `Credentials`。解决办法是用 `JSONP` 或 `P3P` 等技术
+
+    `JSONP`
+    定义
+
+    填充式`json`(`JSON with Padding`): 是应用`JSON`的一种新方法，只不过是被包含在函数调用中的`JSON`。
+
+    `JSONP`由两部分组成：**回调函数**和**数据**。回调函数是当响应到来时应该在页面中调用的函数，而数据就是传入回调函数中的`JSON`数据。
+
+    原理
+
+    **利用 `<script>`标签没有跨域限制的漏洞，网页可以得到从其他来源动态产生的`JSON` 数据**。通过`script`标签引入一个`js`文件，这个`js`文件载入成功后会执行我们在`url`参数中指定的函数，并且会把我们需要的`json`数据作为参数传入。所以`jsonp`是需要服务器端的页面进行相应的配合的。（即用`javascript`动态加载一个`script`文件，同时定义一个`callback`函数给`script`执行而已。）在`js`中，我们直接用`XMLHttpRequest`请求不同域上的数据时，是不可以的。但是，在页面上引入不同域上的`js`脚本文件却是可以的，`jsonp`正是利用这个特性来实现的。注意：`JSONP`请求一定需要对方的服务器做支持才可以。
+
+    过程
+
+    * 服务器将数据写到`friend.js`上
+    * 请求页面的用`<script>`标签引用`friend.js`
+    * `friend.js`执行，执行事先定义好的的`window.xxx`函数
+    * 请求页面通过`window.xxx`函数得到jsons数据
+    * 事实上，`window.xxx`函数就是一个回调函数
+    * 通过设置服务器端的`referer`检查，可以限制为固定网站访问服务器，进行跨域
+   
+    优点是通过简单的约定就能跨域
+          
+    缺点是不支持`get`以外的动词，而且存在`csrf`风险
+    解决办法是 `CORS` 或 `csrf token`
+
+
+
+
+- [x] 常考：如何实现深拷贝？
+  
+ * 浅拷贝只复制指向某个对象的指针，而不复制对象本身，新旧对象还是共享同一块内存。
+ * 深拷贝会另外创造一个一模一样的对象，新对象跟原对象不共享内存，修改新对象不会改到原对象
+  
+  [深拷贝和浅拷贝](https://juejin.im/post/5b5dcf8351882519790c9a2e#heading-3)
+
+  实现浅拷贝
+
+  * `Object.assign()` 方法可以把任意多个的源对象自身的可枚举属性拷贝给目标对象，然后返回目标对象。但是 `Object.assign()`进行的是浅拷贝，拷贝的是对象的属性的引用，而不是对象本身。
+  * 注意：当`object`只有一层的时候，是深拷贝
+  ```
+  var obj = { a: {a: "kobe", b: 39} };
+  var initalObj = Object.assign({}, obj);
+  initalObj.a.a = "wade";
+  console.log(obj.a.a); //wade
+  ```
+  实现深拷贝
+
+  * 用`JSON.stringify`将对象转成`JSON`字符串，再用`JSON.parse()`把字符串解析成对象，一去一来，新的对象产生了，而且对象会开辟新的栈，实现深拷贝
+  * 注意: 这种方法虽然可以实现数组或对象深拷贝,但不能处理函数
+  ```
+  let arr = [1, 3, {
+      username: ' kobe'
+  }];
+  let arr4 = JSON.parse(JSON.stringify(arr));
+  arr4[2].username = 'duncan'; 
+  console.log(arr, arr4)
+
+  ```
+  * 递归方法实现深度克隆原理：遍历对象、数组直到里边都是基本数据类型，然后再去复制，就是深度拷贝
+  ```
+  // 判断类型
+  // 检查环（也叫循环引用）
+  // 递归
+  // 需要忽略原型
+  function deepCopy(object) {
+    if (!object || typeof object !== "object") return;
+
+    let newObject = Array.isArray(object) ? [] : {};
+
+    for (let key in object) {
+      if (object.hasOwnProperty(key)) {
+        newObject[key] =
+          typeof object[key] === "object" ? deepCopy(object[key]) : object[key];
+      }
+    }
+
+    return newObject;
+  }
+  ```
+
+
+- [x] 常考：如何用正则实现 trim()？
+   ```
+    String.prototype.trim = function(){
+        return this.replace(/^\s+|\s+$/g, '')
+    }
+    //或者 
+    function trim(string){
+        return string.replace(/^\s+|\s+$/g, '')
+    }
+   ```
+
+- [x] 常考：不用class如何实现继承？用class又如何实现？
+    1. 答出基于原型的继承
+    2. 答出基于`class`的继承
+
+  **`JS`继承的原理: `A`对象通过继承`B`对象，就能直接拥有`B`对象的所有属性和方法**
+
+  原型链继承
+
+  子类型的原型为父类型的一个实例对象，子类继承父类的属性和方法是将父类的私有属性和公有方法都作为自己的公有属性和方法。其中寄生组合继承是业内最通用的好方法，这里不做介绍。
+
+  实例代码
+  ```
+  //父类型
+  function Person(name,age){
+      this.name=name,
+      this.age=age,
+      this.play=[1,2,3]
+      this.setName=function(){}
+  }
+  Person.prototype.setAge=function(){}
+  //子类型
+  function Student(price){
+      this.price=price
+      this.setScore=function(){}
+  }
+  Student.prototype=new Person()//子类型的原型为父类型的一个实例对象
+  let s1=new Student(15000)
+  let s2=new Student(14000)
+  console.log(s1,s2)
+  ```
+  `class`的继承 
+
+  `ES6`继承是通过`class...extends...`关键字来实现继承。子类通过使用`extends`继承父类的方法和变量的形式来实现继承，方式比`ES5`通过原型来继承简单的多。`ES6 class` 实现继承的核心在于使用关键字 `extends` 表明继承自哪个父类，并且在子类构造函数中必须调用 `super` 关键字，`super(name)`相当于es5继承实现中的 `SuperType.call(this, name)`
+
+  实例代码
+  ```
+  class Person{
+  //调用类的构造方法
+      constructor(name,age){
+          this.name=name
+          this.age=age
+      }
+      showName(){
+          console.log("调用父类的方法")
+          console.log(this.name,this.age);
+      }
+  }
+  let p1=new Person('kobe',39)
+  console.log(p1)
+  //定义一个子类
+  class Student extends Person{
+      constructor(name,age,salary){
+          super(name,age)//通过super调用父类的构造方法
+          this.salary=salary
+      }
+      showName(){
+          console.log("调用子类的方法")
+          console.log(this.name,this.age,this.salary);
+      }
+  }
+  let s1=new Student('wade',38,100000)
+  console.log(s1)
+  s1.showNmae()
+  ```
+  总结
+  * `ES5`中：
+  1. 利用借用构造函数实现 实例属性和方法的继承 ；
+  2. 利用原型链或者寄生式继承实现 共享的原型属性和方法的继承 。
+  * `ES6`中：
+  1. 利用`class`定义类，`extends`实现类的继承；
+  2. 子类`constructor`里调用`super()`（父类构造函数）实现 实例属性和方法的继承；
+  3. 子类原型继承父类原型，实现 原型对象上方法的继承。
+
+
+- [x] 常考：如何实现数组去重？
+
+
+
+  假设有数组`array = [1,5,2,3,4,2,3,1,3,4]`。你要写一个函数`unique`，使得`unique(array)` 的值为 `[1,5,2,3,4]`.也就是把重复的值都去掉，只保留不重复的值。
+
+  要求写出两个答案：
+
+  1. 一个答案不使用 `Set` 实现
+  2. 一个答案使用 `Set` 
+  3. 使用了 `Map / WeakMap` 以支持对象去重
+
+  答案1：不使用`Set`去重
+
+  新建一个数组，遍历原来的数组，值不在新数组就`push`进该新数组中
+  缺点:`IE8`以下不支持数组的`indexOf`方法
+  ```
+  let array = [1,5,2,3,4,2,3,1,3,4]
+  const unique = (array) =>{ 
+    let emptyArray = []
+    for(let i=0;i<array.length;i++){
+      if(emptyArray.indexOf(array[i]) === -1){
+        emptyArray.push(array[i])
+      }
+    }
+    return emptyArray
+  }
+  console.log(unique(array))
+  ```
+  外层循环元素，内层循环时比较值。值相同时，则在数组里删去这个值。
+  缺点：嵌套循环，占用内存高，速度慢
+  ```
+  let array = [1,5,2,3,4,2,3,1,3,4]
+  const unique = (array) =>{ 
+    for(let i=0;i<array.length-1;i++){
+      for(let j = i+1; j<=array.length-1; j++){
+        if(array[i] === array[j]){
+        array.splice(i, 1)
+        j--
+        }
+      }
+    }
+    return array
+  }
+  console.log(unique(array))
+  ```
+  利用`sort()`排序方法，然后根据排序后的结果进行遍历及相邻元素比对
+  缺点：在开发过程中发现，各个浏览器上的`Array.prototype.sort`内部算法实现机制不一样，导致执行结果有偏差,不兼容`IE8`以下版本
+  ```
+  let array = [1,5,2,3,4,2,3,5,3,4]
+  const unique = (array) =>{ 
+      let arr = array.sort()
+      let firstElement= [arr[0]];
+      for (var i = 1; i < arr.length; i++) {
+          if (arr[i] !== arr[i-1]) {
+              firstElement.push(arr[i]);
+          }
+      }
+      return firstElement;
+  }
+  console.log(unique(array))
+  ```
+
+  答案2：使用`Set`去重
+
+  缺点：兼容性问题，有些旧的浏览器不支持
+  ```
+  let array = [1,5,2,3,4,2,3,5,3,4]
+  const unique = (array) =>{ 
+    return Array.from(new Set(array))
+  }
+  console.log(unique(array))
+  ```
+  答案3：使用`Map`去重
+
+  缺点：兼容性问题，有些旧的浏览器不支持
+  ```
+  let array = [1,5,2,3,4,2,3,5,3,4]
+  const unique =(array)=> {
+      //定义常量 res,值为一个Map对象实例
+      const res = new Map();
+      
+      //返回arr数组过滤后的结果，结果为一个数组
+      //过滤条件是，如果res中没有某个键，就设置这个键的值为1
+      return array.filter((a) => !res.has(a) && res.set(a, 1))
+  }
+  console.log(unique(array))
+  ```
+   
+- [x] 送命题：手写一个 Promise
+  
+  [手写promise](https://juejin.im/post/5aafe3edf265da238f125c0a#heading-1)
+  ```
+  function Promise(executor) {
+    let self = this;
+    self.status = 'pending'; //等待态
+    self.value = undefined;  //成功的返回值
+    self.reason = undefined; //失败的原因
+
+    function resolve(value){
+        if(self.status === 'pending'){
+            self.status = 'resolved';
+            self.value = value;
+        }
+    }
+    function reject(reason) {
+        if(self.status === 'pending') {
+            self.status = 'rejected';
+            self.reason = reason;
+        }
+    }
+    try{
+        executor(resolve, reject);
+    }catch(e){
+        reject(e);// 捕获时发生异常，就直接失败
+    }
+  }
+  //onFufiled 成功的回调
+  //onRejected 失败的回调
+  Promise.prototype.then = function (onFufiled, onRejected) {
+      let self = this;
+      if(self.status === 'resolved'){
+          onFufiled(self.value);
+      }
+      if(self.status === 'rejected'){
+          onRejected(self.reason);
+      }
+  }
+  module.exports = Promise;
+  ```
+
 - [ ] 常考：async/await 怎么用，如何捕获异常？
-- [ ] 常考：如何实现深拷贝？
-- [ ] 常考：如何用正则实现 trim()？
-- [ ] 常考：不用 class 如何实现继承？用 class 又如何实现？
-- [ ] 常考：如何实现数组去重？
-- [ ] 放弃：== 相关题目（反着答）
-- [ ] 送命题：手写一个 Promise
 ### DOM
 - [ ] 必考：事件委托
 - [ ] 曾考：用 mouse 事件写一个可拖曳的 div
@@ -288,12 +852,12 @@
 ### Vue框架
 - [ ] 必考：watch 和 computed 和 methods 区别是什么？
 - [ ] 必考：Vue 有哪些生命周期钩子函数？分别有什么用？
-必考：Vue 如何实现组件间通信？
-必考：Vue 数据响应式怎么做到的？
-必考：Vue.set 是做什么用的？
-Vuex 你怎么用的？
-VueRouter 你怎么用的？
-路由守卫是什么？
+- [ ] 必考：Vue 如何实现组件间通信？
+- [ ] 必考：Vue 数据响应式怎么做到的？
+- [ ] 必考：Vue.set 是做什么用的？
+- [ ] Vuex 你怎么用的？
+- [ ] VueRouter 你怎么用的？
+- [ ] 路由守卫是什么？
 ### React框架
 - [ ] 必考：受控组件 V.S. 非受控组件
 - [ ] 必考：React 有哪些生命周期函数？分别有什么用？（Ajax 请求放在哪个阶段？）
