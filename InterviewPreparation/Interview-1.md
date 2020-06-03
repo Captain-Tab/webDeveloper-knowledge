@@ -980,14 +980,142 @@
   [面试题,你真的了解 Cookie 和 Session 吗？](https://zhuanlan.zhihu.com/p/75536009)
 
 ### Vue框架
-- [ ] 必考：watch 和 computed 和 methods 区别是什么？
-- [ ] 必考：Vue 有哪些生命周期钩子函数？分别有什么用？
-- [ ] 必考：Vue 如何实现组件间通信？
-- [ ] 必考：Vue 数据响应式怎么做到的？
-- [ ] 必考：Vue.set 是做什么用的？
-- [ ] Vuex 你怎么用的？
-- [ ] VueRouter 你怎么用的？
-- [ ] 路由守卫是什么？
+- [x] 必考：watch 和 computed 和 methods 区别是什么？
+  
+    computed 和 methods 相比，最大区别是 computed 有缓存：如果 computed 属性依赖的属性没有变化，那么 computed 属性就不会重新计算。methods 则是看到一次计算一次。
+    watch 和 computed 相比，computed 是计算出一个属性（废话），而 watch 则可能是做别的事情
+    
+    [watch 和 computed](https://juejin.im/post/5e7028b4e51d4526fc74b7e8#heading-15)
+
+- [x] 必考：Vue 有哪些生命周期钩子函数？分别有什么用？
+  
+    beforeCreate：创建前，此阶段为实例初始化之后，this指向创建的实例，此时的数据观察事件机制都未形成，不能获得DOM节点。
+
+    data，computed，watch，methods 上的方法和数据均不能访问。
+    可以在这加个loading事件。
+
+    created：创建后，此阶段为实例已经创建，完成数据（data、props、computed）的初始化导入依赖项。
+    可访问 data computed watch methods 上的方法和数据。
+    初始化完成时的事件写在这里，异步请求也适宜在这里调用（请求不宜过多，避免白屏时间太长）。
+    可以在这里结束loading事件，还做一些初始化，实现函数自执行。
+    未挂载DOM，若在此阶段进行DOM操作一定要放在Vue.nextTick()的回调函数中。
+
+    beforeMount：挂载前，虽然得不到具体的DOM元素，但vue挂载的根节点已经创建，下面vue对DOM的操作将围绕这个根元素继续进行。
+
+    beforeMount这个阶段是过渡性的，一般一个项目只能用到一两次。
+
+    mounted：挂载，完成创建vm.$el，和双向绑定
+    完成挂载DOM和渲染，可在mounted钩子函数中对挂载的DOM进行操作。
+    可在这发起后端请求，拿回数据，配合路由钩子做一些事情。
+
+    beforeUpdate：数据更新前，数据驱动DOM。
+    在数据更新后虽然没有立即更新数据，但是DOM中的数据会改变，这是vue双向数据绑定的作用。
+    可在更新前访问现有的DOM，如手动移出添加的事件监听器。
+
+    updated：数据更新后，完成虚拟DOM的重新渲染和打补丁。
+    组件DOM已完成更新，可执行依赖的DOM操作。
+    注意：不要在此函数中操作数据（修改属性），会陷入死循环。
+
+    activated：在使用vue-router时有时需要使用<keep-alive></keep-alive>来缓存组件状态，这个时候created钩子就不会被重复调用了。
+    如果我们的子组件需要在每次加载的时候进行某些操作，可以使用activated钩子触发。
+
+    deactivated：<keep-alive></keep-alive>组件被移除时使用。
+    beforeDestroy：销毁前，
+    可做一些删除提示，如：您确定删除xx吗？
+
+    destroyed：销毁后，当前组件已被删除，销毁监听事件，组件、事件、子实例也被销毁。
+    这时组件已经没有了，无法操作里面的任何东西了。
+   
+- [x] 必考：Vue 如何实现组件间通信？
+  
+   `props/$emit`
+
+    父组件 A 通过 props 的方式向子组件 B 传递，B to A 通过在 B 组件中 $emit, A 组件中 v-on 的方式实现。
+
+    父子组件：使用 v-on 通过事件通信
+
+    爷孙组件：使用两次 v-on 通过爷爷爸爸通信，爸爸儿子通信实现爷孙通信
+
+    任意组件：使用 eventBus = new Vue() 来通信，eventBus.$on 和 eventBus.$emit 是主要API
+
+    任意组件：使用 Vuex 通信
+
+    [Vue事件总线（EventBus）使用详细介绍](https://zhuanlan.zhihu.com/p/72777951)
+
+    [Vue组件间通信6种方式](https://www.cnblogs.com/fundebug/p/10884896.html)
+    
+- [x] 必考：Vue 数据响应式怎么做到的？
+  
+  使用 Object.defineProperty 把这些属性全部转为 getter/setter
+
+  Vue 不能检测到对象属性的添加或删除，解决方法是手动调用 Vue.set 或者 this.$set
+  [Vue-数据响应式](https://juejin.im/post/5e6eef71f265da575918f3cc#heading-11)
+
+- [x] 必考：Vue.set 是做什么用的？
+  
+  Vue没有办法事先监听和代理，需要使用set来新增key,创建监听和代理，更新UI。推荐提前把属性都写好，不要新增key
+  Vue.set和this.$set作用：
+
+  新增key，即对象的键名或者属性名
+  如果没有创建过，自动创建代理和监听
+  触发UI更新，但不会立刻更新，有延迟
+
+
+
+- [x] Vuex 你怎么用的？
+  
+  Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式
+  
+  Vuex有五个核心概念，分别是state、 getters、 mutations、 actions、 modules。
+
+  state：Vuex的基本数据，用来存储变量。
+
+  getters：从基本数据state派生的数据，相当于state的计算属性。
+
+  mutation：提交更新数据的方法，必须是同步的，如果需要异步使用action。每个 mutation 都有一个字符串的事件类型和一个回调函数handler。通过`this.$store.commit`
+
+  action：和mutation的功能大致相同，不同之处在于action 提交的是mutation，而不是直接变更状态。action 可以包含任意异步操作。通过`this.$store.dispatch`
+
+  modules：模块化Vuex，可以让每一个模块拥有自己的state、mutation、action、getters，使得结构非常清晰，方便管理。
+
+  mapGetters 用来获取属性（数据）
+
+  mapActions 用来获取方法（动作）
+  
+  [Vuex](https://vuex.vuejs.org/zh/guide/state.html)
+- [x] VueRouter 你怎么用的？
+
+    Vue Router 是 Vue.js 官方的路由管理器
+  
+    History 模式/导航守卫/路由懒加载
+
+    history：利用了HTML5 History Interface 中新增的pushState() 和replaceState() 方法。（需要特定浏览器支持）
+    如果url里不想出现丑陋hash值（#），在new VueRouter的时候配置mode值为history来改变路由模式，本质使用H5的histroy.pushState方法来更改url，不会引起刷新。
+
+    懒加载也叫延迟加载，即在需要的时候进行加载，随用随载。在单页应用中，如果没有应用懒加载，运用webpack打包后的文件将会异常的大，造成进入首页时，需要加载的内容过多，延时过长，会出现长时间的白屏，即使做了loading也是不利于用户体验，而运用懒加载则可以将页面进行划分，需要的时候加载页面，可以有效的分担首页所承担的加载压力，减少首页加载用时
+
+
+  [vue-router深度解析，全方位搞定路由！](https://www.jianshu.com/p/6b33918d47ef)
+
+- [x] 路由守卫是什么？
+  
+    vue-router提供了导航钩子:全局前置导航钩子 beforeEach和全局后置导航钩子 afterEach，他们会在路由即将改变前和改变后进行触发。所以判断用户是否登录需要在beforeEach导航钩子中进行判断。
+
+    导航钩子有3个参数：
+
+      1、to:即将要进入的目标路由对象；
+
+      2、from:当前导航即将要离开的路由对象；
+
+      3、next ：调用该方法后，才能进入下一个钩子函数（afterEach）。
+
+        next()//直接进to 所指路由
+        next(false) //中断当前路由
+        next('route') //跳转指定路由
+        next('error') //跳转错误路由
+
+        [5分钟学会vue中的路由守卫(导航守卫)](https://www.cnblogs.com/hgdzjp/p/10143707.html)
+
 ### React框架
 - [ ] 必考：受控组件 V.S. 非受控组件
 - [ ] 必考：React 有哪些生命周期函数？分别有什么用？（Ajax 请求放在哪个阶段？）
