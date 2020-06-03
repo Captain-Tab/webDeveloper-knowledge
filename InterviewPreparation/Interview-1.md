@@ -711,8 +711,6 @@
 
 - [x] 常考：如何实现数组去重？
 
-
-
   假设有数组`array = [1,5,2,3,4,2,3,1,3,4]`。你要写一个函数`unique`，使得`unique(array)` 的值为 `[1,5,2,3,4]`.也就是把重复的值都去掉，只保留不重复的值。
 
   要求写出两个答案：
@@ -842,8 +840,51 @@
 
 - [ ] 常考：async/await 怎么用，如何捕获异常？
 ### DOM
-- [ ] 必考：事件委托
-- [ ] 曾考：用 mouse 事件写一个可拖曳的 div
+- [x] 必考：事件委托
+   
+    定义
+
+    事件委托`Event Delegation`: 又称之为事件委托。是`JavaScript`中常用绑定事件的常用技巧。顾名思义，“事件代理”即是把原本需要绑定在子元素的响应事件（`click`、`keydown......`）委托给父元素，让父元素担当事件监听的职务。事件代理的原理是`DOM`元素的事件冒泡。
+
+    原理
+
+    比如一个宿舍的同学同时快递到了，一种方法就是他们一个个去领取，还有一种方法就是把这件事情委托给宿舍长，让一个人出去拿好所有快递，然后再根据收件人一 一分发给每个宿舍同学。在这里，取快递就是一个事件，每个同学指的是需要响应事件的`DOM` 元素，而出去统一领取快递的宿舍长就是代理的元素，所以真正绑定事件的是这个元素，按照收件人分发快递的过程就是在事件执行中，需要判断当前响应的事件应该匹配到被代理元素中的哪一个或者哪几个。
+
+
+   实例代码
+   ```
+     // 思路是点击 span 后，递归遍历 span 的祖先元素看其中有没有 ul 里面的 li。
+
+    function delegate(element, eventType, selector, fn) {
+     element.addEventListener(eventType, e => {
+       let el = e.target
+       while (!el.matches(selector)) {
+         if (element === el) {
+           el = null
+           break
+         }
+         el = el.parentNode
+       }
+       el && fn.call(el, e, el)
+     })
+     return element
+     }
+
+   ```
+- [x] 阻止事件冒泡和事件捕获
+
+    阻止事件的传播：
+    * 在`W3c`中，使用`stopPropagation（）`方法
+    * 在`IE`下设置`cancelBubble = true`；
+    * 在捕获的过程中`stopPropagation（）`；后，后面的冒泡过程也不会发生了
+
+
+    阻止事件的默认行为，例如`click <a>`后的跳转
+    * 在`W3c`中，使用`preventDefault（）`方法；
+    * 在`IE`下设置`window.event.returnValue = false`;
+- [x] 曾考：用 mouse 事件写一个可拖曳的 div
+
+   [示范代码](https://jsbin.com/munuzureya/edit?html,js,output)
 ### HTTP
 - [ ] 必考：HTTP 状态码知道哪些？分别什么意思？
 - [ ] 大公司必考：HTTP 缓存有哪几种？
