@@ -569,8 +569,6 @@
     解决办法是 `CORS` 或 `csrf token`
 
 
-
-
 - [x] 常考：如何实现深拷贝？
   
  * 浅拷贝只复制指向某个对象的指针，而不复制对象本身，新旧对象还是共享同一块内存。
@@ -1094,8 +1092,10 @@
 
     懒加载也叫延迟加载，即在需要的时候进行加载，随用随载。在单页应用中，如果没有应用懒加载，运用webpack打包后的文件将会异常的大，造成进入首页时，需要加载的内容过多，延时过长，会出现长时间的白屏，即使做了loading也是不利于用户体验，而运用懒加载则可以将页面进行划分，需要的时候加载页面，可以有效的分担首页所承担的加载压力，减少首页加载用时
 
-
-  [vue-router深度解析，全方位搞定路由！](https://www.jianshu.com/p/6b33918d47ef)
+  
+    [vue router](https://router.vuejs.org/zh/guide/advanced/lazy-loading.html#%E6%8A%8A%E7%BB%84%E4%BB%B6%E6%8C%89%E7%BB%84%E5%88%86%E5%9D%97)
+    
+    [vue-router深度解析，全方位搞定路由！](https://www.jianshu.com/p/6b33918d47ef)
 
 - [x] 路由守卫是什么？
   
@@ -1117,15 +1117,134 @@
         [5分钟学会vue中的路由守卫(导航守卫)](https://www.cnblogs.com/hgdzjp/p/10143707.html)
 
 ### React框架
-- [ ] 必考：受控组件 V.S. 非受控组件
-- [ ] 必考：React 有哪些生命周期函数？分别有什么用？（Ajax 请求放在哪个阶段？）
-- [ ] 必考：React 如何实现组件间通信？
-- [ ] 必考：shouldComponentUpdate 有什么用？
-- [ ] 必考：虚拟 DOM 是什么？
-- [ ] 必考：什么是高阶组件？
-- [ ] React diff 的原理是什么？
-- [ ] 必考 Redux 是什么？
-- [ ] connect 的原理是什么？
+- [x] 必考：受控组件 V.S. 非受控组件
+  
+  必考：受控组件
+
+  假设我们现在有一个表单，表单中有一个input标签，input的value值必须是我们设置在constructor构造函数的state中的值，然后，通过onChange触发事件来改变state中保存的value值，这样形成一个循环的回路影响。也可以说是React负责渲染表单的组件仍然控制用户后续输入时所发生的变化
+
+  input中的value值通过state值获取，onChange事件改变state中的value值，input中的value值又从state中获取。
+
+  不受控组件
+
+  表单数据由DOM本身处理。即不受setState()的控制，与传统的HTML表单输入相似，input输入值即显示最新值（使用 ref 从DOM获取表单值）
+
+  [受控组件 V.S. 非受控组件](https://zhuanlan.zhihu.com/p/26511786?from_voters_page=true)
+
+- [x] 必考：React 有哪些生命周期函数？分别有什么用？（Ajax 请求放在哪个阶段？）
+  
+    | 生命周期函数   |      说明      |
+    |----------|:-------------:|
+    | constructor |  在这里初始化state |
+    | shouldComponentUpdate() | 决定是否更新组件 |
+    | render | 创建虚拟DOM |
+    | componentDidMount() | 组件已被挂载在DOM |
+    | componentDidUpdate() | 组件已被更新 |
+    | componentWillUnmount() | 组件被移除DOM, 将消亡 |
+
+- [x] 必考：React 如何实现组件间通信？
+   
+    父子靠 props 传函数
+
+    爷孙可以穿两次 props
+
+    任意组件用 Redux（也可以自己写一个 eventBus）
+- [x] 必考：shouldComponentUpdate 有什么用？
+  
+    用于在没有必要更新 UI 的时候返回 false，以提高渲染性能
+    
+    shouldComponentUpdate 这个方法用来判断是否需要调用 render 方法重新描绘 dom。因为 dom 的描绘非常消耗性能，如果我们能在 shouldComponentUpdate 方法中能够写出更优化的 dom diff 算法，可以极大的提高性能。
+- [x] JSX
+  
+     当 Facebook 第一次发布 React 时，他们还引入了一种新的 JS 方言 JSX，将原始 HTML 模板嵌入到 JS 代码中。JSX 代码本身不能被浏览器读取，必须使用Babel和webpack等工具将其转换为传统的JS。很多开发人员就能无意识使用 JSX，因为它已经与 React 结合在一直了。
+- [x] 必考：虚拟 DOM 是什么？
+    
+    Virtual DOM 是一个轻量级的 JavaScript 对象，它最初只是 real DOM 的副本。它是一个节点树，它将元素、它们的属性和内容作为对象及其属性。 React 的渲染函数从 React 组件中创建一个节点树。然后它响应数据模型中的变化来更新该树，该变化是由用户或系统完成的各种动作引起的。
+
+    Virtual DOM 工作过程有三个简单的步骤。
+   
+   每当底层数据发生改变时，整个 UI 都将在 Virtual DOM 描述中重新渲染。
+
+   然后计算之前 DOM 表示与新表示的之间的差异。
+
+   完成计算后，将只用实际更改的内容更新 real DOM。
+
+- [x] 必考：什么是高阶组件？
+  
+    高阶组件(HOC)是接受一个组件并返回一个新组件的函数。基本上，这是一个模式，是从 React 的组合特性中衍生出来的，称其为纯组件，因为它们可以接受任何动态提供的子组件，但不会修改或复制输入组件中的任何行为。
+
+    ```
+    const EnhancedComponent = higherOrderComponent(WrappedComponent);
+    ```
+    HOC 可以用于以下许多用例
+
+    代码重用、逻辑和引导抽象
+    渲染劫持
+    state 抽象和操作
+    props 处理
+- [x] React diff 的原理是什么？
+  
+      把树形结构按照层级分解，只比较同级元素。
+
+      给列表结构的每个单元添加唯一的 key 属性，方便比较。
+      
+      React 只会匹配相同 class 的 component（这里面的 class 指的是组件的名字）
+
+      合并操作，调用 component 的 setState 方法的时候, React 将其标记为 dirty.到每一个事件循环结束, React 检查所有标记 dirty 的 component 重新绘制.
+
+      选择性子树渲染。开发人员可以重写 shouldComponentUpdate 提高 diff 的性能。
+- [x] 必考 Redux 是什么？
+    Redux 是 JavaScript 状态容器，提供可预测化的状态管理。重点是『状态管理』。
+
+    Redux 由以下组件组成：
+
+    Action – 这是一个用来描述发生了什么事情的对象。
+    Reducer – 这是一个确定状态将如何变化的地方。
+    Store – 整个程序的状态/对象树保存在Store中。
+    View – 只显示 Store 提供的数据。
+
+    缺点
+
+    一个组件所需要的数据，必须由父组件传过来，而不能像 flux 中直接从 store 取。
+
+    当一个组件相关数据更新时，即使父组件不需要用到这个组件，父组件还是会重新 render，可能会有效率影响，或者需要写复杂的 shouldComponentUpdate 进行判断。
+- [x] React的ref
+  
+    Refs 提供了一种访问在render方法中创建的 DOM 节点或者 React 元素的方法。在典型的数据流中，props 是父子组件交互的唯一方式，想要修改子组件，需要使用新的pros重新渲染它。凡事有例外，某些情况下咱们需要在典型数据流外，强制修改子代，这个时候可以使用 Refs。
+
+    咱们可以在组件添加一个 ref 属性来使用，该属性的值是一个回调函数，接收作为其第一个参数的底层 DOM 元素或组件的挂载实例。
+    [35道值得收藏的React面试题](https://www.html.cn/interview/14282.html)
+- [x] redux的中间件
+  
+      中间件提供第三方插件的模式，自定义拦截 action -> reducer 的过程。变为 action -> middlewares -> reducer 。这种机制可以让我们改变数据流，实现如异步 action ，action 过滤，日志输出，异常报告等功能。
+
+      常见的中间件：
+
+      redux-logger：提供日志输出
+
+      redux-thunk：处理异步操作
+
+      redux-promise：处理异步操作，actionCreator的返回值是promise
+- [x] flux
+    
+      Flux 的最大特点，就是数据的"单向流动"。
+
+      用户访问 View
+      View 发出用户的 Action
+      Dispatcher 收到 Action，要求 Store 进行相应的更新
+      Store 更新后，发出一个"change"事件
+      View 收到"change"事件后，更新页面
+- [x] connect 的原理是什么？
+    react-redux 库提供的一个 API，connect 的作用是让你把组件和store连接起来，产生一个新的组件（connect 是高阶组件）
+    
+    React-Redux 提供<Provider/>组件，能够使你的整个app访问到Redux store中的数据：
+
+    mapStateToProps, 输入逻辑
+    mapDispatchToProps 输出逻辑
+
+    输入逻辑：外部的数据（即state对象）如何转换为 UI 组件的参数
+
+    输出逻辑：用户发出的动作如何变为 Action 对象，从 UI 组件传出去。
 ### TypeScript
 - [ ] never 类型是什么？
 - [ ] TypeScript 比起 JavaScript 有什么优点？
