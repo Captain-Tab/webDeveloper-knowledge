@@ -878,7 +878,26 @@
   module.exports = Promise;
   ```
 
-- [ ] 常考：async/await 怎么用，如何捕获异常？
+- [x] 常考：async/await 怎么用，如何捕获异常？
+   
+   一句话，async 函数就是 Generator 函数的语法糖。
+
+   async 函数的优点
+
+   （1）内置执行器
+    
+   （2）更好的语义
+
+   （3）更广的适用性
+
+   async 函数的实现，就是将 Generator 函数和自动执行器，包装在一个函数里。
+
+   同 Generator 函数一样，async 函数返回一个 Promise 对象，可以使用 then 方法添加回调函数。当函数执行的时候，一旦遇到 await 就会先返回，等到触发的异步操作完成，再接着执行函数体内后面的语句。
+
+   await 命令后面的 Promise 对象，运行结果可能是 rejected，所以最好把 await 命令放在 try...catch 代码块中。
+
+  [async 函数的含义和用法](https://www.ruanyifeng.com/blog/2015/05/async.html)
+
 ### DOM
 - [x] 必考：事件委托
    
