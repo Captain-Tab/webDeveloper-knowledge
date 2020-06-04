@@ -1184,15 +1184,28 @@
     props 处理
 - [x] React diff 的原理是什么？
   
-      把树形结构按照层级分解，只比较同级元素。
+  
+    React 通过制定大胆的 diff 策略，将 O(n3) 复杂度的问题转换成 O(n) 复杂度的问题；
 
-      给列表结构的每个单元添加唯一的 key 属性，方便比较。
-      
-      React 只会匹配相同 class 的 component（这里面的 class 指的是组件的名字）
+    React 通过分层求异的策略，对 tree diff 进行算法优化；
 
-      合并操作，调用 component 的 setState 方法的时候, React 将其标记为 dirty.到每一个事件循环结束, React 检查所有标记 dirty 的 component 重新绘制.
+    React 通过相同类生成相似树形结构，不同类生成不同树形结构的策略，对 component diff 进行算法优化；
 
-      选择性子树渲染。开发人员可以重写 shouldComponentUpdate 提高 diff 的性能。
+    React 通过设置唯一 key的策略，对 element diff 进行算法优化；
+
+
+    把树形结构按照层级分解，只比较同级元素。
+
+    给列表结构的每个单元添加唯一的 key 属性，方便比较。
+    
+    React 只会匹配相同 class 的 component（这里面的 class 指的是组件的名字）
+
+    合并操作，调用 component 的 setState 方法的时候, React 将其标记为 dirty.到每一个事件循环结束, React 检查所有标记 dirty 的 component 重新绘制.
+
+    选择性子树渲染。开发人员可以重写 shouldComponentUpdate 提高 diff 的性能。
+    
+    [Diff 算法](https://zhuanlan.zhihu.com/p/20346379)
+
 - [x] 必考 Redux 是什么？
     Redux 是 JavaScript 状态容器，提供可预测化的状态管理。重点是『状态管理』。
 
@@ -1216,24 +1229,24 @@
     [35道值得收藏的React面试题](https://www.html.cn/interview/14282.html)
 - [x] redux的中间件
   
-      中间件提供第三方插件的模式，自定义拦截 action -> reducer 的过程。变为 action -> middlewares -> reducer 。这种机制可以让我们改变数据流，实现如异步 action ，action 过滤，日志输出，异常报告等功能。
+    中间件提供第三方插件的模式，自定义拦截 action -> reducer 的过程。变为 action -> middlewares -> reducer 。这种机制可以让我们改变数据流，实现如异步 action ，action 过滤，日志输出，异常报告等功能。
 
-      常见的中间件：
+    常见的中间件：
 
-      redux-logger：提供日志输出
+    redux-logger：提供日志输出
 
-      redux-thunk：处理异步操作
+    redux-thunk：处理异步操作
 
-      redux-promise：处理异步操作，actionCreator的返回值是promise
+    redux-promise：处理异步操作，actionCreator的返回值是promise
 - [x] flux
     
-      Flux 的最大特点，就是数据的"单向流动"。
+    Flux 的最大特点，就是数据的"单向流动"。
 
-      用户访问 View
-      View 发出用户的 Action
-      Dispatcher 收到 Action，要求 Store 进行相应的更新
-      Store 更新后，发出一个"change"事件
-      View 收到"change"事件后，更新页面
+    用户访问 View
+    View 发出用户的 Action
+    Dispatcher 收到 Action，要求 Store 进行相应的更新
+    Store 更新后，发出一个"change"事件
+    View 收到"change"事件后，更新页面
 - [x] connect 的原理是什么？
     react-redux 库提供的一个 API，connect 的作用是让你把组件和store连接起来，产生一个新的组件（connect 是高阶组件）
     
@@ -1246,8 +1259,31 @@
 
     输出逻辑：用户发出的动作如何变为 Action 对象，从 UI 组件传出去。
 ### TypeScript
-- [ ] never 类型是什么？
-- [ ] TypeScript 比起 JavaScript 有什么优点？
+- [x] never 类型是什么？
+  
+   never 类型表示的是那些永不存在的值的类型。 例如， never 类型是那些总是会抛出异常或根本就不会有返回值的函数表达式或箭头函数表达式的返回值类型。
+   
+   没有显式返回值的函数会隐式返回 undefined 。尽管我们通常说这样的函数 “什么也不返回”，但实际上它是会返回的。在这些情况下，我们通常忽略返回值。在 TypeScript 中这些函数的返回类型被推断为 void 。
+   具有 never 返回类型的函数 永不返回 。它也不返回 undefined 。该函数没有正常完成，这意味着它可能会抛出异常或根本无法退出执行。
+
+   [TypeScript never 类型](http://www.fly63.com/article/detial/8120?type=3)
+
+- [x] TypeScript 比起 JavaScript 有什么优点？
+   
+  简单来说 提供了类型约束，因此更可控、更容易重构、更适合大型项目、更容易维护
+
+  1. 静态输入
+  静态类型化是一种功能，可以在开发人员编写脚本时检测错误。查找并修复错误是当今开发团队的迫切需求。有了这项功能，就会允许开发人员编写更健壮的代码并对其进行维护，以便使得代码质量更好、更清晰。
+
+  2. 大型的开发项目
+  有时为了改进开发项目，需要对代码库进行小的增量更改。这些小小的变化可能会产生严重的、意想不到的后果，因此有必要撤销这些变化。使用TypeScript工具来进行重构更变的容易、快捷。
+
+  3. 更好的协作
+  当发开大型项目时，会有许多开发人员，此时乱码和错误的机也会增加。类型安全是一种在编码期间检测错误的功能，而不是在编译项目时检测错误。这为开发团队创建了一个更高效的编码和调试过程。
+
+  4. 更强的生产力
+  干净的 ECMAScript 6 代码，自动完成和动态输入等因素有助于提高开发人员的工作效率。这些功能也有助于编译器创建优化的代码。
+
 ### Webpack
 - [ ] 必考：有哪些常见 loader 和 plugin，你用过哪些？
 - [ ] 英语题：loader 和 plugin 的区别是什么？
