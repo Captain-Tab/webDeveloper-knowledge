@@ -104,35 +104,32 @@
   * `border-box` 更好用，比如同时使用`padding,width,border`来测试
 - [x] 必考：如何垂直居中？
   
-  内联元素居中方案
-
-    水平居中设置：
+  内联元素, 水平居中设置：
 
     1. 行内元素
     * 设置`text-align:center`；
     2. `Flex`布局
     * 设置`display:flex;justify-content:center`;(灵活运用,支持`Chroime，Firefox，IE9+`)
-  
-    垂直居中设置：
 
-    1. 父元素高度确定的单行文本（内联元素）
-    * 设置`text-align:center`；
-    2. 父元素高度确定的多行文本（内联元素）
-    * `a`:插入`table`（插入方法和水平居中一样），然后设置 `vertical-align:middle`；
-    * `b`:先设置`display:table-cell`再设置 `vertical-align:middle`；
-
-  块级元素居中方案
-
-    水平居中设置：
+   块级元素, 水平居中设置：
 
     1. 定宽块状元素
     * 设置 左右`margin`值为`auto`；
     2. 不定宽块状元素
-    * `a`:在元素外加入 `table` 标签（完整的，包括 `table`、`tbody`、`tr`、`td`），该元素写在`td`内，然后设置`margin`的值为`auto`；
-    * `b`:给该元素设置`displa:inine`方法；
-    * `c`:父元素设置`position:relative`和`left:50%`，子元素设置`position:relative`和`left:50%`；
+    * 在元素外加入 `table` 标签（完整的，包括 `table`、`tbody`、`tr`、`td`），该元素写在`td`内，然后设置`margin`的值为`auto`；
+    * 给该元素设置`displa:inine`方法；
+    * 父元素设置`position:relative`和`left:50%`，子元素设置`position:relative`和`left:50%`；
 
-   垂直居中设置：
+  
+    内联元素,垂直居中设置：
+
+    1. 父元素高度确定的单行文本（内联元素）
+    * 设置`text-align:center`；
+    1. 父元素高度确定的多行文本（内联元素）
+    * 插入`table`（插入方法和水平居中一样），然后设置 `vertical-align:middle`；
+    * 先设置`display:table-cell`再设置 `vertical-align:middle`；
+
+   块级元素,垂直居中设置：
 
    * 使用`position:absolute（fixed`,设置`left、top、margin-left、margin-top`的属性;
    * 利用`position:fixed（absolute）`属性，`margin:auto`这个必须不要忘记了;

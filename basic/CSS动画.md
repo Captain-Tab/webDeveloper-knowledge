@@ -2,13 +2,14 @@
 1. [动画原理](#动画原理)
 2. [浏览器渲染过程](#浏览器渲染过程)
 3. [Transform](#Transform)
-4. [Scale缩放](#Scale缩放)
-5. [Rotate旋转 ](#Rotate旋转)
-6. [倾斜Skew](#倾斜Skew)
-7. [Transform多重效果](#Transform多重效果)
-8. [Transition过渡](#Transition过渡)
-9. [Animation](#Animation)
-10. [更多信息](#更多信息)
+4. [Translate位移](#Translate位移)
+5. [Scale缩放](#Scale缩放)
+6. [Rotate旋转 ](#Rotate旋转)
+7. [倾斜Skew](#倾斜Skew)
+8. [Transform多重效果](#Transform多重效果)
+9. [Transition过渡](#Transition过渡)
+10. [Animation](#Animation)
+11. [更多信息](#更多信息)
 
 ### 动画原理
 动画是由许多静止的画面(帧)以一定的速度连续播放组成，由于人的肉眼因视觉残像产生错觉，而错以为是活动的画面。例如影视画面以每秒`24`帧播放，游戏以每秒`30`帧进行播放。
@@ -56,7 +57,12 @@
 ### Transform 
 `transform`属性允许你旋转，缩放，倾斜或平移给定元素。这是通过修改`CSS`视觉格式化模型的坐标空间来实现的。
 
-#### Translate位移
+`transform`有4个方法，分别是`translate`平移、`rotate`旋转、`scale`缩放、`skew`斜切
+
+`transition`有`4`个值（默认是前`2`个值）：`property`(指定`css`属性的`name`)、`duration`（动画持续时间）、`timing-function`(切换动画的速度)、`delay`(动画执行前的延迟时间)
+
+
+### Translate位移
 * `transltateX(<length-percentage>)`
 * `translateY(<length-percentage>)`
 * `translate(<length-percentage>,<length-percentage>?)`
