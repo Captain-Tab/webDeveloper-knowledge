@@ -131,11 +131,11 @@
 
    块级元素,垂直居中设置：
 
-   * 使用`position:absolute（fixed`,设置`left、top、margin-left、margin-top`的属性;
+   * 使用`position:absolute（fixed`,设置`left、top、margin-left、margin-top:50%`的属性;
    * 利用`position:fixed（absolute）`属性，`margin:auto`这个必须不要忘记了;
    * 利用`display:table-cell`属性使内容垂直居中;
    * 使用`css3`的新属性`transform:translate(x,y)`属性;
-   * 使用`:before`元素;
+   * 使用`:before`元素;100% 高度的加上`inline block`
 
 
 - [x] CSS 布局选择
@@ -350,7 +350,50 @@
   Promise.race([promise1, promise2]).then(success1, fail1)
   ```
 
+
+- [x] new操作符
+  
+      （1）首先创建了一个新的空对象
+      （2）设置原型，将对象的原型设置为函数的 prototype 对象。
+      （3）让函数的 this 指向这个对象，执行构造函数的代码（为这个新对象添加属性）
+      （4）判断函数的返回值类型，如果是值类型，返回创建的对象。如果是引用类型，就返回这个引用类型的对象
+
+      ```
+      function objectFactory() {
+      let newObject = null,
+        constructor = Array.prototype.shift.call(arguments),
+        result = null;
+
+      // 参数判断
+      if (typeof constructor !== "function") {
+        console.error("type error");
+        return;
+      }
+
+      // 新建一个空对象，对象的原型为构造函数的 prototype 对象
+      newObject = Object.create(constructor.prototype);
+
+      // 将 this 指向新建对象，并执行函数
+      result = constructor.apply(newObject, arguments);
+
+      // 判断返回对象
+      let flag =
+        result && (typeof result === "object" || typeof result === "function");
+
+      // 判断返回结果
+        return flag ? result : newObject;
+      }
+
+      // 使用方法
+      // objectFactory(构造函数, 初始化参数);
+      ```
+
 - [x] 必考：手写函数防抖和函数节流
+
+  throttle-函数节流：一个水龙头在滴水，可能一次性会滴很多滴，但是我们只希望它每隔 500ms 滴一滴水，保持这个频率。即我们希望函数在以一个可以接受的频率重复调用。
+
+  debounce-函数防抖：将一个弹簧按下，继续加压，继续按下，只会在最后放手的一瞬反弹。即我们希望函数只会调用一次，即使在这之前反复调用它，最终也只会调用一次而已。
+
 
   1. 函数防抖
    
@@ -374,7 +417,7 @@
     debounced()
     debounced()
    ```
-   2. 函数节流
+   1. 函数节流
 
   * 函数节流是指规定一个单位时间，在这个单位时间内，只能有一次触发事件的回调函数执行，如果在同一个单位时间内某事件被触发多次，只有一次能生效。
   * 节流可以使用在`scroll`函数的事件监听上，通过事件节流来降低事件调用的频率。
@@ -508,7 +551,9 @@
    2. 这个作用域里面的变量，外面访问不到（即避免「变量污染」）。
 
 - [x] 必考：什么是 JSONP，什么是 CORS，什么是跨域？
-  
+    
+    跨域Cross-Domain：跨域是指从一个域名的网页去请求另一个域名的资源。比如从www.baidu.com页面去请求www.google.com 的资源。但是一般情况下不能这么做，它是由浏览器的同源策略造成的，是浏览器对JavaScript施加的安全限制。跨域的严格一点的定义是：只要协议，域名，端口有任何一个的不同，就被当作是跨域
+
     `CORS`
     定义
 
