@@ -1368,22 +1368,85 @@
    [彻底解决 webpack 打包文件体积过大](https://www.jianshu.com/p/a64735eb0e2b)
 上面五题请看这个不错的参考：https://zhuanlan.zhihu.com/p/44438844
 ### 安全
-- [ ] 必考：什么是 XSS？如何预防？
-- [ ] 必考：什么是 CSRF？如何预防？
+- [x] 必考：什么是 XSS？如何预防？
+  
+    [「每日一题」XSS 是什么？](https://zhuanlan.zhihu.com/p/22500730)
+- [x] 必考：什么是 CSRF？如何预防？
+ 
+    [「每日一题」CSRF 是什么？](https://zhuanlan.zhihu.com/p/22521378)
 ## 开放题目
-- [ ] 必考：你遇到最难的问题是怎样的？
-- [ ] 你在团队的突出贡献是什么？
-- [ ] 最近在关注什么新技术
-- [ ] 有没有看什么源码，看了后有什么记忆深刻的地方，有什么收获
+- [x] 必考：你遇到最难的问题是怎样的？
+  
+  一波三折。参考 https://www.zhihu.com/question/35323603
+- [x] 你在团队的突出贡献是什么？
+  
+  把小事说大。
+- [x] 最近在关注什么新技术
+  
+  书、博客、推特、知乎，不要说 CSDN、百度
+- [x] 有没有看什么源码，看了后有什么记忆深刻的地方，有什么收获
+  
+    看过源码说源码，推荐看 underscore.js 的源码
+    没看过源码就说同事的代码，代码烂就说哪里烂，代码好就说哪里好
+    收获：命名规范、设计模式
 ### 刁钻题目
 - [ ]  代码
 (a ==1 && a== 2 && a==3) 可能为 true 吗？
 ### 超纲题
-- [ ] JS 垃圾回收机制
-- [ ] Eventloop 说一下
+- [x] JS 垃圾回收机制
+   
+   什么是垃圾
+
+   如何捡垃圾（遍历和计数，只是不同的算法而已）
+
+   前端又有其特殊性（JS进程和DOM进程）
+  
+
+   [垃圾回收](https://zh.javascript.info/garbage-collection)
+
+   [高级进阶](http://newhtml.net/v8-garbage-collection/)
+- [x] Eventloop 说一下
+  
+    肤浅理解：『一会儿』和『尽快』异步任务
+
+    详细理解：Eventloop 是个啥？
+
+    浏览器有 Eventloop 吗？
+
+    [什么是 Event Loop？](http://www.ruanyifeng.com/blog/2013/10/event_loop.html)
+
+    [浅析 JS 中的 EventLoop 事件循环（新手向）](https://segmentfault.com/a/1190000019313028)
 ## 个性化题目
-- [ ] PWA
+- [x] PWA
+  
+     PWA，全称直译过来就是渐进式网页应用（ProgressiveWebApp）。PWA的概念由Chrome项目组在2015年的时候提出，很明显，它是一种基于网页的应用，但它又与传统的Web App又有一些不同
+
+     [请问什么是PWA？](https://www.jiangweishan.com/article/html9234jsldkjflsdjf.html)
 - [ ] echarts.js / d3.js
-- [ ] three.js
-- [ ] flutter
-- [ ] SSR
+- [x] three.js
+  
+      three.js是JavaScript编写的WebGL第三方库。提供了非常多的3D显示功能。
+
+      WebGL的第三方库这是重点
+
+      Three.js 是一款运行在浏览器中的 3D 引擎，你可以用它创建各种三维场景，包括了摄影机、光影、材质等各种对象
+
+
+- [x] flutter
+
+   Flutter是Google一个新的用于构建跨平台的手机App的SDK。写一份代码，在Android 和iOS平台上都可以运行。
+
+  [Flutter是什么？](https://www.jianshu.com/p/51e989500ca3)
+- [x] SSR
+  
+    SSR：Server Side Rendering
+    服务端渲染，由服务器进行渲染并返回给客户端渲染完成的html
+
+    优点
+    超快的响应速度
+    易做SEO
+    缺点
+    增加服务器压力
+    主流框架
+    Next.js —— React的SSR方案
+    Nuxt.js —— Vue的SSR方案
