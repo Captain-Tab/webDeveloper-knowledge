@@ -613,36 +613,36 @@
 
 - [x] 常考：如何实现深拷贝？
   
- * 浅拷贝只复制指向某个对象的指针，而不复制对象本身，新旧对象还是共享同一块内存。
- * 深拷贝会另外创造一个一模一样的对象，新对象跟原对象不共享内存，修改新对象不会改到原对象
-  
-  [深拷贝和浅拷贝](https://juejin.im/post/5b5dcf8351882519790c9a2e#heading-3)
+   * 浅拷贝只复制指向某个对象的指针，而不复制对象本身，新旧对象还是共享同一块内存。
+   * 深拷贝会另外创造一个一模一样的对象，新对象跟原对象不共享内存，修改新对象不会改到原对象
+    
+    [深拷贝和浅拷贝](https://juejin.im/post/5b5dcf8351882519790c9a2e#heading-3)
 
-  实现浅拷贝
+    实现浅拷贝
 
-  * `Object.assign()` 方法可以把任意多个的源对象自身的可枚举属性拷贝给目标对象，然后返回目标对象。但是 `Object.assign()`进行的是浅拷贝，拷贝的是对象的属性的引用，而不是对象本身。
-  * 注意：当`object`只有一层的时候，是深拷贝
-  ```
-  var obj = { a: {a: "kobe", b: 39} };
-  var initalObj = Object.assign({}, obj);
-  initalObj.a.a = "wade";
-  console.log(obj.a.a); //wade
-  ```
-  实现深拷贝
+    * `Object.assign()` 方法可以把任意多个的源对象自身的可枚举属性拷贝给目标对象，然后返回目标对象。但是 `Object.assign()`进行的是浅拷贝，拷贝的是对象的属性的引用，而不是对象本身。
+    * 注意：当`object`只有一层的时候，是深拷贝
+    ```
+    var obj = { a: {a: "kobe", b: 39} };
+    var initalObj = Object.assign({}, obj);
+    initalObj.a.a = "wade";
+    console.log(obj.a.a); //wade
+    ```
+    实现深拷贝
 
-  * 用`JSON.stringify`将对象转成`JSON`字符串，再用`JSON.parse()`把字符串解析成对象，一去一来，新的对象产生了，而且对象会开辟新的栈，实现深拷贝
-  * 注意: 这种方法虽然可以实现数组或对象深拷贝,但不能处理函数
-  ```
-  let arr = [1, 3, {
-      username: ' kobe'
-  }];
-  let arr4 = JSON.parse(JSON.stringify(arr));
-  arr4[2].username = 'duncan'; 
-  console.log(arr, arr4)
+    * 用`JSON.stringify`将对象转成`JSON`字符串，再用`JSON.parse()`把字符串解析成对象，一去一来，新的对象产生了，而且对象会开辟新的栈，实现深拷贝
+    * 注意: 这种方法虽然可以实现数组或对象深拷贝,但不能处理函数
+    ```
+    let arr = [1, 3, {
+        username: ' kobe'
+    }];
+    let arr4 = JSON.parse(JSON.stringify(arr));
+    arr4[2].username = 'duncan'; 
+    console.log(arr, arr4)
 
-  ```
-  * 递归方法实现深度克隆原理：遍历对象、数组直到里边都是基本数据类型，然后再去复制，就是深度拷贝
-  ```
+    ```
+    * 递归方法实现深度克隆原理：遍历对象、数组直到里边都是基本数据类型，然后再去复制，就是深度拷贝
+    ```
   // 判断类型
   // 检查环（也叫循环引用）
   // 递归
@@ -662,7 +662,6 @@
     return newObject;
   }
   ```
-
 
 - [x] 常考：如何用正则实现 trim()？
    ```
@@ -998,6 +997,13 @@
   协商缓存: 向服务器发送请求，服务器会根据这个请求的request header的一些参数来判断是否命中协商缓存，如果命中，则返回304状态码并带上新的response header通知浏览器从缓存中读取资源；
 
   ETag 是通过对比浏览器和服务器资源的特征值（如MD5）来决定是否要发送文件内容，如果一样就只发送 304（not modified）
+  
+  服务器会通过某种算法，给资源计算得出一个唯一标志符（比如md5标志），在把资源响应给客户端的时候，会在实体首部加上“ETag: 唯一标识符”一起返回给客户端。例如：
+  ```
+  Etag: "5d8c72a5edda8d6a:3239"
+  ```
+  客户端会保留该 ETag 字段，并在下一次请求时将其一并带过去给服务器。服务器只需要比较客户端传来的ETag跟自己服务器上该资源的ETag是否一致，就能很好地判断资源相对客户端而言是否被修改过了。
+  如果服务器发现ETag匹配不上，那么直接以常规GET 200回包形式将新的资源（当然也包括了新的ETag）发给客户端；如果ETag是一致的，则直接返回304知会客户端直接使用本地缓存即可。
 
   Expires 是设置过期时间（绝对时间），但是如果用户的本地时间错乱了，可能会有问题
 
@@ -1211,8 +1217,6 @@
 
     任意组件用 Redux（也可以自己写一个 eventBus）
 - [x] 必考：shouldComponentUpdate 有什么用？
-  
-    用于在没有必要更新 UI 的时候返回 false，以提高渲染性能
     
     shouldComponentUpdate 这个方法用来判断是否需要调用 render 方法重新描绘 dom。因为 dom 的描绘非常消耗性能，如果我们能在 shouldComponentUpdate 方法中能够写出更优化的 dom diff 算法，可以极大的提高性能。
 - [x] JSX
@@ -1403,17 +1407,17 @@
     通过import(*)语句来控制加载时机，webpack内置了对于import(*)的解析，会将import(*)中引入的模块作为一个新的入口在生成一个chunk。 当代码执行到import(*)语句时，会去加载Chunk对应生成的文件。import()会返回一个Promise对象，所以为了让浏览器支持，需要事先注入Promise polyfill
 - [x] 必考：如何提高构建速度？
   
-      多入口情况下，使用CommonsChunkPlugin来提取公共代码
+    多入口情况下，使用CommonsChunkPlugin来提取公共代码
 
-      通过externals配置来提取常用库
+    通过externals配置来提取常用库
 
-      利用DllPlugin和DllReferencePlugin预编译资源模块 通过DllPlugin来对那些我们引用但是绝对不会修改的npm包来进行预编译，再通过DllReferencePlugin将预编译的模块加载进来。
+    利用DllPlugin和DllReferencePlugin预编译资源模块 通过DllPlugin来对那些我们引用但是绝对不会修改的npm包来进行预编译，再通过DllReferencePlugin将预编译的模块加载进来。
 
-      使用Happypack 实现多线程加速编译
+    使用Happypack 实现多线程加速编译
 
-      使用webpack-uglify-parallel来提升uglifyPlugin的压缩速度。 原理上webpack-uglify-parallel采用了多核并行压缩来提升压缩速度
+    使用webpack-uglify-parallel来提升uglifyPlugin的压缩速度。 原理上webpack-uglify-parallel采用了多核并行压缩来提升压缩速度
 
-      使用Tree-shaking和Scope Hoisting来剔除多余代码
+    使用Tree-shaking和Scope Hoisting来剔除多余代码
 - [x] 转义出的文件过大怎么办？
    
    去除不必要的插件
