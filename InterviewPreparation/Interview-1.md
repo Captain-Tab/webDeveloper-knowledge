@@ -1216,7 +1216,7 @@
     爷孙可以穿两次 props
 
     任意组件用 Redux（也可以自己写一个 eventBus）
-- [x] 必考：shouldComponentUpdate 有什么用？
+- [x] 必考：shouldComponentUpdate 有什么用？g
     
     shouldComponentUpdate 这个方法用来判断是否需要调用 render 方法重新描绘 dom。因为 dom 的描绘非常消耗性能，如果我们能在 shouldComponentUpdate 方法中能够写出更优化的 dom diff 算法，可以极大的提高性能。
 - [x] JSX
