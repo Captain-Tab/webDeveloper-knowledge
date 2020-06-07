@@ -1,33 +1,40 @@
 ## 目录
-1. [引入echarts](#引入echarts)
-2. [使用echarts](#使用echarts)
+1. [引入 echarts](#引入echarts)
+2. [使用 echarts](#使用echarts)
 3. [更新主题](#更新主题)
-4. [更新echarts数据](#更新echarts数据)
-5. [加载数据](#加载数据)  
+4. [更新 echarts 数据](#更新echarts数据)
+5. [加载数据](#加载数据)
 6. [点击事件](#点击事件)
 7. [移动端适配](#移动端适配)
-8. [echarts适配Vue](#echarts适配Vue)
-9. [echarts适配React](#echarts适配react)
+8. [echarts 适配 Vue](#echarts适配Vue)
+9. [echarts 适配 React](#echarts适配react)
 10. [更多资料](#更多资料)
 
+## 引入 echarts
 
-## 引入echarts
 方法一： 在无`webapck/ parcel`情况下，`CDN`引入
 直接在`html`引入`<script>`标签
+
 ```
 <script src="https://cdn.bootcdn.net/ajax/libs/echarts/4.7.0/echarts.min.js"></script>
 ```
+
 然后使用全局变量`window.echarts`
 
 方法二：有`webpack/parcel`情况下，命令行下载`echarts`
+
 ```
 yarn add echarts
 yarn add --dev @types/echarts  // 在TypeScript中运行
 import echarts from 'echarts'或者`var echarts = require('echarts')`
 ```
+
 然后使用`echarts`即可
-## 使用echarts
+
+## 使用 echarts
+
 1. 准备`DOM`容器, 即`echarts`挂载的容器
+
 ```
 <body>
     <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
@@ -36,6 +43,7 @@ import echarts from 'echarts'或者`var echarts = require('echarts')`
 ```
 
 2. 添加`echarts`代码
+
 ```
 <!DOCTYPE html>
 <html>
@@ -78,17 +86,22 @@ import echarts from 'echarts'或者`var echarts = require('echarts')`
 </body>
 </html>
 ```
+
 3. 效果图
-   
+
 ![](https://user-gold-cdn.xitu.io/2020/5/24/172440884faea39d?w=770&h=385&f=jpeg&s=32762)
 
 ## 更新主题
+
 方法一：通过`echarts.init()`方法
+
 ```
 const main = document.getElementById('main')
 const myChart = eacharts.init(main, 'dark') // 第二次参数可以设置为light或者default
 ```
+
 方法二：细节修改
+
 ```
 myChart.setOption({
     series:[{
@@ -98,7 +111,7 @@ myChart.setOption({
         },
     // 修改填充点宽带
        itemStyle:{
-         borderWidth:10  
+         borderWidth:10
        },
         name:'bug数'，
         data:[820,935,901,934,1290,1330,1320],
@@ -106,10 +119,14 @@ myChart.setOption({
     }]
 })
 ```
-## 更新echarts数据
+
+## 更新 echarts 数据
+
 使用`setOption`更新`x`坐标轴数据
-* 使用`showLoading() / hideLoading()`
-* `echarts`会自动找出差异，并更新图表
+
+- 使用`showLoading() / hideLoading()`
+- `echarts`会自动找出差异，并更新图表
+
 ```
 // html
 <button id="loadMore">加载更多</button>
@@ -130,8 +147,11 @@ loadMoreButton.addEventListener('click',()=>{
     })
 })
 ```
+
 ## 加载数据
+
 使用`showLoading()`显示加载数据的动画, `showLoading()`关闭加载的动画
+
 ```
 let isLoading = false
 loadMoreButton.addEventListener('click',()=>{
@@ -154,36 +174,46 @@ loadMoreButton.addEventListener('click',()=>{
     }, 3000)
 })
 ```
+
 ## 点击事件
+
 使用`on`监听事件
+
 ```
 myChart.on('click',(e)=>{
     window.alert(`${e.name}`被点击了)
 })
 ```
+
 ## 移动端适配
+
 常规技巧
 `meta`淘宝手机版复制到项目的`html`中
+
 ```
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 ```
+
 使用`JS`获取屏幕宽度设置在`div`上, 设计宽高比例
+
 ```
 const width = document.documentElement.clientWidth
 main.style.width = `${width}px`
 main.style.height = `${width*1.2}px`
 ```
+
 同时适配移动端和`PC`端, 使用`baseOption`和`media`
+
 ```
 myChart.setOption({
     baseOption:{
-       // PC端自定义部分 
+       // PC端自定义部分
     },
     meidia:[
     {
          // 移动端自定义部分
         query:{
-           maxWidth:500 
+           maxWidth:500
         },
         option:{
             series:[{
@@ -195,13 +225,16 @@ myChart.setOption({
     ]
 })
 ```
-## echarts适配Vue
+
+## echarts 适配 Vue
+
 将`echarts`封装成组件
+
 ```
 // 子组件 vue-echarts
 <template>
     <div ref="container">
-    
+
     </div>
 </template>
 
@@ -231,6 +264,7 @@ export default {
 }
 </script>
 ```
+
 ```
 // 父组件，包含echarts子组件
 <template>
@@ -266,8 +300,8 @@ export default {
                     type: 'bar',
                     data: [5, 20, 36, 10, 10, 20]
                 }]
-          
-        }  
+
+        }
       }
     },
     component:{VueEcharts},
@@ -291,7 +325,8 @@ export default {
 </script>
 ```
 
-## echarts适配React
+## echarts 适配 React
+
 ```
 // 子组件 React-echarts
 import React,{useState} from 'react'
@@ -308,12 +343,12 @@ export function ReactEcharts(props){
      chart.current = echarts.init(container.current,'dark')
    },[])
    useEffect(()=>{
-       chart.current.setOpiton(option)
+       chart.current.setOption(option)
    },[option])
    useEffect(()=>{
        if(loading){
            chart.current.showLoading()
-       }else(){
+       }else{
            chart.current.hideLoading()
        }
    },[loading])
@@ -322,6 +357,7 @@ export function ReactEcharts(props){
         )
 }
 ```
+
 ```
 // 父组件，包含echarts子组件
 import React from 'react'
@@ -347,7 +383,7 @@ function ReactEcharts(){
                 data: [5, 20, 36, 10, 10, 20]
             }]
     })
-    
+
     const onClick =()=>{
         if(loading){return}
         setLoading(true)
@@ -363,7 +399,7 @@ function ReactEcharts(){
            })
         },3000)
     }
-    
+
     return(
       <div>
         <h1>在React里使用Echarts</h1>
@@ -375,12 +411,13 @@ function ReactEcharts(){
 ```
 
 ## 更多资料
->[Echarts更复杂的setOption实例](https://echarts.apache.org/examples/zh/editor.html?c=doc-example/tutorial-dynamic-data)
 
->[ECharts 中的事件和行为](https://echarts.apache.org/zh/tutorial.html#ECharts%20%E4%B8%AD%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%92%8C%E8%A1%8C%E4%B8%BA)
+> [Echarts 更复杂的 setOption 实例](https://echarts.apache.org/examples/zh/editor.html?c=doc-example/tutorial-dynamic-data)
 
->[5 分钟上手 ECharts](https://echarts.apache.org/zh/tutorial.html#5%20%E5%88%86%E9%92%9F%E4%B8%8A%E6%89%8B%20ECharts)
+> [ECharts 中的事件和行为](https://echarts.apache.org/zh/tutorial.html#ECharts%20%E4%B8%AD%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%92%8C%E8%A1%8C%E4%B8%BA)
 
->[封装Echarts为Vue组件](https://github.com/ecomfe/vue-echarts)
+> [5 分钟上手 ECharts](https://echarts.apache.org/zh/tutorial.html#5%20%E5%88%86%E9%92%9F%E4%B8%8A%E6%89%8B%20ECharts)
 
->[封装Echarts为React组件](https://github.com/hustcc/echarts-for-react)
+> [封装 Echarts 为 Vue 组件](https://github.com/ecomfe/vue-echarts)
+
+> [封装 Echarts 为 React 组件](https://github.com/hustcc/echarts-for-react)

@@ -12,6 +12,8 @@
 
 > [Hugo搭建个人博客](/tools/Hugo搭建个人博客.md)
 
+> [gif图片生成器](https://www.jianshu.com/p/0252daa89458)
+
 ## 前端入门
 
 > [HTML入门](/basic/HTML入门.md)
@@ -151,6 +153,8 @@
 ### Echarts
 
 > [Echarts入门指南](/Echarts/Echarts入门指南.md)
+
+> [Echarts使用小技巧](/Echarts/Echart-使用小技巧.md)
 
 ## 前端面试
 
