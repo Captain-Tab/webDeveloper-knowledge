@@ -148,6 +148,8 @@
 ### 使用技巧
 > [React-实现点击切换组件](/PraticalTrick/React-实现点击切换组件.md)
 
+> [React+Antd Design实现分页](/PraticalTrick/React+Antd%20Design实现分页.md)
+
 ## 前端扩展学习
 
 ### Echarts
