@@ -65,5 +65,46 @@ series:[{
       },
     },
 ```
+
+
+### 饼图设置文字显示在图内
+使用`lable`属性来进行设置
+```
+series: [
+      {
+        name: '统计',
+        type: 'pie',
+        // 设置数据显示在片区
+        label:{
+          normal:{
+            show:true,
+            position:'inner'
+          },
+          textStyle : {
+            fontWeight : 300 ,
+            fontSize : 10    //文字的字体大小
+          },
+          formatter:'{d}%'
+        },
+        radius: '70%',
+        center: ['50%', '50%'],
+        data: [
+          {value: 9, name: '完成任务'},
+          {value: 8, name: '未完成任务'}
+        ],
+        labelLine: {
+          show: false
+        },
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0,0, 0, 0.5)'
+          }
+        }
+      }
+    ]
+```
+
 ### 更多信息
 [ECharts - 去除图表周围空白的部分（减少空白区域的大小）](https://www.hangge.com/blog/cache/detail_2161.html)
