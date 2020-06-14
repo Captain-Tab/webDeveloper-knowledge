@@ -5,7 +5,8 @@
 4. [自定义点显示框](#自定义点显示框)
 5. [饼图设置文字显示在图内](#饼图设置文字显示在图内)
 6. [设置坐标轴文字和tick](#设置坐标轴文字和tick)
-7. [更多信息](#更多信息)
+7. [解决resize方法失效的问题](#解决resize方法失效的问题)
+8. [更多信息](#更多信息)
 
 ### 消除图表空白部分
 我们可以通过`grid`属性来控制直角坐标系内绘图网格四周边框位置，具体有如下配置项：
@@ -127,5 +128,14 @@ series: [
     },
 ```
 
+### 解决resize方法失效的问题
+电脑页面切换大小时, `echart`的自带`resize()`方法不会触发图表的更新
+```
+   // 监听window的窗口大小，将父元素的宽度事实更新给图表，从而让图表实时更新
+   window.onresize = () => {
+      const width = document.getElementsByClassName('chartBox')[0].clientWidth * 0.95;
+     chart.resize({width})
+    }
+```
 ### 更多信息
 [ECharts - 去除图表周围空白的部分（减少空白区域的大小）](https://www.hangge.com/blog/cache/detail_2161.html)
