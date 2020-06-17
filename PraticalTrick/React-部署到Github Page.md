@@ -46,7 +46,7 @@ export default history;
 "homepage": "https://xxx.github.io/theApp"
 ```
 
-注意！如果前面的`Homepage`发布到线上有问题，可以尝试更换`Homepage`
+注意！如果前面的`Homepage`发布到线上有问题，可以尝试更换`Homepage`为`"./“`
 
 例如： `homepage`不要设置成`github page`上生成的那个链接路径，比如`https://username.github.io/react_demo/`
 如果设置成上面的连接，`build`打的包会这所有路径前面加上`react_demo`

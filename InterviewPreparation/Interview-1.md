@@ -94,7 +94,7 @@
   `border-box`, `IE`盒子模型
   * 边框才是盒子的边界
   * 属性`width`,`height`包含`border`和`padding`，指的是`content`+`padding`+`border`。
-  * `width` = 内容宽度 + `padding` = `border`
+  * `width` = 内容宽度 + `padding` + `border`
 
   `CSS`如何设置这两种模型：
   * 设置当前盒子为 标准盒模型（默认）：`box-sizing: content-box`;
@@ -1029,13 +1029,16 @@
   区别：Cookie保存在客户端浏览器中，而Session保存在服务器上。Cookie机制是通过检查客户身上的“通行证”来确定客户身份的话，那么Session机制就是通过检查服务器上的“客户明细表”来确认客户身份。Session相当于程序在服务器上建立的一份客户档案，客户来访的时候只需要查询客户档案表就可以了。
 
   Cookie V.S. LocalStorage
+
   主要区别是 Cookie 会被发送到服务器，而 LocalStorage 不会
   Cookie 一般最大 4k，LocalStorage 可以用 5Mb 甚至 10Mb（各浏览器不同）
 
   LocalStorage V.S. SessionStorage
+
   LocalStorage 一般不会自动过期（除非用户手动清除），而 SessionStorage 在回话结束时过期（如关闭浏览器）
 
   Cookie V.S. Session
+  
   Cookie 存在浏览器的文件里，Session 存在服务器的文件里
   Session 是基于 Cookie 实现的，具体做法就是把 SessionID 存在 Cookie 里
 
@@ -1114,6 +1117,7 @@
   使用 Object.defineProperty 把这些属性全部转为 getter/setter
 
   Vue 不能检测到对象属性的添加或删除，解决方法是手动调用 Vue.set 或者 this.$set
+  
   [Vue-数据响应式](https://juejin.im/post/5e6eef71f265da575918f3cc#heading-11)
 
 - [x] 必考：Vue.set 是做什么用的？
@@ -1216,7 +1220,7 @@
     爷孙可以穿两次 props
 
     任意组件用 Redux（也可以自己写一个 eventBus）
-- [x] 必考：shouldComponentUpdate 有什么用？g
+- [x] 必考：shouldComponentUpdate 有什么用？
     
     shouldComponentUpdate 这个方法用来判断是否需要调用 render 方法重新描绘 dom。因为 dom 的描绘非常消耗性能，如果我们能在 shouldComponentUpdate 方法中能够写出更优化的 dom diff 算法，可以极大的提高性能。
 - [x] JSX
