@@ -64,23 +64,23 @@
 
 > [DOM编程](/basic/DOM编程.md)
 
+> [DOM事件和事件委托](/basic/DOM事件和事件委托.md)
+
 > [封装DOM库](/basic/封装DOM库.md)
 
->[JQuery设计模式](/basic/JQuery设计模式.md)
+> [JQuery设计模式](/basic/JQuery设计模式.md)
 
->[AJAX原理](/basic/AJAX原理.md)
+> [AJAX原理](/basic/AJAX原理.md)
 
->[异步与Promise](/basic/异步与Promise.md)
+> [异步与Promise](/basic/异步与Promise.md)
 
->[跨域](basic/跨域.md)
+> [跨域](basic/跨域.md)
 
->[静态与动态服务器](/basic/静态与动态服务器.md)
+> [静态与动态服务器](/basic/静态与动态服务器.md)
 
->[JavaScript要点](/basic/JavaScript要点.md)
+> [JavaScript要点](/basic/JavaScript要点.md)
 
->[MVC与设计模式](basic/MVC与设计模式.md)
-
-- [ ] [DOM事件和事件委托](/basic/DOM事件和事件委托.md)
+> [MVC与设计模式](basic/MVC与设计模式.md)
 
 - [ ] [webpack入门](/basic/webpack入门.md)
 
