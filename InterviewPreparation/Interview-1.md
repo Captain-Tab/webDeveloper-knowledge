@@ -1,19 +1,18 @@
 ## 目录
-1. [技巧](#技巧)
-2. [HTML](#HTML)
-3. [CSS](#CSS)
-4. [原生JS](#原生JS)
-5. [DOM](#DOM)  
-6. [HTTP](#HTTP)
-7. [Vue框架](#Vue框架)
-8. [React框架](#React框架)
-9. [TypeScript](#TypeScript)
-10. [Webpack](#Webpack)
-11. [安全](#安全)
-12. [开放题目](#开放题目)
-13. [刁钻题目](#刁钻题目)
-13. [超纲题](#超纲题)
-14. [个性化题目](#个性化题目)
+- [目录](#目录)
+  - [技巧](#技巧)
+  - [HTML](#html)
+  - [CSS](#css)
+  - [原生JS](#原生js)
+  - [Vue框架](#vue框架)
+  - [React框架](#react框架)
+  - [TypeScript](#typescript)
+  - [Webpack](#webpack)
+  - [安全](#安全)
+- [开放题目](#开放题目)
+  - [刁钻题目](#刁钻题目)
+  - [超纲题](#超纲题)
+- [个性化题目](#个性化题目)
 
 
 ### 技巧
@@ -1447,6 +1446,17 @@
 - [x] 必考：你遇到最难的问题是怎样的？
   
   一波三折。参考 https://www.zhihu.com/question/35323603
+
+  1. 我想让React应用支持sass
+  2. 需要node-sass, 它有两个缺点：下载速度慢，本地编译慢
+  3. 于是我想改用dart-sass代替node-sass
+  4. 但是React只支持node-sass，不支持dart-sass
+  5. 但是经过我的努力搜索和研究
+  6. 我发现npm6.9版本支持一个新的功能，叫做package.alias
+  7. 使用命令`yarn add node-sass@npm:dart-sass`就可偷梁换柱，瞒天过海
+  8. 最后我达成了我的目标
+
+
 - [x] 你在团队的突出贡献是什么？
   
   把小事说大。
