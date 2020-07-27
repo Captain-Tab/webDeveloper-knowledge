@@ -1,9 +1,10 @@
 ## 目录
 1. [伪类介绍](#伪类介绍)
 2. [伪类分类](#伪类分类)
-3. [浏览器市场份额](#浏览器市场份额)
-4. [检查浏览器兼容性](#检查浏览器兼容性)
-5. [更多信息](#更多信息)
+3. [结构伪类选择器](#结构伪类选择器)
+4. [伪元素介绍](#伪元素介绍)
+5. [伪元素实例](#伪元素实例)
+6. [伪元素和伪类的区别](#伪元素和伪类的区别)
 
 ### 伪类介绍
 
@@ -20,7 +21,7 @@ a:hover{
     text-decoration: underline;
 }
 ```
-
+![](https://user-gold-cdn.xitu.io/2020/7/27/1738dbf446957725?w=748&h=682&f=webp&s=25718)
 ### 伪类分类
 
 动态伪类选择器
@@ -117,3 +118,48 @@ div:nth-last-child(2n) {
     background-color: var(--red);
 }
 ```
+### 伪元素介绍
+核心用途：创建一些不在文档树中的元素，并且为他添加样式。
+
+主要使用场景：比如说，我们可以通过:before来在一个元素前增加一些文本，并为这些文本添加样式。虽然用户可以看到这些文本，但是这些文本实际上不在文档树中。
+
+伪元素的语法:
+```
+selector:pseudo-element {property:value;}
+// CSS 类也可以与伪元素配合使用
+selector.class:pseudo-element {property:value;}
+```
+![](https://user-gold-cdn.xitu.io/2020/7/27/1738dc38b177340d?w=616&h=265&f=webp&s=8712)
+### 伪元素实例
+
+`: first-letter`伪元素用于向文本的首字母设置特殊样式
+```
+p:first-letter
+  {
+  color:#ff0000;
+  font-size:xx-large;
+  }
+```
+`: before`伪元素可以在元素的内容前面插入新内容
+```
+h1:before
+  {
+  content:url(logo.gif);
+  }
+```
+`: after`伪元素
+```
+h1:after
+  {
+  content:url(logo.gif);
+  }
+```
+`:: selection`用于文档被用户高亮的部分，比如鼠标或者其他设备选中的部分
+```
+p::selection{
+    background-color: #ffeb3b;
+}
+```
+### 伪元素和伪类的区别
+* 伪类的操作对象是文档树中已有的元素，而伪元素则创建了一个文档数外的元素。因此，伪类与伪元素的区别在于：有没有创建一个文档树之外的元素
+* 伪类使用的单冒号`:`,在CSS3中，伪元素使用双冒号`::`
