@@ -106,9 +106,12 @@
 
 > [Vue-前端路由](/Vue-quickStart/Vue-前端路由.md)
 
+> [Vue-动态组件](/Vue-quickStart/Vue-动态组件.md)
+
 - [ ] [Vue-动画原理](/Vue-quickStart/Vue-动画原理.md)
 
 - [ ] [Vue-表单与 v-model](/Vue-quickStart/Vue-表单与v-model.md)
+
 
 ### Vue 基础
 
