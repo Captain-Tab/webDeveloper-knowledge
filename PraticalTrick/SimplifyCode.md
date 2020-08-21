@@ -3,7 +3,7 @@
 2. [多条件分支的优化处理](#多条件分支的优化处理)
 3. [使用数组新特性简化逻辑判断](#使用数组新特性简化逻辑判断)
 4. [函数默认值](#函数默认值)
-5. [更多信息](#更多信息)
+5. [策略模式](#策略模式)
 
 ### 嵌套层级优化
 ```
@@ -176,4 +176,140 @@ const fruits = [
 
 // 条件：是否有红色水果 
 const isAnyRed = fruits.some(f => f.color == 'red');
+```
+### 函数默认值
+* 使用默认参数
+```
+const buyFruit = (fruit,amount) => {
+ if(!fruit){
+    return
+  }
+  amount = amount || 1;
+  console.log(amount)
+}
+```
+在这里可以在传输参数的时间设置默认参数, 在这里，只有`fruit`为`undefined`的时候，才有有默认参数
+```
+const buyFruit = (fruit,amount = 1) => {
+ if(!fruit){
+        return
+  }
+  console.log(amount,'amount')
+}
+```
+* 使用解构与默认参数
+没有使用解构对象的情况
+```
+const buyFruit = (fruit,amount) => {
+  fruit = fruit || {};
+  if(!fruit.name || !fruit.price){
+      return;
+  }
+  ...
+  amount = amount || 1;
+  console.log(amount)
+}
+```
+使用解构结合默认参数可以简化逻辑
+```
+const buyFruit = ({ name,price }={},amount) => {
+  if(!name || !prices){
+    return;
+  }
+  console.log(amount)
+}
+```
+* 复杂数据解构
+在复杂的数据对象下，解构和默认参数会降低代码的可读性
+```
+const oneComplexObj = {
+  firstLevel: {
+    secondLevel: [{
+      name: '',
+      price: '',
+    }],
+  },
+};
+```
+如果使用解构来获取对象里的值
+```
+const {
+  firstLevel: {
+    secondLevel: [{ name, price }] = [],
+  } = {},
+} = oneComplexObj;
+```
+可以使用`lodash`库来实现需求
+```
+import lodashGet from 'lodash/get';
+
+const { name,price } = lodashGet(oneComplexObj,'firstLevel.secondLevel[0]',{});
+```
+### 策略模式
+策略模式：定义一系列的算法，把它们一个个封装起来， 并且使它们可相互替换。
+
+使用场景：策略模式属于对象行为模式，当遇到具有相同行为接口、行为内部不同逻辑实现的实例对象时，可以采用策略模式；或者是一组对象可以根据需要动态的选择几种行为中的某一种时，也可以采用策略模式；这里以第二种情况作为示例：
+```
+const TYPE = {
+  JUICE: 'juice',
+  SALAD: 'salad',
+  JAM: 'jam',
+};
+function enjoy({ type = TYPE.JUICE, fruits }) {
+  if (!fruits || !fruits.length) {
+    console.log('请先采购水果！');
+    return;
+  }
+  if (type === TYPE.JUICE) {
+    console.log('榨果汁中...');
+    return '果汁';
+  }
+  if (type === TYPE.SALAD) {
+    console.log('做沙拉中...');
+    return '拉沙';
+  }
+  if (type === TYPE.JAM) {
+    console.log('做果酱中...');
+    return '果酱';
+  }
+}
+
+enjoy({ type: 'juice', fruits });
+```
+使用思路：定义策略对象封装不同行为、提供策略选择接口，在不同的规则时调用相应的行为。
+```
+const TYPE = {
+  JUICE: 'juice',
+  SALAD: 'salad',
+  JAM: 'jam',
+};
+
+const strategies = {
+  [TYPE.JUICE](fruits) {
+    console.log('榨果汁中...');
+    return '果汁';
+  },
+  [TYPE.SALAD](fruits) {
+    console.log('做沙拉中...');
+    return '沙拉';
+  },
+  [TYPE.JAM](fruits) {
+    console.log('做果酱中...');
+    return '果酱';
+  },
+};
+
+function enjoy({ type = TYPE.JUICE, fruits }) {
+  if (!type) {
+    console.log('请直接享用！');
+    return;
+  }
+  if (!fruits || !fruits.length) {
+    console.log('请先采购水果！');
+    return;
+  }
+  return strategies[type](fruits);
+}
+
+enjoy({ type: 'juice', fruits });
 ```
