@@ -177,6 +177,8 @@
 
 > [React-部署到 Github Page](/PraticalTrick/React-部署到Github%20Page.md)
 
+> [代码逻辑优化策略](/PraticalTrick/SimplifyCode.md)
+
 ## 前端扩展学习
 
 ### Echarts
