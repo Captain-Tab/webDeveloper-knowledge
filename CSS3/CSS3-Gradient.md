@@ -31,6 +31,9 @@ background:-webkit-linear-gradient(left top,yellow,blue);
 background:-moz-linear-gradient(left top,yellow,blue);
 background:-o-linear-gradient(left top,yellow,blue);
 ```
+
+![](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/82331b2f5a654b1c9e74c934dc022042~tplv-k3u1fbpfcp-zoom-1.image)
+
 实例2
 ```
 background: linear-gradient(left,red,orange,yellow,green,blue,indigo,violet);   
@@ -38,11 +41,19 @@ background: -webkit-linear-gradient(left,red,orange,yellow,green,blue,indigo,vio
 background: -moz-linear-gradient(left,red,orange,yellow,green,blue,indigo,violet);   
 background: -o-linear-gradient(left,red,orange,yellow,green,blue,indigo,violet);
 ```
+
+![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c021fb8e14a24fa59d202b637135cf15~tplv-k3u1fbpfcp-zoom-1.image)
+
 使用角度
+
+![](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8613299c189a4019bb7b3d3d54d57d7a~tplv-k3u1fbpfcp-zoom-1.image)
 
 角度是指水平线和渐变线之间的角度，逆时针方向计算。换句话说，0deg 将创建一个从下到上的渐变，90deg 将创建一个从左到右的渐变。注意：有部分浏览器使用了旧的标准，即 0deg 将创建一个从左到右的渐变，90deg 将创建一个从下到上的渐变。换算公式 90 - x = y 其中 x 为标准角度，y为非标准角度。
 
 重复的线性渐变
+
+![](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/78237e7223f546d4b10949d1d446425d~tplv-k3u1fbpfcp-zoom-1.image)
+
 ````
 background: -webkit-repeating-linear-gradient(red, yellow 10%, green 15%);
 background: -o-repeating-linear-gradient(red, yellow 10%, green 15%); 
@@ -80,6 +91,10 @@ closest-side：指定径向渐变的半径长度为从圆心到离圆心最近�
 ```
 
 实例1：颜色结点均匀分布的径向渐变
+
+
+![](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5dc45f387fe64572aa8734bd84cc90eb~tplv-k3u1fbpfcp-zoom-1.image)
+
 ```
  background: -webkit-radial-gradient(white, green, orange);
  background: -o-radial-gradient(white, green, orange);
@@ -87,16 +102,16 @@ closest-side：指定径向渐变的半径长度为从圆心到离圆心最近�
  background: radial-gradient(white, green, orange);
 ```
 实例2：结点不均匀的径向渐变
+
+![](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1bcbf88f13334bc4807e1302424dbb8a~tplv-k3u1fbpfcp-zoom-1.image)
+
 ```
 background: -webkit-radial-gradient(white 2%, green 10%, orange 50%);
 background: -o-radial-gradient(white 2%, green 10%, orange 50%);
 background: -moz-radial-gradient(white 2%, green 10%, orange 50%); 
 background: radial-gradient(white 2%, green 10%, orange 50%);
 ```
-实例3：定义形状
-```
-background: -webkit-radial-gradient(circle,white, green, orange);
-background: -o-radial-gradient(circle,white, green, orange);
-background: -moz-radial-gradient(circle,white, green, orange); 
-background: radial-gradient(circle,white, green, orange);
-```
+
+### 更多信息
+
+> [css3 Gradient渐变 ](https://www.w3cschool.cn/lugfe/lugfe-bd5q25ys.html)
