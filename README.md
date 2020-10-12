@@ -100,6 +100,8 @@
 
 > [MVC 与设计模式](basic/MVC与设计模式.md)
 
+> [纯函数和副作用](basic/纯函数和副作用.md)
+
 - [ ] [webpack 入门](/basic/webpack入门.md)
 
 - [ ] [JSON 入门](/basic/JSON入门.md)
