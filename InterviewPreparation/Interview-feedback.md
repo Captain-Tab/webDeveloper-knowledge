@@ -93,22 +93,110 @@ console.log([str].map(Number))
 输出为：`["bac","abc","acb","acg","acz"]`
 
 排序的规则为：按照从第二个字符的字母表进行排序，例如`“abc”`中第二个字符为`Gb`，`“bac”`第二个字符为`a`，那么`“bac”`排在`“abc”`的前面；如果第二个字符大小也相同，则按照第三个字符的大小进行排序，以此类推，直至比较出大小；如果两个字符完全相同则顺序不变。
+```
+const array = ['abc', 'bac', 'acb', 'acg', 'acz', 'aca']
+
+const compare = function (string1, string2) {
+  for (let i = 1; i < string1.length; i++) {
+    const val1 = string1[i]
+    const val2 = string2[i]
+    if (val1 < val2) {
+      return -1
+    } else if (val1 > val2) {
+      return 1
+    }
+  }
+  return 0
+}
+console.log((array.sort(compare)))
+```
 
 问题7. 
 声明一个函数add，使得add(2,3,4) 和add(2)(3)(4)都输出9
 
 ```
-function add(arg) {
+const add = (...arg) => {
+  let args = []
+
+  const getResult = () => {
+    const result = arg.reduce((sum, current) => {
+      return sum + current
+    }, 0)
+    args = []
+    return result
+  }
+  const addInner = () => {
+    if (arguments.length === 0) {
+      return getResult
+    } else {
+      Array.prototype.push.apply(args, Array.prototype.splice.call(arg, 0, 1))
+      return add
+    }
+  }
+
+  addInner.valueOf = () => {
+    return getResult()
+  }
+
+  addInner.toString = () => {
+    return getResult() + ''
+  }
+  return addInner
 }
-console.log(add(2,3,4))
-console.log(add(2)(3)(4))
+
+    function add (...argument) {
+      const args = Array.prototype.slice.call(argument)
+      const resultFun = () => {
+        const subArgs = Array.prototype.slice.call(argument)
+        // eslint-disable-next-line prefer-spread
+        return add.apply(null, args.concat(subArgs))
+      }
+      resultFun.toString = () => {
+        return args.reduce((sum, cur) => {
+          return sum + cur
+        }, 0)
+      }
+      return resultFun
+    }
+
+ console.log(add(1, 2))
+console.log(add(1, 2, 3, 7))
 ```
 ### 面试二
 
 问题1: 一只青蛙一次可以跳上`1`级台阶，也可以跳上`2`级台阶。求该青蛙跳上一个`n`级的台阶总共：有多少种跳法。
- 
+使用斐波那契数列来解决，即fn= f(n-1) + f(n-2), 从第三项开始，第n项等于前两项之和
+```
+const jumpFloor = (n)=>{
+  if(n<=0)  return 0;
+  if(n ==1 ) return 1;
+  if( n==2 ) return 2;
+  return jumpFloor(n-1) + jumpFloor(n-2)
+}
+```
+当递归为50的时候，会卡在不动，推荐使用迭代来解决问题
+```
+jumpFloor = (n)=> {
+  let target = 0;
+  let number1 = 1;
+  let number2 = 2；
+
+  if(n<=0) return 0;
+  if(n==1) return 1;
+  if(n==2) return 2;
+
+  for(let i=3;i<=n；i++){
+   target = number1 + number2
+   number1 = number2
+   number2 = target
+  }
+ return target
+}
+```
+
+
 问题2: 浏览器输入`url`到网页渲染的过程
- 
+
 从输入URL到渲染出整个页面的过程包括三个部分：
 
 
