@@ -102,8 +102,7 @@
 
 > [纯函数和副作用](basic/纯函数和副作用.md)
 
->[函数柯里化](basic/函数柯里化.md)
-
+>[函数柯里化](basic/柯里化.md)
 
 - [ ] [webpack 入门](/basic/webpack入门.md)
 
