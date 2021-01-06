@@ -50,7 +50,9 @@
 }
 ```
 效果图
+
 ![](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cc81cc0c13144dd484819cfa9d01fbcf~tplv-k3u1fbpfcp-watermark.image)
+
 ### Grid实现
 原理：使用grid创建网格布局，划分为3x3的等分布局
 ```
@@ -87,7 +89,9 @@
 }
 ```
 效果图
+
 ![](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1afce9026628474cba22ae2557cf75fc~tplv-k3u1fbpfcp-watermark.image)
+
 ### Float实现
 原理：利用float布局和31%的百分比设置宽和高
 ```
@@ -134,7 +138,9 @@
 }
 ```
 效果图
+
 ![](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e6d8561a255d4331bbbe24e28e75a191~tplv-k3u1fbpfcp-watermark.image)
+
 ### Table实现
 原理1：使用原生table表格实现九宫格
 缺点：单元之间的间隔使用`border-spacing`实现，不支持百分比，设置后为添加单元四周的间隔
@@ -186,6 +192,7 @@
 }
 ```
 效果图
+
 ![](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cc8469b71f15484b8d509b0842e0ca97~tplv-k3u1fbpfcp-watermark.image)
 
 原理2：模仿table表格，模拟tr+td的方式实现,减少重置table某些样式
@@ -249,4 +256,5 @@
 }
 ```
 效果图
+
 ![](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1fb5113ad88a479e9df2312a6a85abe5~tplv-k3u1fbpfcp-watermark.image)
