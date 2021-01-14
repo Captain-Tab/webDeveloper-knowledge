@@ -186,6 +186,9 @@
 > [代码逻辑优化策略](/PraticalTrick/SimplifyCode.md)
 
 ## 前端扩展学习
+### 深入原理
+
+> [JS原理之混入](/core/JScore.md)
 
 ### Echarts
 
