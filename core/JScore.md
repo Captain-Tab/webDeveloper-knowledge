@@ -2,6 +2,7 @@
 1. [显示混入](#显示混入)
 2. [寄生继承](#寄生继承)
 3. [隐式混入](#隐式混入)
+4. [原型继承](#原型继承)
 4. [总结](#总结)
 
 ### 显示混入
@@ -101,6 +102,29 @@ Another.count
 ```
 * 利用`call()`方法改变`this`的指向，来达到借用`Something.cool()`函数的目的
 * 最终`Something.cool()`的赋值操作都应用在`Another`对象上，而不是`Something`对象上，即`count`值不是共享的
+
+### 原型继承
+```
+function Foo(name) {
+    this.name = name
+}
+Foo.prototype.myName = function () {
+    return this.name
+}
+function Bar(name,label) {
+    Foo.call(this, name)
+    this.label = label
+}
+// 创建一个新的Bar.prototype对象并关联到Foo.prototype
+Bar.prototype = Ojbect.create(Foo.prototype)
+// 现在没有Bar.prototype.constructor，需要这个属性需要手动修复
+Bar.prototype.myLabel = function () {
+    return this.label
+}
+const a = new Bar('a', 'obj a')
+a.myName()
+a.myLabel()
+```
 
 ### 总结
 * 类是一种设计模式。许多语言提供了对于面向类软件设计的原生语法。JavaScript 也有类似的语法，但是和其他语言中的类完全不同。
