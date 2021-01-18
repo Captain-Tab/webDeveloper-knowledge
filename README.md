@@ -188,7 +188,9 @@
 ## 前端扩展学习
 ### 深入原理
 
-> [JS原理之混入](/core/JScore.md)
+> [JS原理之混入](/core/JScore1.md)
+
+> [JS原理之对象行为委托](/core/JScore2.md)
 
 ### Echarts
 
