@@ -68,7 +68,7 @@
 * `IE 5`: `div.attachEvent('onclick',fn)`为事件冒泡
 * 网景: `div.addEventListener('click', fn) `为事件捕获
 * `W3C`: `div.addEventListener('click', fn, bool)` 其中，如果`bool`为默认值，不传或者为`falsy`。则让`fn`走冒泡，意思是说当浏览器在冒泡阶段发现`div`有`fn`监听函数，就会调用`fn`,并且提供事件信息
-* `falsy`值有: `0`, `0n`, `"" " `` `, `null,` `undefined`, `NaN`
+* `falsy`值有: `0`, `"" " `` `, `null,` `undefined`, `NaN`
 * 如果`bool`值为`true`,就让`fn`走捕获，意思是说，当浏览器在捕获阶段发现`div`有`fn`监听函数，就会调用`fn`, 提供事件信息
 * 注意的是：捕获和冒泡都会被执行，区别在于`fn`在哪个过程会被执行
 * 注意的是：`IE`的知识不需要特意去学，因为已经过时了，等需要用到的时候，再去搜索学习

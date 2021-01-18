@@ -125,6 +125,21 @@ const a = new Bar('a', 'obj a')
 a.myName()
 a.myLabel()
 ```
+* 这段代码的核心部分就是`Bar.prototype = Object.create(Foo.prototype)`调用`Object.create(...)`会凭空创建一个新对象并把新对象内部的`prototype`
+关联到制定的对象，本例就是`Foo.prototype`.简单来说就是，创建一个新的`Bar.prototype`对象并把它关联到`Foo.prototype`
+* 声明`function bar() {...}`时，和其他函数一样，会有一个`.prototype`关联到默认的对象，但是这个原生的对象不是我们想要的，所以我们创建了一个新的对象并把它关联到我们希望的对象上，把原始的关联对象抛弃掉
+
+下面的这两种方式是常见的错误
+```
+// 和你想要的机制不一样
+Bar.prototype = Foo.prototype
+// 可以，但是还有副作用
+Bar.prototype = new Foo()
+```
+* `Bar.prototype = Foo.prototype` 并不会创建一个关联到`Bar.prototype`的新对象，它只是让`Bar.prototype`直接引用`Foo.prototype`对象。因此当你执行类似`Bar.prototype.myLabel = ...`的赋值语句时会直接修改`Foo.prototype`对象本身。
+* `Bar.prototype = new Foo()`的确会创建一个关联到`Bar.prototype`的新对象。但是它使用了`Foo(..)`的“构造函数调用”，如果函数`Foo`有一些副作用（比如写日志、修改状态、注册到其他对象、给`this`添加数据属性，等等）的话，就会影响到`Bar()`的“后代”，后果不堪设想
+* 所以要创建一个合适的关联对象，必须使用`Object.create(...)`而不是使用具有副作用的`Foo(...)`，这样的缺点就是需要创建一个新对象然后把旧对象抛弃掉
+* `ES6`添加了函数`Object.setPrototypeOf(...)`来修改关联和`isPrototypeOf`来确定对象之间是否存在关系
 
 ### 总结
 * 类是一种设计模式。许多语言提供了对于面向类软件设计的原生语法。JavaScript 也有类似的语法，但是和其他语言中的类完全不同。
