@@ -1,3 +1,14 @@
+## 目录
+1. [复制文本](#复制文本)
+2. [轮询查询支付状态](#轮询查询支付状态)
+3. [验证码60秒倒计时](#验证码60秒倒计时)
+4. [获取图表的总数和](#获取图表的总数和)
+5. [获取上传视频信息](#获取上传视频信息)
+6. [对比两个对象，找出不同](#对比两个对象，找出不同)
+7. [获取邀请区间](#获取邀请区间)
+8. [产生随机数据](#产生随机数据)
+9. [级联属性](#级联属性)
+
 ### 复制文本
 
 ```
@@ -279,3 +290,33 @@ export const randomGenerator = (listNumber) => {
 }
 ```
 
+### 级联属性
+```
+const hours = 1000 * 60 * 60;
+const days = hours * 24;
+const weeks = days * 7;
+const UNIT_TO_NUM = { hours, days, weeks };
+
+class Duration {
+  constructor(num, unit) {
+    this.number = num;
+    this.unit = unit;
+  }
+  toNumber() {
+    return UNIT_TO_NUM[this.unit] * this.number;
+  }
+  get ago() {
+    return new Date(Date.now() - this.toNumber());
+  }
+  get later() {
+    return new Date(Date.now() + this.toNumber());
+  }
+}
+Object.keys(UNIT_TO_NUM).forEach(unit => {
+  Object.defineProperty(Number.prototype, unit, {
+    get() {
+      return new Duration(this, unit);
+    }
+  });
+});
+```
