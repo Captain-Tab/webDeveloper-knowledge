@@ -1,12 +1,25 @@
 ## 目录
+0. [介绍Reduce函数](#介绍Reduce函数)
 1. [获取对象属性之和](#获取对象属性之和)
 2. [按比例获取属性之和](#按比例获取属性之和)
 3. [获取字符出现的次数](#获取字符出现的次数)
 4. [数组去重](#数组去重)
 5. [将二维数组转为一维](#将二维数组转为一维)
-6. [将多维数据转为为一维](#将多维数据转为为一维)
+6. [将多维数据转为一维](#将多维数据转为一维)
 7. [找到最大值](#找到最大值)
-8. [调用promise](#调用promise)
+8. [链式调用promise](#链式调用promise)
+
+### 介绍Reduce函数
+`reduce`为数组中的每一个元素依次执行`callback`函数，不包括数组中被删除或从未被赋值的元素，接受四个参数：
+
+* `accumulator` 累计器
+* `currentValue` 当前值
+* `currentIndex` 当前索引
+* `array` 数组
+
+回调函数第一次执行时，`accumulator` 和`currentValue`的取值有两种情况：如果调用`reduce()`时提供了`initialValue`，`accumulator`取值为`initialValue`，`currentValue`取数组中的第一个值；如果没有提供`initialValue`，那么`accumulator`取数组中的第一个值，`currentValue`取数组中的第二个值。
+
+注意：如果没有提供`initialValue`，`reduce`会从索引1的地方开始执行`callback`方法，跳过第一个索引。如果提供`initialValue`，从索引0开始。
 
 ### 获取对象属性之和
 ```
@@ -93,9 +106,6 @@ console.log('result', result)
 ```
 ### 将二维数组转为一维
 ```
-
-```
-```
 const data = [[0, 1], [2, 3], [4, 5]]
 
 const result = data.reduce((prev, cur)=>{
@@ -106,7 +116,7 @@ const result = data.reduce((prev, cur)=>{
 
 console.log('result', result)
 ```
-### 将多维数据转为为一维
+### 将多维数据转为一维
 ```
 const data = [[0, 1], [2, 3], [4, [5, 6, 7]]]
 
@@ -148,7 +158,7 @@ const result = dates.reduce((prev, cur)=> {
 
 console.log('result', result)
 ```
-### 调用promise
+### 链式调用promise
 ```
 const functions = [
   async function() { return 1; },
@@ -158,8 +168,8 @@ const functions = [
 
 const result = await functions.reduce((promise, fn)=> {
     return promise.then(fn)
-}
-, Promise.resolve())
+}, Promise.resolve())
 
 console.log('result', result)
 ```
+

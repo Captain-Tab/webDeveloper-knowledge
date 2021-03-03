@@ -185,6 +185,10 @@
 
 > [代码逻辑优化策略](/PraticalTrick/SimplifyCode.md)
 
+>[Reduce方法](/PraticalTrick/Reduce.md)
+
+>[实用方法](/PraticalTrick/TestCode.md)
+
 ## 前端扩展学习
 ### 深入原理
 
