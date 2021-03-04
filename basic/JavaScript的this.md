@@ -279,7 +279,7 @@ Function.prototype.newApply = function(context, parameter) {
 ```
 let array = ['a', 'b'];
 let elements = [0, 1, 2];
-array.push.apply(array, elements);
+array.push.newApply(array, elements);
 console.info(array); // ["a", "b", 0, 1, 2]
 ```
 ### bind()方法
@@ -303,7 +303,7 @@ Function.prototype.bind = function (context,...innerArgs) {
 应用：
 ```
 let person = {
-  name: 'Abiel'
+  name: 'Abel'
 }
 function sayHi(age,sex) {
   console.log(this.name, age, sex);

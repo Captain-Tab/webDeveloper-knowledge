@@ -95,3 +95,71 @@ const resultRes = testArr.myEvery((cur)=> {
     return cur === 'ab'
 })
 console.log('result', resultRes)
+
+/*****************Native Call*********************/
+// 1. if the target is undefined, assign window to newObj, otherwise assign to newObj
+// 2. 'this' point to newObj
+// 3. find the rest parameters
+// 4. get the result after executing the function
+// 5. remove the function
+// 6. return the result
+
+Function.prototype.myCall = function (context, parameter) {
+    if ( typeof this !== 'function') {
+        throw new Error(`${this}.myCall is not a function`)
+    }
+    const newObj = context ? context : window
+    let fnSymbol = Symbol()
+    newObj[fnSymbol] = this
+    const result = newObj[fnSymbol](...parameter)
+    delete newObj[fnSymbol]
+    return result
+
+}
+// let test it
+function testFunc () {
+    console.log(this.name)
+}
+const obj = {
+    name: 'Tab'
+}
+testFunc.myCall(obj)
+
+/*****************Native Apply*********************/
+Function.prototype.myApply = function (context, parameter) {
+    if (typeof this !== 'function') {
+        throw  new Error(`${this}.myApply is not  a function`)
+    }
+    let newObj
+    if (typeof context === 'object') {
+        newObj = context || window
+    } else {
+        newObj = Object.create(null)
+    }
+    let fnSymbol = Symbol()
+    newObj[fnSymbol] = this
+    newObj[fnSymbol](...parameter)
+    delete  newObj[fnSymbol]
+}
+// let test it
+let array = ['a', 'b']
+let elements = [0, 1, 2]
+array.push.myApply(array, elements)
+console.info(array)
+
+/*****************Native Bind*********************/
+Function.prototype.myBind = function (context, parameter) {
+    const me = this
+    return function (...finallyParas) {
+        return me.call(context, ...parameter, ...finallyParas)
+    }
+}
+// let test it
+let person = {
+    name: 'Abel'
+}
+function sayHi(age,sex) {
+    console.log(this.name, age, sex);
+}
+let personSayHi = sayHi.bind(person, 25)
+personSayHi('男')

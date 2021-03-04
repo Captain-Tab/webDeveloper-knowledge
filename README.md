@@ -189,6 +189,10 @@
 
 >[实用方法](/PraticalTrick/TestCode.md)
 
+>[实现原生JS方法](/PraticalTrick/nativeJavascript.js)
+
+>[封装JS方法](/PraticalTrick/refactorJavaScript.js)
+
 ## 前端扩展学习
 ### 深入原理
 
