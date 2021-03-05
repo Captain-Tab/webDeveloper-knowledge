@@ -174,12 +174,23 @@ console.log('newObj', newObj)
 /*****************Native New*********************/
 // 1. receive a Constructor function
 // 2. create a new Object
-// 3. connect the prototype
-// 4. direct the point of this
+// 3. new Object connect the prototype from Constructor's prototype
+// 4. direct the point of this to new Objet
 // 5. return new object
-function myNew(Constructor, ...parameter) {
-    let newObj = {}
-    newObj._proto_ = Constructor.prototype
-    Constructor.call(newObj, ...parameter)
-    return newObj
+function myNew(constructor, ...parameter) {
+    if (typeof constructor !== 'function') {
+        throw  new Error(`myNew function the first param must be a function`)
+    }
+    const newObj = Object.create(constructor.prototype)
+    const result = constructor.call(newObj, ...parameter)
+    if ( result !== null && typeof result === 'object') {
+        return result
+    }
+    return  newObj
 }
+// let test it
+function Test (name) {
+    this.name = name
+}
+const newOb = myNew(Test, 'tab')
+console.log('newOb', newOb)
