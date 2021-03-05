@@ -68,7 +68,7 @@ console.log('result', newResult)
 Array.prototype.myEvery = function (callback,context) {
     for (let i = 0; i < this.length; i ++) {
         if(!callback.call(context, this[i], i, this)) {
-            return  false
+            return false
         }
     }
     return  true
@@ -104,7 +104,7 @@ console.log('result', resultRes)
 // 5. remove the function
 // 6. return the result
 
-Function.prototype.myCall = function (context, parameter) {
+Function.prototype.myCall = function (context, ...parameter) {
     if ( typeof this !== 'function') {
         throw new Error(`${this}.myCall is not a function`)
     }
@@ -114,7 +114,6 @@ Function.prototype.myCall = function (context, parameter) {
     const result = newObj[fnSymbol](...parameter)
     delete newObj[fnSymbol]
     return result
-
 }
 // let test it
 function testFunc () {
@@ -126,7 +125,7 @@ const obj = {
 testFunc.myCall(obj)
 
 /*****************Native Apply*********************/
-Function.prototype.myApply = function (context, parameter) {
+Function.prototype.myApply = function (context, ...parameter) {
     if (typeof this !== 'function') {
         throw  new Error(`${this}.myApply is not  a function`)
     }
@@ -148,18 +147,39 @@ array.push.myApply(array, elements)
 console.info(array)
 
 /*****************Native Bind*********************/
-Function.prototype.myBind = function (context, parameter) {
-    const me = this
-    return function (...finallyParas) {
-        return me.call(context, ...parameter, ...finallyParas)
+Function.prototype.myBind = function (context, ...parameter) {
+    let _this = this
+    let temp = function () {}
+    let bindFunc = function (...finallyParams) {
+        return _this.call(this instanceof temp ? this : context, ...parameter, ...finallyParams)
     }
+    temp.prototype = this.prototype
+    bindFunc.prototype = new temp()
+    return bindFunc
 }
 // let test it
 let person = {
     name: 'Abel'
 }
-function sayHi(age,sex) {
-    console.log(this.name, age, sex);
+function sayHi (age, sex) {
+    this.age = age
+    console.log(age, this.name, sex)
 }
-let personSayHi = sayHi.bind(person, 25)
-personSayHi('男')
+sayHi.prototype.money = 12
+
+const boundFunc = sayHi.bind(person, 12, 'man')
+const newObj = new boundFunc()
+console.log('newObj', newObj)
+
+/*****************Native New*********************/
+// 1. receive a Constructor function
+// 2. create a new Object
+// 3. connect the prototype
+// 4. direct the point of this
+// 5. return new object
+function myNew(Constructor, ...parameter) {
+    let newObj = {}
+    newObj._proto_ = Constructor.prototype
+    Constructor.call(newObj, ...parameter)
+    return newObj
+}
