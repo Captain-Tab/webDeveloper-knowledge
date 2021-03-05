@@ -81,7 +81,7 @@ const checkRes = numberArr.myEvery((cur)=> {
 console.log('result', checkRes)
 
 /*****************Native Some*********************/
-Array.prototype.myEvery = function (callback,context) {
+Array.prototype.mySome = function (callback,context) {
     for (let i = 0; i < this.length; i ++) {
         if(callback.call(context, this[i], i, this)) {
             return  true
@@ -91,7 +91,7 @@ Array.prototype.myEvery = function (callback,context) {
 }
 // let test it
 const testArr = ['ab', 'cd', 'ef', 'gh']
-const resultRes = testArr.myEvery((cur)=> {
+const resultRes = testArr.mySome((cur)=> {
     return cur === 'ab'
 })
 console.log('result', resultRes)
