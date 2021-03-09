@@ -5,6 +5,7 @@
 4. [set方法](#set)
 5. [apply方法](#apply)
 6. [其他](#其他)
+7. [更多资料](#更多资料)
 
 ### 介绍
 `Proxy`顾名思义，意思是在访问目标对象之前做一层拦截或者代理。例如，访问或者修改该对象的属性时，拦截器判断之后，再做下一步的处理
@@ -151,3 +152,6 @@ proxy.apply(null, [7, 8]) // 30
 * `deleteProperty()`方法用于拦截`delete`操作
 * `getOwnPropertyDescriptor()`方法拦截`Object.getOwnPropertyDescriptor()`
 * `isExtensible()`方法拦截`Object.isExtensible()`操作
+
+### 更多资料
+>[Proxy](https://es6.ruanyifeng.com/#docs/proxy)
