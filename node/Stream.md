@@ -1,5 +1,5 @@
 1. [Stream](#Stream)
-2. [第二范式2NF](#第二范式2NF)
+2. [Pipe](#Pipe)
 3. [第三范式3NF](#第三范式3NF)
 4. [数据库设计经验](#数据库设计经验)
 5. [一对一](#一对一)
@@ -37,6 +37,53 @@ console.log('done')
 * 打开流，多次往里面塞内容，关闭流
 * 多次写的过程
 * 最终得到一个128兆左右的文件
+
+代码实例2
+```
+const server = http.createServer()
+server.on('request', (request, response)=>{
+  fs.readFile('./big_file.txt', (error,data)=>{
+    if(err) throw err
+    response.end(data)
+    console.log('done')
+  })
+})
+server.listen(8888)
+```
+* Node.js内存占用，大概在130mb
+
+
+代码实例3
+```
+const server = http.createServer()
+server.on('request', (request, response)=>{
+  const stream = fs.createReadStream('./big_file.txt')
+  stream.pipe(response)
+  })
+server.listen(8888)
+```
+* js内存占用，大概低于30mb
+* 文件`stream`和`response stream`通过管道相连
+
+### Pipe
+两个流可以用一个管道相连
+* `stream1`的末尾连接上`stream2`的开端
+* 一旦`stream1`有数据，就会留到`stream2`
+
+代码
+```
+stream1.pipe(stream)
+```
+链式操作
+```
+a.pipe(b).pipe(c)
+// is equal to 
+a.pipe(b)
+b.pipe(c)
+
+```
+
+<img src="../assets/node/database5.png" width="500" height="200" >
 
 ### 更多信息
 > [Node's Streams](https://jscomplete.com/learn/node-beyond-basics/node-streams)
