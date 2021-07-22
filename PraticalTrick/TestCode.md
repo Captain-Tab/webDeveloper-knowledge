@@ -8,6 +8,7 @@
 7. [获取邀请区间](#获取邀请区间)
 8. [产生随机数据](#产生随机数据)
 9. [级联属性](#级联属性)
+10. [扁平数据结构转Tree](#扁平数据结构转Tree)
 
 ### 复制文本
 
@@ -320,3 +321,186 @@ Object.keys(UNIT_TO_NUM).forEach(unit => {
   });
 });
 ```
+
+### 扁平数据结构转Tree
+```
+let arr = [
+    {id: 1, name: '部门1', pid: 0},
+    {id: 2, name: '部门2', pid: 1},
+    {id: 3, name: '部门3', pid: 1},
+    {id: 4, name: '部门4', pid: 3},
+    {id: 5, name: '部门5', pid: 4},
+]
+```
+输出结果
+```
+[
+    {
+        "id": 1,
+        "name": "部门1",
+        "pid": 0,
+        "children": [
+            {
+                "id": 2,
+                "name": "部门2",
+                "pid": 1,
+                "children": []
+            },
+            {
+                "id": 3,
+                "name": "部门3",
+                "pid": 1,
+                "children": [
+                    // 结果 ,,,
+                ]
+            }
+        ]
+    }
+]
+```
+树结构化一层
+```
+let arr = [
+    {id: 1, name: '部门1', pid: 0},
+    {id: 2, name: '部门2', pid: 1},
+    {id: 3, name: '部门3', pid: 1},
+    {id: 4, name: '部门4', pid: 3},
+    {id: 5, name: '部门5', pid: 4},
+]
+
+const toTree = (arr) => {
+  const result = arr.reduce((accur, current)=> {
+     current.children = []
+    if(current.pid == 0) {
+      accur.push(current)
+    }else {
+      accur[0].children.push(current)
+    }
+    console.log('a', accur)
+    return accur
+  }, [])
+  return result
+}
+
+const result = toTree(arr)
+console.log('result', result)
+```
+树结构化复杂层
+```
+let arr = [
+      {id: 1, name: '部门1', pid: 0},
+      {id: 2, name: '部门2', pid: 1},
+      {id: 3, name: '部门3', pid: 1},
+      {id: 4, name: '部门4', pid: 3},
+      {id: 5, name: '部门5', pid: 4},
+    ]
+
+const toTree = (arr) => {
+  // sign value to children layer
+  const setChildren = (accur, current) => {
+    // iterate the array to find matched node
+    for(let i of accur) {
+      if(i.id === current.pid) {
+        i.children.push(current)
+       // if not matched, find it's children
+      }else {
+        setChildren(i.children, current)
+      }
+    }
+  }
+
+  const result = arr.reduce((accur, current)=> {
+     current.children = []
+    if(current.pid == 0) {
+      accur.push(current)
+    }else {
+      setChildren(accur, current)
+    }
+    console.log('a', accur)
+    return accur
+  }, [])
+  return result
+}
+
+const result = toTree(arr)
+console.log('result', result)
+}
+```
+使用循环实现
+```
+let arr = [
+      {id: 1, name: '部门1', pid: 0},
+      {id: 2, name: '部门2', pid: 1},
+      {id: 3, name: '部门3', pid: 1},
+      {id: 4, name: '部门4', pid: 3},
+      {id: 5, name: '部门5', pid: 4},
+    ]
+
+function arrayToTree(items) {
+  const result = [];   // 存放结果集
+  const itemMap = {};  // 
+    
+  // 先转成map存储
+  for (const item of items) {
+    itemMap[item.id] = {...item, children: []}
+  }
+  
+  for (const item of items) {
+    const id = item.id;
+    const pid = item.pid;
+    const treeItem =  itemMap[id];
+    if (pid === 0) {
+      result.push(treeItem);
+    } else {
+      if (!itemMap[pid]) {
+        itemMap[pid] = {
+          children: [],
+        }
+      }
+      itemMap[pid].children.push(treeItem)
+    }
+
+  }
+  return result;
+}
+
+arrayToTree(arr)
+```
+算法优化
+```
+function arrayToTree(items) {
+  const result = [];   // 存放结果集
+  const itemMap = {};  // 
+  for (const item of items) {
+    const id = item.id;
+    const pid = item.pid;
+
+    if (!itemMap[id]) {
+      itemMap[id] = {
+        children: [],
+      }
+    }
+
+    itemMap[id] = {
+      ...item,
+      children: itemMap[id]['children']
+    }
+
+    const treeItem =  itemMap[id];
+
+    if (pid === 0) {
+      result.push(treeItem);
+    } else {
+      if (!itemMap[pid]) {
+        itemMap[pid] = {
+          children: [],
+        }
+      }
+      itemMap[pid].children.push(treeItem)
+    }
+
+  }
+  return result;
+}
+```
+> [扁平数据结构转Tree](https://juejin.cn/post/6983904373508145189#heading-7)
