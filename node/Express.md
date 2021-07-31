@@ -2,7 +2,8 @@
 2. [express](#express)
 3. [中间件](#中间件)
 4. [错误处理](#错误处理)
-x. [更多信息](#更多信息)
+5. [API总结](#API总结)
+6. [更多信息](#更多信息)
 
 ### web框架
 功能
@@ -47,7 +48,12 @@ next(error)
 * 可以定义多个这样的中间件
 next('route')
 
-
+### API总结
+* express.xxx-内置中间件
+* app.xxx-应用设置（如模板设置，中间件，挂载路由）
+* req.xxx-操作请求
+* res.xxx-操作响应
+* router.xxx-操作路由
 
 ### 更多信息
 > [Error Handler](https://expressjs.com/en/guide/error-handling.html#the-default-error-handler)
