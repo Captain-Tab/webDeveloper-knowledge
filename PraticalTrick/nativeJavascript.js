@@ -1,5 +1,7 @@
 'use strict';
 
+/*** Array ***/
+
 /*****************Native Reduce*********************/
 Array.prototype.myReduce = function (callback, initialValue)  {
   let accumulator = initialValue ? initialValue : undefined
@@ -32,6 +34,58 @@ arr1.myForEach((cur, index)=> {
     console.log('cur', cur)
 })
 
+/*****************Native FindIndex*********************/
+Array.prototype.myFindIndex = function (callback) {
+    for (let i = 0; i < this.length; i++) {
+        if (callback(this[i], i, this)) {
+            return i
+        }
+    }
+    return -1
+}
+// let test it
+const findArr = ['apple', 'banana']
+const result = findArr.myFindIndex(item => item === 'apple')
+
+/*****************Native Find*********************/
+Array.prototype.myFind = function (callback) {
+    for (let i = 0; i < this.length; i++) {
+        if (callback(this[i], i, this)) {
+            return i
+        }
+    }
+    return undefined
+}
+// let test it
+const findArr = ['cherry', 'date']
+const result = findArr.myFind(item => item === 'apple')
+
+/*****************Native Fill*********************/
+Array.prototype.myFill = function (value, start = 0, end = this.length) { 
+    for (let i = start; i < end; i++) { 
+        this[i] = value 
+    } 
+    return this 
+}
+// let test it
+const findArr = ['cherry', 'date']
+const result = findArr.myFill('piapple', 1, 3)
+
+/*****************Native includes*********************/
+Array.prototype.myIncludes = function (value, start = 0) {
+    if (start < 0) start = this.length + start
+    const isNaN = Number.isNaN(value)
+    for(let i = start; i < this.length; i++) {
+        if (this[i] === value || (Number.isNaN(this[i]) && Number.isNaN(value))) {
+            return true
+        }
+    }
+    return false
+}
+// let test it
+const findArr = ['cherry', 'date']
+const result = findArr.myIncludes('cherry')
+
 /*****************Native Map*********************/
 Array.prototype.myMap = function (callback)  {
     const emptyArr = []
@@ -40,12 +94,6 @@ Array.prototype.myMap = function (callback)  {
     }
     return emptyArr
 }
-// let test it
-const arr2 = ['g', 'o', 'l', 'f']
-const result = arr2.myMap((cur)=>{
-    return cur
-})
-console.log('result', result)
 
 /*****************Native Filter*********************/
 Array.prototype.myFilter = function (callback, context) {
@@ -95,6 +143,8 @@ const resultRes = testArr.mySome((cur)=> {
     return cur === 'ab'
 })
 console.log('result', resultRes)
+
+/*** Ojbect ***/
 
 /*****************Native Call*********************/
 // 1. if the target is undefined, assign window to newObj, otherwise assign to newObj

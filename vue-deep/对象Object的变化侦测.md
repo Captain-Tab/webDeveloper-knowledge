@@ -29,7 +29,7 @@ function defineReactive(data, key, val) {
         get: function () {
             return val
         },
-        set: function () {
+        set: function (newVal) {
             if(val === newVal) {
                 return 
             }
