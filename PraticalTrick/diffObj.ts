@@ -77,8 +77,3 @@ export function hasChanged (oldVal, newVal) {
     // 基本类型比较
     return oldVal !== newVal
 }
-
-/** 深度复制 */
-export function deepCopy (obj: object): object {
-    return JSON.parse(JSON.stringify(obj))
-}
