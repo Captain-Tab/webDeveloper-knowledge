@@ -1,4 +1,4 @@
-class DeepCloneer {
+class DeepClone {
     constructor() {
         this.cache = []
     }
@@ -9,6 +9,7 @@ class DeepCloneer {
                 return this.cache[i][1]
             }
         }
+        return undefined
     }
     clone(origin) {
         if(origin instanceof Object) {

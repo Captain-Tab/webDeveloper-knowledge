@@ -195,16 +195,20 @@
 
 >[实用方法](/PraticalTrick/TestCode.md)
 
->[实现原生JS方法](/PraticalTrick/nativeJavascript.js)
+
 
 >[封装JS方法](/PraticalTrick/refactorJavaScript.js)
 
 ## 前端扩展学习
 ### 深入原理
 
-> [JS原理之混入](/core/JScore1.md)
+>[JS原理之混入](/core/JScore1.md)
 
-> [JS原理之对象行为委托](/core/JScore2.md)
+>[JS原理之对象行为委托](/core/JScore2.md)
+
+>[实现原生JS方法](/PraticalTrick/nativeJavascript.js)
+
+>[实现深拷贝](/PracticalTrick/deepClone.js)
 
 ### Echarts
 
