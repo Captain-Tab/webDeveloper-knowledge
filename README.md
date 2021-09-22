@@ -235,6 +235,8 @@
 
 > [策略模式](/design-pattern/strategy/index.md)
 
+> [发布订阅模式](/desgin-pattern/subscribe/index.md)
+
 
 ## 前端面试
 
