@@ -210,6 +210,8 @@
 
 >[实现深拷贝](/PracticalTrick/deepClone.js)
 
+>[实现EventHub](/PracticalTrick/eventHub.js)
+
 ### Echarts
 
 > [Echarts 入门指南](/Echarts/Echarts入门指南.md)
@@ -227,6 +229,12 @@
 > [Stream](/node/Stream.md)
 
 > [Process](/node/Process.md)
+
+
+## 设计模式
+
+> [策略模式](/design-pattern/strategy/index.md)
+
 
 ## 前端面试
 
