@@ -1,5 +1,5 @@
 /**
- * 前端简易版event
+ * a simple version of eventhub
  */
 
 class EventEmitter {
