@@ -212,6 +212,11 @@
 
 >[实现EventHub](/PracticalTrick/eventHub.js)
 
+### vue源码
+>[对象Object的变化侦听](/vue-deep/对象Object的变化侦测.md)
+
+>[keepalive缓存源码](/vue-deep/keep-alive原理.md)
+
 ### Echarts
 
 > [Echarts 入门指南](/Echarts/Echarts入门指南.md)
