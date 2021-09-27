@@ -8,7 +8,7 @@ class EventEmitter {
     private readonly maxListeners: number
     private static instance: EventEmitter;
 
-    // 单例模式
+    // singleton
     public static get singleInstance (): EventEmitter {
         if (!EventEmitter.instance) {
             EventEmitter.instance = new EventEmitter()
@@ -16,14 +16,14 @@ class EventEmitter {
         return EventEmitter.instance
     }
 
-    // 构造函数
+    // constructor
     private constructor () {
         // @ts-ignore
         this.event = new Map([])
         this.maxListeners = 10
     }
 
-    // 监听事件
+    // listen event
     public on (type: string, listener: Function) {
         const arr = this.event.get(type) as Function[] || []
         console.log('arr', arr)
@@ -36,7 +36,7 @@ class EventEmitter {
         return true
     }
 
-    // 发送监听
+    // fire event
     public emit (type: string, ...rest: any[]) {
         if (this.event.has(type)) {
             const arr = this.event.get(type) as Function[]
@@ -44,14 +44,14 @@ class EventEmitter {
         }
     }
 
-    // 移除监听器
+    // remove event
     public removeListener (type: string) {
         if (this.event.has(type)) {
             this.event.delete(type)
         }
     }
 
-    // 移除所有监听器
+    // remove all event
     public removeAllListener () {
         // @ts-ignore
         this.event = new Map()
