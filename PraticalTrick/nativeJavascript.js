@@ -144,6 +144,33 @@ const resultRes = testArr.mySome((cur)=> {
 })
 console.log('result', resultRes)
 
+/*****************Native findIndex*********************/
+Array.prototype.myJoin = function (splitter = ',') {
+    let resultStr = ''
+    for (let i = 0; i < this.length; i++) {
+        resultStr = i === 0 ? `${this[i]}` : `${resultStr}${splitter}${this[i]}`
+    }
+    return resultStr
+}
+
+const testArr = ['today', 'is', 'Saturaday']
+const result = testArr.myJoin('-')
+console.log('result', result)
+
+/*****************Native flat*********************/
+Array.prototype.myFlat = function () {
+    let arr = this
+    while (arr.some(item => Array.isArray(item))) {
+        arr = [].concat(...arr)
+        console.log('arr', arr)
+    }
+    return arr
+}
+
+const testArr = [1, [2, 3, [4, 5]], [8, 9]]
+const result = testArr.myFlat()
+console.log('result', result)
+
 /*** Ojbect ***/
 
 /*****************Native Call*********************/
