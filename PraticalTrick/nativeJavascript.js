@@ -171,108 +171,36 @@ const testArr = [1, [2, 3, [4, 5]], [8, 9]]
 const result = testArr.myFlat()
 console.log('result', result)
 
+/*****************Native Slice*********************/
+Array.prototype.mySlice = function (start, length, ...values) {
+    length = start + length > this.length - 1 ? this.length - start : length
+    const res = [], tempArr = [...this]
+    for (let i = start; i < start + values.length; i++) {
+        this[i] = values[i - start]
+    }
+    if (values.length < length) {
+        const cha = length - values.length
+        for (let i = start + values.length; i < tempArr.length; i++) {
+            this[i] = tempArr[i + cha]
+        }
+        this.length = this.length - cha
+    }
+    if (values.length > length) {
+        for (let i = start + length; i < tempArr.length; i++) {
+            this.push(tempArr[i])
+        }
+    }
+    for (let i = start; i < start + length; i++) {
+        res.push(tempArr[i])
+    }
+    return res
+}
+const arr = [1, 2, 3, 4, 5]
+console.log(arr.mySlice(2))
+
 /*** Ojbect ***/
 
-/*****************Native Call*********************/
-// 1. if the target is undefined, assign window to newObj, otherwise assign to newObj
-// 2. 'this' point to newObj
-// 3. find the rest parameters
-// 4. get the result after executing the function
-// 5. remove the function
-// 6. return the result
-
-Function.prototype.myCall = function (context, ...parameter) {
-    if ( typeof this !== 'function') {
-        throw new Error(`${this}.myCall is not a function`)
-    }
-    const newObj = context ? context : window
-    let fnSymbol = Symbol()
-    newObj[fnSymbol] = this
-    const result = newObj[fnSymbol](...parameter)
-    delete newObj[fnSymbol]
-    return result
-}
-// let test it
-function testFunc () {
-    console.log(this.name)
-}
-const obj = {
-    name: 'Tab'
-}
-testFunc.myCall(obj)
-
-/*****************Native Apply*********************/
-Function.prototype.myApply = function (context, ...parameter) {
-    if (typeof this !== 'function') {
-        throw  new Error(`${this}.myApply is not  a function`)
-    }
-    let newObj
-    if (typeof context === 'object') {
-        newObj = context || window
-    } else {
-        newObj = Object.create(null)
-    }
-    let fnSymbol = Symbol()
-    newObj[fnSymbol] = this
-    newObj[fnSymbol](...parameter)
-    delete  newObj[fnSymbol]
-}
-// let test it
-let array = ['a', 'b']
-let elements = [0, 1, 2]
-array.push.myApply(array, elements)
-console.info(array)
-
-/*****************Native Bind*********************/
-Function.prototype.myBind = function (context, ...parameter) {
-    let _this = this
-    let temp = function () {}
-    let bindFunc = function (...finallyParams) {
-        return _this.call(this instanceof temp ? this : context, ...parameter, ...finallyParams)
-    }
-    temp.prototype = this.prototype
-    bindFunc.prototype = new temp()
-    return bindFunc
-}
-// let test it
-let person = {
-    name: 'Abel'
-}
-function sayHi (age, sex) {
-    this.age = age
-    console.log(age, this.name, sex)
-}
-sayHi.prototype.money = 12
-
-const boundFunc = sayHi.bind(person, 12, 'man')
-const newObj = new boundFunc()
-console.log('newObj', newObj)
-
-/*****************Native New*********************/
-// 1. receive a Constructor function
-// 2. create a new Object
-// 3. new Object connect the prototype from Constructor's prototype
-// 4. direct the point of this to new Objet
-// 5. return new object
-function myNew(constructor, ...parameter) {
-    if (typeof constructor !== 'function') {
-        throw  new Error(`myNew function the first param must be a function`)
-    }
-    const newObj = Object.create(constructor.prototype)
-    const result = constructor.call(newObj, ...parameter)
-    if ( result !== null && typeof result === 'object') {
-        return result
-    }
-    return  newObj
-}
-// let test it
-function Test (name) {
-    this.name = name
-}
-const newOb = myNew(Test, 'tab')
-console.log('newOb', newOb)
-
-/*****************Native Apply*********************/
+/*****************Native Entries*********************/
 Object.prototype.myEntries = function (obj) {
     const res = []
     for (let key in obj) {
@@ -288,7 +216,7 @@ const obj = {
 const result = Object.myEntries(obj)
 console.log('result', result)
 
-/*****************Native Apply*********************/
+/*****************Native fromEntries*********************/
 Object.prototype.myFromEntries = function (arr) {
     const obj = {}
     for (let i = 0; i < arr.length; i++) {
@@ -384,6 +312,150 @@ console.log(Object.myIs(a, b))
 console.log(Object.myIs(a, c))
 
 
+/*** Function ***/
 
+/*****************Native Call*********************/
+// 1. if the target is undefined, assign window to newObj, otherwise assign to newObj
+// 2. 'this' point to newObj
+// 3. find the rest parameters
+// 4. get the result after executing the function
+// 5. remove the function
+// 6. return the result
 
+Function.prototype.myCall = function (context, ...parameter) {
+    if (typeof this !== 'function') {
+        throw new Error(`${this}.myCall is not a function`)
+    }
+    const newObj = context ? context : window
+    let fnSymbol = Symbol()
+    newObj[fnSymbol] = this
+    const result = newObj[fnSymbol](...parameter)
+    delete newObj[fnSymbol]
+    return result
+}
+// let test it
+function testFunc() {
+    console.log(this.name)
+}
+const obj = {
+    name: 'Tab'
+}
+testFunc.myCall(obj)
 
+/*****************Native Apply*********************/
+Function.prototype.myApply = function (context, ...parameter) {
+    if (typeof this !== 'function') {
+        throw new Error(`${this}.myApply is not  a function`)
+    }
+    let newObj
+    if (typeof context === 'object') {
+        newObj = context || window
+    } else {
+        newObj = Object.create(null)
+    }
+    let fnSymbol = Symbol()
+    newObj[fnSymbol] = this
+    newObj[fnSymbol](...parameter)
+    delete newObj[fnSymbol]
+}
+// let test it
+let array = ['a', 'b']
+let elements = [0, 1, 2]
+array.push.myApply(array, elements)
+console.info(array)
+
+/*****************Native Bind*********************/
+Function.prototype.myBind = function (context, ...parameter) {
+    let _this = this
+    let temp = function () { }
+    let bindFunc = function (...finallyParams) {
+        return _this.call(this instanceof temp ? this : context, ...parameter, ...finallyParams)
+    }
+    temp.prototype = this.prototype
+    bindFunc.prototype = new temp()
+    return bindFunc
+}
+// let test it
+let person = {
+    name: 'Abel'
+}
+function sayHi(age, sex) {
+    this.age = age
+    console.log(age, this.name, sex)
+}
+sayHi.prototype.money = 12
+
+const boundFunc = sayHi.bind(person, 12, 'man')
+const newObj = new boundFunc()
+console.log('newObj', newObj)
+
+/*****************Native New*********************/
+// 1. receive a Constructor function
+// 2. create a new Object
+// 3. new Object connect the prototype from Constructor's prototype
+// 4. direct the point of this to new Objet
+// 5. return new object
+function myNew(constructor, ...parameter) {
+    if (typeof constructor !== 'function') {
+        throw new Error(`myNew function the first param must be a function`)
+    }
+    const newObj = Object.create(constructor.prototype)
+    const result = constructor.call(newObj, ...parameter)
+    if (result !== null && typeof result === 'object') {
+        return result
+    }
+    return newObj
+}
+// let test it
+function Test(name) {
+    this.name = name
+}
+const newOb = myNew(Test, 'tab')
+console.log('newOb', newOb)
+
+/*** String ***/
+
+/*****************Native slice*********************/
+String.prototype.mySlice = function (start = 0, end) {
+    start = start < 0 ? this.length + start : start
+    end = !end && end !== 0 ? this.length : end
+
+    if (start >= end) return ''
+    let str = ''
+    for (let i = start; i < end; i++) {
+        str += this[i]
+    }
+
+    return str
+}
+console.log('result', '12345'.mySlice(2))
+
+/*****************Native substr*********************/
+String.prototype.mySubstr = function (start = 0, length) {
+    if (length < 0) return ''
+
+    start = start < 0 ? this.length + start : start
+    length = (!length && length !== 0) || length > this.length - start ? this.length : start + length
+
+    let str = ''
+    for (let i = start; i < length; i++) {
+        str += this[i]
+    }
+    return str
+}
+console.log('result', '1234567'.mySubstr(2))
+
+/*****************Native substr*********************/
+String.prototype.mySubstring = function (start = 0, end) {
+    start = start < 0 ? this.length + start : start
+    end = !end && end !== 0 ? this.length : end
+
+    if (start >= end) [start, end] = [end, start]
+    let str = ''
+    for (let i = start; i < end; i++) {
+        str += this[i]
+    }
+
+    return str
+}
+console.log('result', '123456789'.mySubstring(6))
