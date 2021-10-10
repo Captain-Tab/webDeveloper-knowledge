@@ -271,3 +271,119 @@ function Test (name) {
 }
 const newOb = myNew(Test, 'tab')
 console.log('newOb', newOb)
+
+/*****************Native Apply*********************/
+Object.prototype.myEntries = function (obj) {
+    const res = []
+    for (let key in obj) {
+        obj.hasOwnProperty(key) && res.push([key, obj[key]])
+    }
+    return res
+}
+const obj = {
+    name: 'tab',
+    age: 22,
+    gender: 'man'
+}
+const result = Object.myEntries(obj)
+console.log('result', result)
+
+/*****************Native Apply*********************/
+Object.prototype.myFromEntries = function (arr) {
+    const obj = {}
+    for (let i = 0; i < arr.length; i++) {
+        console.log('tes', arr[i])
+        const [key, value] = arr[i]
+        obj[key] = value
+    }
+    return obj
+}
+const arr = [
+    ['name', 'tab'],
+    ['age', 22],
+    ['gender', 'man']
+]
+const result = Object.myFromEntries(arr)
+console.log('result', result)
+
+/*****************Native Key*********************/
+Object.prototype.myKeys = function (obj) {
+    const arr = []
+    for (let key in obj) {
+        obj.hasOwnProperty(key) && arr.push(key)
+    }
+    return arr
+}
+const obj = {
+    name: 'tab',
+    age: 22,
+    gender: 'man'
+}
+const result = Object.myKeys(obj)
+console.log('result', result)
+
+/*****************Native Values*********************/
+Object.prototype.myValues = function (obj) {
+    const arr = []
+    for (let key in obj) {
+        obj.hasOwnProperty(key) && arr.push(obj[key])
+    }
+    return arr
+}
+const obj = {
+    name: 'tab',
+    age: 22,
+    gender: 'man'
+}
+const result = Object.myValues(obj)
+console.log('result', result)
+
+/*****************Native InstanceOf*********************/
+function myInstanceOf(father, child) {
+    const fp = father.prototype
+    let cp = child.__proto__
+
+    while (cp) {
+        if (cp === fp) {
+            return true
+        }
+        cp = cp.__proto__
+    }
+    return false
+}
+
+function Person(name) {
+    this.name = name
+}
+const tab = new Person('tab')
+const result = myInstanceOf(Person, tab)
+console.log('result', result)
+
+/*****************Native is*********************/
+/**
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
+ * 
+ * This is not the same as being equal according to the == operator.The == operator applies various coercions to both sides(if they are not the same Type) before testing for equality(resulting in such behavior as "" == false being true), but Object.is doesn't coerce either value.
+ * This is also not the same as being equal according to the === operator.The only difference between Object.is() and === is in their treatment of signed zeroes and NaNs.For example, the === operator(and the == operator) treats the number values - 0 and + 0 as equal.Also, the === operator treats Number.NaN and NaN as not equal.
+ */
+Object.prototype.myIs = function (x, y) {
+    if (x === y) {
+        // prevent -0 equal to + 0
+        return x !== 0 || 1/ x === 1/ y
+    }
+
+    // prevent Number.NaN is not equalt to NaN
+    return x !== x && y !== y
+}
+
+const a = { name: 'tab' }
+const b = a
+const c = { name: 'sophia' }
+
+console.log(Object.myIs(a, b))
+console.log(Object.myIs(a, c))
+
+
+
+
+
