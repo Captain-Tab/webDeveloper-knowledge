@@ -199,6 +199,24 @@ const arr = [1, 2, 3, 4, 5]
 console.log(arr.mySlice(2))
 
 /*** Ojbect ***/
+/*****************Native Assign*********************/
+Object.prototype.myAssgin = function (target, ...source) {
+    if (target == null) {
+        throw new TypeError('Cannot convert undefined or null to object')
+    }
+    let result = Object(target)
+    source.forEach(function (obj) {
+        if (obj != null) {
+            for (let key in obj) {
+                if (obj.hasOwnProperty(key)) {
+                    result[key] = obj[key]
+                }
+            }
+        }
+    })
+    return result
+}
+console.log(Object.myAssgin({a: '123'}, {b: '345'}))
 
 /*****************Native Entries*********************/
 Object.prototype.myEntries = function (obj) {
