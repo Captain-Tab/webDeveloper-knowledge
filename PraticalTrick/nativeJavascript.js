@@ -144,7 +144,7 @@ const resultRes = testArr.mySome((cur)=> {
 })
 console.log('result', resultRes)
 
-/*****************Native findIndex*********************/
+/*****************Native Join*********************/
 Array.prototype.myJoin = function (splitter = ',') {
     let resultStr = ''
     for (let i = 0; i < this.length; i++) {
