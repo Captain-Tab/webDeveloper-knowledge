@@ -206,7 +206,11 @@
 
 >[JS原理之对象行为委托](/core/JScore2.md)
 
->[实现原生JS方法](/PraticalTrick/nativeJavascript.js)
+>[实现原生JS数组方法](/PraticalTrick/nativeArrayMethod.js)
+
+>[实现原生JS对象方法](/PraticalTrick/nativeObjectMethod.js)
+
+>[实现JSON方法](/PraticalTrick/JSON.stringify.js)
 
 >[实现深拷贝](/PracticalTrick/deepClone.js)
 
