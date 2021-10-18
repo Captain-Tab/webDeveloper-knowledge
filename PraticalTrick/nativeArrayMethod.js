@@ -62,12 +62,200 @@ Array.prototype.myReverse = function () {
     let temp = this[i]
     this[i] = this[k]
     this[k--] = temp
-    console.log(this)
   }
   return this
 }
-console.log('result', [3,2,3].myReverse())
+console.log('result', [1, 2, 3].myReverse())
 
+/*****************Native Sort*********************/
+
+// sort 不接受参数或者接受的参数为 undefined 时，默认的排序规则是：将每个元素转化为字符串，再将它们按照 Unicode 编码从小到大排序。其中，null 会转化为 "null"，undefined 固定排在数组最后
+// sort 接受参数且为排序函数的时候，按照排序函数的规则排序：若函数返回值为负数，则第一个参数排在第二个参数前面，若为正数，则在它后面，若为 0 则位置不变
+Array.prototype.mySort = function (...args) {
+  if (typeof args[0] !== 'function' && typeof args[0] !== 'undefined') {
+    throw new TypeError("The argument must be undefined or a function")
+  }
+  let arr = this
+  const shouldBefore = (x, y) => {
+    // if arguments come wth no paramerter or it's undefined
+    if (args.length === 0 || args.length !== 0 && typeof args[0] === 'undefined') {
+      return String(x) < String(y)
+    } else {
+      let fn = args[0]
+      return fn(x, y) < 0 ? true: false
+    }
+  }
+  for (let i = 0; i < arr.length - 1; i++) {
+    for (let j = 0; j < arr.length - 1 - i; j++){
+      if (shouldBefore(arr[j + 1], arr[j])) {
+        let temp = arr[j]
+        arr[j] = arr[j + 1]
+        arr[j + 1] = temp
+      }
+    }
+  }
+  return arr
+}
+const arr = [1, 2, 5, 10]
+// compare eache unicode of each item
+arr.mySort()                  // [1,10,2,5]
+// sort the order from small to bigger
+arr.mySort((a, b) => a < b ? -1 : a > b ? 1 : 0)     // [1,2,5,10]
+arr.mySort((a, b) => a - b)                // [1,2,5,10]
+// sort order from bigger to small
+arr.mySort((a, b) => a > b ? -1 : a < b ? 1 : 0)
+
+/*****************Native Splice*********************/
+
+//* 接受三个参数：开始操作的位置 start、删除的元素个数num ，以及添加的元素 item1、item2、...
+//* start 可以是正数或者负数。如果是正数且超过数组长度，则无视删除操作，直接把需要添加的元素添加到数组末尾；如果是负数，且负数绝对值小于数组长度，则将负数与长度相加作为 start，否则将 0 作为 start
+//* num 可以是正数或者负数。如果没有传 num，或者 num 是正数且超过 start 往后的元素个数（包含 start），则将 start 和它后面所有元素删除；如果 num 是 0 或者负数，则不删除任何元素
+//* 这个方法会修改到原数组，且最终返回一个包含被删除元素的数组，或者空数组
+Array.prototype.mySplice = function (...args) {
+  let arr = this
+  let len = arr.length
+  let res = []
+
+  const computeStart = (start) => {
+    return start >= 0 ? start : Math.abs(start) < len ? start + len : 0
+  }
+
+  const computeDeleteNum = (args, start) => {
+    return args.length < 2 ?
+      len - start : args[1] > 0 ? Math.min(args[1], len - start) : 0
+  }
+
+  const sliceArray = (arr, separator) => {
+    let arr1 = [], arr2 = []
+    for (let i = 0; i < arr.length; i++) {
+      i < separator ? arr1.push(arr[i]) : arr2.push(arr[i])
+    }
+    // clear the original arrary 
+    arr.length = 0
+    return [arr1, arr2]
+  }
+
+  const pushToArray = (array) => {
+    for (let i = 2; i < args.length; i++) {
+      array.push(args[i])
+    }
+  }
+
+  if (len > 0) {
+    let start = computeStart(args[0])
+    let deleteNum = computeDeleteNum(args, start)
+    if (start >= len) {
+      args > 2 && pushToArray(arr)
+    } else {
+      let [arr1, arr2] = sliceArray(arr, start)
+      // delete item
+      if (deleteNum !== 0) {
+        for (let i = 0; i < deleteNum; i++) {
+          res.push(arr2.shift())
+        }
+      }
+      // add item
+      if (args.length > 2) {
+        pushToArray(arr1)
+      }
+      const temArr = [...arr1, ...arr2]
+      for (let el of temArr) {
+        arr.push(el)
+      }
+    }
+  }
+  return res
+}
+
+const arrTest = [1, 2, 3, 4, 5]
+// 删除：在索引1这里操作，删除2个元素
+const arr1 = arrTest.mySplice(1, 2)                 // 返回 [2,3]，arr 变成 [1,4,5]
+console.log(arr, ar1)
+// 添加：在索引1这里操作，删除0个元素，添加2个元素（注意是插入到索引1前面，不是后面）
+const arr2 = arr.mySplice(1, 0, "a", "b")          // 返回 []，arr 变成 [1,"a","b",2,3,4,5]
+
+// 替换：删除+添加就是替换
+const arr3 = arr.mySplice(1, 2, "a", "b")
+
+/*****************Native copyWidthin*********************/
+Array.prototype.myCopyWithin = function (target = 0, begin = 0, end = this.length) {
+  let arr = this
+  let len = arr.length
+  let copyArr = []
+  let m = 0, n = 0
+  target = target >= 0 ? target : Math.abs(target) < len ? target + len : 0
+  begin = begin >= 0 ? begin : Math.abs(begin) < len ? begin + len : 0
+  end = end >= 0 ? Math.min(end, len) : Math.abs(end) < len ? end + len : end
+  // 把需要复制的元素放到 copyArr 数组中
+  for (; begin < end; begin++) {
+    copyArr[m++] = arr[begin]
+  }
+  let _len = copyArr.length < len - target ? target + copyArr.length : len
+  // 用 copyArr 数组从 target 开始覆盖原数组
+  for (; target < _len; target++) {
+    arr[target] = copyArr[n++]
+  }
+  return arr
+}
+
+const arr = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+arr.myCopyWithin(4)                   // [0,1,2,3,0,1,2,3,4]   缺省范围为整个数组
+arr.myCopyWithin(4, 7)                 // [0,1,2,3,7,8,6,7,8]
+arr.myCopyWithin(4, 6, 9)
+
+/*****************Native toString *********************/
+Array.prototype.myToString = function () {
+  let arr = this
+  let str = ""
+  for (x of arr) {
+    x = typeof (x) === 'undefined' || x === null ? "" : x
+    str += `${x.toString()},`
+  }
+  return str.slice(0, str.length - 1)
+}
+[1, 2, 3].myToString()              // "1,2,3"
+[{ a: 1 }, { b: 2 }].myToString()        // "[obejct Object],[object Object]"
+
+/*****************Native concat *********************/
+Array.prototype.myConcat = function (...args) {
+  let arr = this
+  let res = []
+  let k = 0
+  const isArrayLike = obj => {
+    if (typeof o === 'object' &&
+      isFinite(o.length) &&
+      o.length >= 0 &&
+      o.length === Math.floor(o.length) &&
+      o.length < 4294967296)
+      return true
+    else
+      return false
+  }
+  for (let el of arr) {
+    res[k++] = el
+  }
+  for (let el of args) {
+    // 如果是数组且没有禁止展开
+    if (Array.isArray(el) && el[Symbol.isConcatSpreadable] != false) {
+      for (let _el of el) {
+        res[k++] = _el
+      }
+    } else {
+      // 如果是类数组且允许展开
+      if (isArrayLike(el) && el[Symbol.isConcatSpreadable]) {
+        for (let key in el) {
+          // 把除了 length 之外的键值都放入新数组中
+          if (key !== 'length') {
+            res[k++] = el[key]
+          }
+        }
+      } else {
+        res[k++] = y
+      }
+    }
+  }
+  return res
+}
 
 /*****************Native Reduce*********************/
 Array.prototype.myReduce = function (callback, initialValue) {
@@ -89,7 +277,33 @@ const total = arr.myReduce((prev, cur) => {
 }, 10)
 console.log(total)
 
-
+/*****************Native ReduceRight *********************/
+Array.prototype.myReduceRight = function (...args) {
+  let fn = args[0]
+  let arr = this
+  let len = arr.length
+  let index = len - 1, acc
+  if (typeof fn != 'function') {
+    throw new TypeError(`${fn} is not function`)
+  }
+  if (args.length >= 2) {
+    acc = args[1]
+  } else {
+    while (index > 0 && !(index in arr)) {
+      index--
+    }
+    if (index == 0) {
+      throw new TypeError('Reduce of empty array with no initical value')
+    }
+    acc = arr[index--]
+    for (; index >= 0; index--) {
+      if (index in arr) {
+        acc = fn(acc, arr[index], index, arr)
+      }
+    }
+    return acc
+  }
+}
 /*****************Native ForEach*********************/
 Array.prototype.myForEach = function (callback) {
   for (let i = 0; i < this.length; i++) {
@@ -102,6 +316,32 @@ arr1.myForEach((cur, index) => {
   console.log('cur', cur)
 })
 
+/*****************Native IndexoF*********************/
+Array.prototype.myIndexOf = function (target, start = 0) {
+  let arr = this
+  let len = arr.length
+  let _start = start >= 0 ? start : Math.abs(start) <= len ? len + start : 0
+  for (; _start < len; _start++) {
+    if (arr[_start] === target) {
+      return _start
+    }
+  }
+  return -1
+}
+
+/*****************Native LastIndexOf*********************/
+Array.prototype.myLastIndexOf = function (target, start) {
+  let arr = this
+  let len = arr.length
+  start = start || arr[arr.length - 1]
+  let _start = start < 0 ? len + start : start >= len ? arr.length - 1 : start
+  for (; _start > 0; _start--) {
+    if (arr[_start] === target) {
+      return _start
+    }
+  }
+  return -1
+}
 
 /*****************Native FindIndex*********************/
 Array.prototype.myFindIndex = function (callback) {
@@ -247,30 +487,73 @@ const testArr = [1, [2, 3, [4, 5]], [8, 9]]
 const result = testArr.myFlat()
 console.log('result', result)
 
+/*****************Native FlatMap*********************/
+Array.prototype.myFlatMap = function (fn, thisArg = null) {
+  if (typeof fn != 'function') {
+    throw new TypeError(`${fn} is not a function`)
+  }
+  let arr = this
+  let newArr = new Array(arr.length)
+  let k = 0
+  for (let i = 0; i < arr.length; i++) {
+    if (i in arr) {
+      const res = fn.call(thisArg, arr[i], i, arr)
+      if (Array.isArray(res)) {
+        for (let el of res) {
+          newArr[k++] = el
+        }
+      } else {
+        newArr[k++] = res
+      }
+    }
+  }
+  return newArr
+}
 
 /*****************Native Slice*********************/
-Array.prototype.mySlice = function (start, length, ...values) {
-    length = start + length > this.length - 1 ? this.length - start : length
-    const res = [], tempArr = [...this]
-    for (let i = start; i < start + values.length; i++) {
-        this[i] = values[i - start]
-    }
-    if (values.length < length) {
-        const cha = length - values.length
-        for (let i = start + values.length; i < tempArr.length; i++) {
-            this[i] = tempArr[i + cha]
-        }
-        this.length = this.length - cha
-    }
-    if (values.length > length) {
-        for (let i = start + length; i < tempArr.length; i++) {
-            this.push(tempArr[i])
-        }
-    }
-    for (let i = start; i < start + length; i++) {
-        res.push(tempArr[i])
+Array.prototype.mySlice = function (begin = 0, end = this.length) {
+  let arr = this
+  let len = arr.length
+  let res = []
+  let k = 0
+  begin = begin >= 0 ? begin : Math.abs(begin) <= len ? begin + len : 0
+  end = end < 0 ? end + len : Math.min(end, len)
+  for (; begin < end; begin++) {
+    res[k++] = arr[begin]
+  }
+  return res
+}
+
+
+/*****************Native Array.isArray*********************/
+Object.defineProperty(Array, "myIsArray", {
+  value: function (arr) {
+    return Object.prototype.toString.call(arr) === '[object Array]'
+  }
+})
+
+/*****************Native Array.from*********************/
+Object.defineProperty(Array, "myFrom", {
+  value: function (toChange, fn, thisArg = null) {
+    let res = [...toChange]
+    if (typeof fn === 'function') {
+      for (let i = 0; i < res.length; i++) {
+        res[i] = fn.call(thisArg, res[i], i, res)
+      }
     }
     return res
-}
-const arr = [1, 2, 3, 4, 5]
-console.log(arr.mySlice(2))
+  }
+})
+
+/*****************Native Array.of*********************/
+Object.defineProperty(Array, "myOf", {
+  value: function () {
+    let res = []
+    for (let i = 0; i < arguments.length; i++) {
+      res[i] = arguments[i]
+    }
+    return res
+  }
+})
+
+// https://segmentfault.com/a/1190000040138580
