@@ -216,6 +216,8 @@
 
 >[实现EventHub](/PracticalTrick/eventHub.js)
 
+>[实现简易正则表达式](/PracticalTrick/myRegularExpression.js)
+
 ### vue源码
 >[对象Object的变化侦听](/vue-deep/对象Object的变化侦测.md)
 
