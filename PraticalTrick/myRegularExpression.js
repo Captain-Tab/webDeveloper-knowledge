@@ -76,14 +76,13 @@ const getGenerator = (patternObjList) => {
   }; // generator need a 'start' to start valid
   const len = patternObjList.length;
   start.next = getNext(patternObjList, -1);
-  // console.log('start', start.next)
-  // for (let i = 0; i < len; i++) {
-  //   const curPattern = patternObjList[i];
-  //   curPattern.next = getNext(patternObjList, i)
-  //   if (collectionTypes.includes(curPattern.collectionType)) {
-  //     curPattern.next.push(curPattern);
-  //   }
-  // }
+  for (let i = 0; i < len; i++) {
+    const curPattern = patternObjList[i];
+    curPattern.next = getNext(patternObjList, i)
+    if (collectionTypes.includes(curPattern.collectionType)) {
+      curPattern.next.push(curPattern);
+    }
+  }
 
   return start;
 }
