@@ -132,3 +132,6 @@ const testReg = (str, reg) => {
   //console.log(matchStructure)
 }
 console.log(testReg('2131aa3', '^[123]+[a]*3$'));
+
+
+// link: https://juejin.cn/post/6986409229825343496
