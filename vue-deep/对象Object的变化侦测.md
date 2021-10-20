@@ -1,5 +1,6 @@
 ## 目录
 1. [什么是变化侦测](#什么是变化侦测)
+2. [如何收集依赖](#如何收集依赖)
 
 ### 什么是变化侦测
 通常在运行网页项目的时候，状态不停改变， 需要不停的重新渲染。但是如果确定什么时候该进行渲染呢?
@@ -33,6 +34,67 @@ function defineReactive(data, key, val) {
                 return 
             }
               val = newVal
+        }
+    })
+}
+```
+
+### 如何收集依赖
+如果只是把`Object.defineProperty`进行封装，其实没有什么用处，重点在于收集依赖。我们可以把依赖收集的代码封装成一个`Dep`类，通过这个类收集依赖，删除依赖，或者向依赖发送通知
+```
+export default class Dep {
+    constrcutor () {
+        this.subs = []
+    }
+
+    addSub (sub) {
+        this.subs.push(sub)
+    }
+
+    removeSub (sub) {
+        remove(this.subs, sub)
+    }
+
+    depend () {
+        if(window.target) {
+            this.addSub(window.target)
+        }
+    }
+
+    notify () {
+        const subs = this.subs.slice()
+        for(let i = 0; l = subs.lenght; i < l; i ++) {
+            subs[i].update()
+        }
+    }
+
+    function remove (arr, item) {
+        if (arr.length) {
+            const index = arr.indexOf(item)
+            if (index > -1) {
+                return arr.splice(index, 1)
+            }
+        }
+    }
+}
+```
+再改造一下`defineReactive`
+```
+function defineReactive (data, key, val) {
+    let dep = new Dep()
+    Object.defineProperty(data, key, {
+        enumerable: true,
+        congfigurable: true,
+        get: function () {
+            dep.depend()
+            return val
+        },
+        set: function (newVal) {
+            if(val === newVal) {
+                return
+            }
+            val = newVal
+            dep.notify()
         }
     })
 }
