@@ -1,6 +1,7 @@
 ## 目录
 1. [什么是变化侦测](#什么是变化侦测)
-2. [如何收集依赖](#如何收集依赖)
+2. [如何收集依赖](#如何收集依赖#
+3. [什么是Watcher](#什么是Watcher)
 
 ### 什么是变化侦测
 通常在运行网页项目的时候，状态不停改变， 需要不停的重新渲染。但是如果确定什么时候该进行渲染呢?
@@ -97,5 +98,30 @@ function defineReactive (data, key, val) {
             dep.notify()
         }
     })
+}
+```
+
+### 什么是Watcher
+`watcher`是一个中介角色，数据发生变化时通知它，然后它再通知其他地方
+```
+export default class Watcher {
+    constructor(vm, exPorfn, cb) {
+        this.vm = vm
+        // 执行this.gette(), 就可以读取data.a.b.c内容
+        this.getter = parsePath(exPorfn)
+        this.cb = cb
+        this.value = this.get()
+    }
+
+    get() {
+        window.target = this
+        let value = this.gettter.call(this.vm, this.vm)
+    }
+
+    update() {
+        const oldValue = this.value
+        this.value = this.get()
+        this.cb.call(this.vm, this.value, oldValue)
+    }
 }
 ```
