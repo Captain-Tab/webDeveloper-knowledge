@@ -103,6 +103,14 @@ function defineReactive (data, key, val) {
 
 ### 什么是Watcher
 `watcher`是一个中介角色，数据发生变化时通知它，然后它再通知其他地方
+例如当`a.b.c`变化时，执行对应的函数
+```
+// kepath
+vm.$watch('a.b.c', function(newVal, oldBVal) {
+    // do something
+})
+```
+假设当`a.b.c`变化时，我们可以先通知`watcher`, `watcher`再执行对应的函数
 ```
 export default class Watcher {
     constructor(vm, exPorfn, cb) {
