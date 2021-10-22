@@ -1,7 +1,8 @@
 ## 目录
 1. [什么是变化侦测](#什么是变化侦测)
-2. [如何收集依赖](#如何收集依赖#
+2. [如何收集依赖](#如何收集依赖)
 3. [什么是Watcher](#什么是Watcher)
+4. [相关代码](#相关代码)
 
 ### 什么是变化侦测
 通常在运行网页项目的时候，状态不停改变， 需要不停的重新渲染。但是如果确定什么时候该进行渲染呢?
@@ -115,7 +116,7 @@ vm.$watch('a.b.c', function(newVal, oldBVal) {
 export default class Watcher {
     constructor(vm, exPorfn, cb) {
         this.vm = vm
-        // 执行this.gette(), 就可以读取data.a.b.c内容
+        // 执行this.getter(), 就可以读取data.a.b.c内容
         this.getter = parsePath(exPorfn)
         this.cb = cb
         this.value = this.get()
@@ -124,6 +125,8 @@ export default class Watcher {
     get() {
         window.target = this
         let value = this.gettter.call(this.vm, this.vm)
+        window.target = undefined
+        return value
     }
 
     update() {
@@ -132,4 +135,121 @@ export default class Watcher {
         this.cb.call(this.vm, this.value, oldValue)
     }
 }
+```
+
+
+### 相关代码
+```
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+<h2 id="test"></h2>
+<button id="but">+1</button>
+<script>
+    class Watcher { //
+        constructor(vm, exp, cb) {
+            this.vm = vm
+            this.exp = exp
+            this.cb = cb
+            this.value = this.get() //在watcher被实例化的时候调用下文的get方法
+        }
+        get() {
+            Dep.target = this //缓存当前的this，this是一个watcher对象
+            const value = this.vm.data[this.exp] //这段是精髓，通过获取对应属性的值，调用了被监听数据的get方法，由此调用了dep.depend()方法。由于Dep.target是存在的，于是往Dep实例中的subs数组添加了一个依赖，也就是watcher对象。
+            Dep.target = null
+            return value
+        }
+        update() { //在data发生改变的时候，监听数据的set方法被调用，dep实例调用notify方法，通知subs数组中的每一个依赖调用update方法，update方法会调用回调函数，更新元素的内容。
+            const value = this.vm.data[this.exp]
+            this.cb.call(this.vm,value)
+        }
+    }
+
+    class Dep { //dep实例的作用是收集依赖
+        constructor() {
+            this.subs = []
+        }
+        addSub(sub) {
+            this.subs.push(sub)
+        }
+        depend() {
+            if (Dep.target) {
+                this.addSub(Dep.target)
+            }
+        }
+        notify() {
+            const subs = this.subs.slice()
+            for (let i = 0; i < subs.length; i++) {
+                subs[i].update()
+            }
+        }
+    }
+
+    class Observer {
+        defineReactive(data) {
+            if (!data || typeof data != 'object') return
+            let dep = new Dep()
+            Object.keys(data).forEach(key => {
+                let value = data[key]
+
+                typeof value === 'object' && this.defineReactive(value)  //如果value还是对象，则对该对象递归继续使用defineReactive方法，实现深度绑定
+                Object.defineProperty(data, key, { //使用该方法监听对象属性的变化
+                    enumerable: true,
+                    configurable: true,
+                    get: function () {
+                        console.log(data, value, 'get method')
+                        dep.depend()
+                        return value
+                    },
+                    set: function (newValue) {
+                        console.log(value, 'set method')
+                        if (value === newValue) return
+                        value = newValue
+                        dep.notify()
+                    }
+                })
+            })
+        }
+    }
+
+    class Vue {
+        constructor(options = {}) {
+            this.el = options.el
+            this.exp = options.exp
+            this.data = options.data
+            el.innerHTML = this.data[this.exp]
+            let observer = new Observer()
+            observer.defineReactive(this.data)
+            new Watcher(this, this.exp, function(val) {
+                el.innerHTML = val
+            })
+            return this
+        }
+    }
+    let el = document.getElementById("test")
+    let vue = new Vue({
+        el: el,
+        exp: 'count',
+        data: {
+            count: 123
+        }
+    })
+    let but = document.getElementById("but")
+    but.addEventListener('click', () => {
+        vue.data.count += 1
+    })
+
+</script>
+</body>
+
+</html>
+
 ```
