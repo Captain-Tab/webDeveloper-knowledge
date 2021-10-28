@@ -136,6 +136,27 @@ export default class Watcher {
     }
 }
 ```
+不管是用户执行`vm.$watch('a.b.c', (value, oldValue) => {})`还是模板中用到的`data`, 都是通过`watcher`来通知自己是否需要发生变化。
+
+`parsePath`函数先将`keypath`用，分割成数组，然后循环数组一层一层读取数据，然后返回`obj`
+```
+// 解析简单路径
+
+const bailRE = /[^\w.$]/
+export function parsePath (path) {
+    if(bailRE.test(path)) {
+        return
+    }
+    const segements = path.split('.')
+    return function (obj) {
+        for(let i = 0; i < segements.length; i++) {
+            if(!obj) return
+            obj = obj[segements[i]]
+        }
+        return obj
+    }
+}
+```
 
 
 ### 相关代码
