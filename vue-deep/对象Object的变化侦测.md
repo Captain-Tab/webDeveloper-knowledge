@@ -161,6 +161,32 @@ export function parsePath (path) {
 ### 递归侦测所有key
 现在，其实已经可以实现变化监测的功能，我们希望把数据的所有属性，包括子属性都检测到，所以要封装一个`Observer`类。这个类的作用是将一个数据内的所有属性，包括子属性都换成`getter/setter`的形式，然后去追踪它们的变化
 
+```
+/*
+* Observer类会附加到每一个被检测的object上
+* 一旦附加上就会将object的所有属性转化为getter/setter的形式
+*/
+
+export class Observer {
+    constructor (value) {
+        this.value = value
+
+        if(!Array.isArray(value)) {
+            this.walk(value)
+        }
+    }
+
+  
+    // 将每一个属性转化为getter/setter的形式来侦听变化
+    walk(obj) {
+        const keys = Object.kes(obj)
+        for(let i = 0; i < keys.length; i++) {
+            defineReactive(obj, keys[i], obj[keys[i]])
+        }
+    }
+}
+
+```
 
 ### 相关代码
 ```
