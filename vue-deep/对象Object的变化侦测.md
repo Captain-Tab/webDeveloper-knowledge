@@ -184,9 +184,35 @@ export class Observer {
             defineReactive(obj, keys[i], obj[keys[i]])
         }
     }
+    
+    function defineReactive(data, key, val) {
+        // 新增，递归子属性
+        if(typeof val === 'object') {
+            new Observer(val
+        }
+        let dep = new Dep()
+        Object.defineProperty(data, key, {
+            enumerable: true,
+            configurable: true,
+            get: function(){
+                dep.depend()
+                return val
+            },
+            set: function(newVal){
+                if(val === newVal) {
+                    return
+                }
+                val = newVal
+                dep.notify()
+            }
+        })
+    }
 }
-
 ```
+在上面的代码中，我们定义了`Observer`类，用来将一个正常的`Object`转换为被侦测的`Ojbect`.然后判断数据的类型，只有`Object`类型的数据才会调用`walk`, 将每一个属性转换成`getter/setter`形式来监听变化
+最后`defineReactive`中新增`new Observer`来递归子属性，这样将所有`data`中所有属性，包括子属性都转换成`getter/setter`的形式来监听变化
+
+
 
 ### 相关代码
 ```
