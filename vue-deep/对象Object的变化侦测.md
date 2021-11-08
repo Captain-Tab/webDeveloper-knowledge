@@ -3,7 +3,8 @@
 2. [如何收集依赖](#如何收集依赖)
 3. [什么是Watcher](#什么是Watcher)
 4. [递归侦测所有key](#递归侦测所有key)
-5. [相关代码](#相关代码)
+5. [关于object的问题](#关于object的问题)
+6. [相关代码](#相关代码)
 
 ### 什么是变化侦测
 通常在运行网页项目的时候，状态不停改变， 需要不停的重新渲染。但是如果确定什么时候该进行渲染呢?
@@ -213,7 +214,24 @@ export class Observer {
 最后`defineReactive`中新增`new Observer`来递归子属性，这样将所有`data`中所有属性，包括子属性都转换成`getter/setter`的形式来监听变化
 
 
-
+### 关于object的问题
+由于采用了`object`类型数据的变化侦测原理，有些语法中即便是数据发生了变化，`vue.js`也追踪不到
+例如，向`object`添加属性
+```
+const vm = new Vue({
+    el: '#el',
+    template: '#demo-template',
+    method: {
+        action() {
+            this.obj.name  = 'berwin'
+        }
+    },
+    data: {
+        obj: {}
+    }
+})
+```
+在`action`中，我们在`obj`中新增了`name`属性，但是`Vue`无法追踪新增属性和删除属性，只能追踪一个数据是否被修改。为了解决这个问题，`vue.js`提供了`vm.$set`和`vm.$delete`
 ### 相关代码
 ```
 <!DOCTYPE html>
