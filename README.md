@@ -218,6 +218,11 @@
 
 >[实现简易正则表达式](/PracticalTrick/myRegularExpression.js)
 
+### JS专精
+>[混入与继承](/core/JScore1.md)
+
+>[类理论](/core/JScore2.md)
+
 ### vue源码
 >[对象Object的变化侦听](/vue-deep/对象Object的变化侦测.md)
 
