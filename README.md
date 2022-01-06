@@ -223,6 +223,10 @@
 
 >[类理论](/core/JScore2.md)
 
+>[函数-上](/core/JSfunction1.md)
+
+>[函数-下](/core/JSfunction2.md)
+
 ### vue源码
 >[对象Object的变化侦听](/vue-deep/对象Object的变化侦测.md)
 
