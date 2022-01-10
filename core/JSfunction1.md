@@ -1,8 +1,7 @@
 ## 目录
 1. [函数是什么](#函数是什么)
-2. [寄生继承](#寄生继承)
-3. [隐式混入](#隐式混入)
-4. [原型继承](#原型继承)
+2. [闭包](#闭包)
+3. [柯里化函数](#柯里化函数)
 4. [总结](#总结)
 
 
@@ -33,3 +32,41 @@
 
 闭包是穷人的对象
 * 如果一门语言不支持对象，可以用闭包代理
+
+
+### 柯里化函数
+把多参数函数，变成单参数函数
+
+
+1. 如何把三参数函数`add(1, 2, 3)`变成`curriedAdd(1)(2)(3)`形式
+```
+const add = (number1, number2, number3)=> {
+  console.log('total', number1 + number2 + number3)
+}
+
+const curriedAdd = a => b => c => add(1, 2, 3)
+```
+
+2. 假设`addTwo`接受两个参数，`addThree`接受三个参数，`addFour`接受四个参数，请写出一个`currify`参数，使得他们分别接受`2, 3, 4`次参数。`currify`能任意接受固定个参数的函数转化为单一参数的函数
+```
+currify(addTwo)(1)(2)
+currify(addThree)(1)(2)(3)
+currify(addFour)(1)(2)(3)(4)
+```
+```
+const currify = (fn, params = [])=> (...args) => 
+  params.length+args.length === fn.length
+    ? fn(...params, ...args)
+    : currify(fn, [...params, ...args])
+
+  
+
+addTwo = (a,b)=>a+b
+addThree = (a,b,c)=>a+b+c
+
+newAddTwo = currify(addTwo)
+newAddThree = currify(addThree)
+
+newAddTwo(1)(2)
+newAddThree(1)(2)(3)
+```
