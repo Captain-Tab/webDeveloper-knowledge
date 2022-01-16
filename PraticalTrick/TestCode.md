@@ -9,6 +9,9 @@
 8. [产生随机数据](#产生随机数据)
 9. [级联属性](#级联属性)
 10. [扁平数据结构转Tree](#扁平数据结构转Tree)
+11. [once函数](#once函数)
+12. [throttle](#throttle函数)
+13. [debounce函数](#debounce函数)
 
 ### 复制文本
 
@@ -503,4 +506,56 @@ function arrayToTree(items) {
   return result;
 }
 ```
+
 > [扁平数据结构转Tree](https://juejin.cn/post/6983904373508145189#heading-7)
+
+### once函数
+```
+function once(fn, replaceer = null) {
+  return function(...args) {
+    if(fn) {
+      const result = fn.apply(this, args)
+      fn = null
+      return result
+    }
+    if(replacer) {
+      return replacer.apply(this, args)
+    }
+  }
+}
+```
+
+### throttle函数
+```
+function throttle(fn, ms = 100){
+  let timer = null
+  return function(...args){
+    if(!timer) {
+      const result = fn.apply(this, args)
+      timer = setTimeout(()=> {
+        timer = null
+      }, ms)
+      return result
+    }
+  }
+}
+```
+
+### 防抖函数
+```
+const debounce = (func: Function, wait: number, immediate: boolean) => {
+  let timeout: null | any
+  return function (...args: any) {
+    const later = function () {
+      timeout = null
+      func(args)
+    }
+    const callNow = immediate && !timeout
+    clearTimeout(timeout)
+    timeout = setTimeout(later, wait)
+    if (callNow) {
+      func(args)
+    }
+  }
+}
+```
