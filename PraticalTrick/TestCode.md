@@ -12,6 +12,10 @@
 11. [once函数](#once函数)
 12. [throttle](#throttle函数)
 13. [debounce函数](#debounce函数)
+14. [deprecate函数](#deprecate函数)
+15. [intercept函数](#intercept函数)
+16. [batch函数](#batch函数)
+17. [continous函数](#continous函数)
 
 ### 复制文本
 
@@ -558,4 +562,63 @@ const debounce = (func: Function, wait: number, immediate: boolean) => {
     }
   }
 }
+```
+
+### deprecate函数
+```
+function deprecate(fn, oldApi, newApi) {
+  const message = `The ${oldApi}` is deprecated, Please use the ${newApi} instead`
+  const notice = once(console.warn)
+  return function(...args) {
+    notice(message)
+    return fn.apply(this, args)
+  }
+}
+```
+
+### intercept函数
+```
+function intercept(fn, {beforeCall = null, afterCall = null}) {
+  return function(...args) {
+    if(!beforeCall || beforeCall.call(this, args) !== false) {
+      // 如果beforeCall 返回false, 不执行后面的函数
+      const result = fn.apply(this, args)
+      if(afterCall) return afterCall.call(this, result)
+      return result
+     }
+  }
+}
+```
+
+### batch函数
+```
+function batch(fn) {
+  return function(subject, ...args){
+    if(Array.isArray(subject)){
+      return subject.map((s)=> {
+        return fn.call(this, s, ...args)
+      })
+    }
+    return fn.call(this, subject, ...args)
+  }
+}
+
+export const setStyle = batch((el, key, value) => {
+  el.style[key] = value
+})
+```
+### continous函数
+```
+function continous(reducer) {
+  return function(...args) {
+    return args.reduce((a, b) => reducer(a, b))
+  }
+}
+
+const add = continous((a, b) => a + b);
+const multiply = continous((a, b) => a * b);
+
+console.log(add(1, 2, 3, 4)); // 1 + 2 + 3 + 4 = 10
+
+console.log(multiply(1, 2, 3, 4, 5)); // 1 * 2 * 3 * 4 * 5 = 120
 ```
