@@ -110,7 +110,7 @@
 5. `new`会将`p`的原型`_p`设为 `#502`
 
 #### 原型图表
-![](https://user-gold-cdn.xitu.io/2020/2/19/1705def9b7377bdd?w=770&h=772&f=jpeg&s=77158)
+![](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/2/19/1705def9b7377bdd~tplv-t2oaga2asx-image.image)
 
 #### 总结
 **构造函数**
