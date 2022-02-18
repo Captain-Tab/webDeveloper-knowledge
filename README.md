@@ -210,13 +210,13 @@
 
 >[实现原生JS对象方法](/PraticalTrick/nativeObjectMethod.js)
 
->[实现JSON方法](/PraticalTrick/JSON.stringify.js)
+>[实现JSON方法](/PraticalTrick/JSON.stringify.md)
 
->[实现深拷贝](/PracticalTrick/deepClone.js)
+>[实现深拷贝](/PraticalTrick/deepClone.js)
 
->[实现EventHub](/PracticalTrick/eventHub.js)
+>[实现EventHub](/PraticalTrick/eventHub.ts)
 
->[实现简易正则表达式](/PracticalTrick/myRegularExpression.js)
+>[实现简易正则表达式](/PraticalTrick/myRegularExpression.js)
 
 ### JS专精
 >[混入与继承](/core/JScore1.md)
@@ -240,7 +240,7 @@
 
 
 ### Node.js
-> [介绍Node](/node/介绍node.md)
+> [介绍Node](/node/介绍Node.md)
 
 > [数据库](/node/数据库.md)
 
