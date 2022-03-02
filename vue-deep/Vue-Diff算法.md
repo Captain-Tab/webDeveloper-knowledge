@@ -420,7 +420,6 @@ key的作用--性能更高
 1、key值要选择一个唯一值，通常用id来做key
 2、不要做一些无谓的dom结构修改或者跨层级去操作一些dom
 
-
-
 ### 相关链接
->[原始链接](https://mp.weixin.qq.com/s/a54pTwwl5-ujrX57jRznDQ)
+> [原始链接](https://mp.weixin.qq.com/s/a54pTwwl5-ujrX57jRznDQ)
+> [相关链接](https://juejin.cn/post/6994959998283907102)

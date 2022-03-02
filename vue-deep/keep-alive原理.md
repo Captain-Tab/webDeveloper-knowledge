@@ -15,7 +15,7 @@
 4. 当E组件被访问时，内存空间不足，C变成最久未使用的组件，C组件从缓存中删除，E组件加入到最新的位置
 
 
-<img src="https://picb.zhimg.com/80/v2-998b52e7534278b364e439bbeaf61d5e_720w.jpg" width="700px" hight="300px">
+<img src="https://picb.zhimg.com/80/v2-998b52e7534278b364e439bbeaf61d5e_720w.jpg" height="300px" width="700px"  alt="">
 
 ### 组件实现原理
 `kepp-alive`实际是一个抽象组件，只对包裹的子组件做处理，并不会和子组件建立父子关系，也不会作为节点渲染到页面上。在组件开头就设置`abstract`为`true`，代表该组件是一个抽象组件。

@@ -28,7 +28,68 @@
 * box-sizing
 * media query
 
-[更新详情](https://segmentfault.com/a/1190000010780991)
+[更多详情](https://segmentfault.com/a/1190000010780991)
+
+3. 函数执行上下文
+(1) 语法分析阶段:分析代码是否有语法错误(SyntaxError)，如果有语法错误将会在控制台报错，并终止
+   执行。
+(2) 编译阶段。每进入一个不同的运行环境时都会:
+    创建一个新的执行上下文(Execution Context)
+    创建一个新的词法环境(Lexical Environment)，即作用域
+(3) 执行阶段。Javascript 在运行过程中会产生一个调用栈，调用栈遵循 LIFO(先进后出，后进先出)原则:
+    将步骤 (2) 中创建的执行上下文压入执行栈，并成为正在运行的执行上下文  执行代码
+    在代码执行结束后，将其弹出执行栈
+
+4. 作用域和闭包
+使用词法环境Lexical Environment代替作用域描述执行上下文。词法环境有两个成员
+* 环境记录Environment Record
+* 外包词法环境引用Outer Lexical Environment，简称 Outer
+
+每个词法环境的 Outer 记录了外层词法环境的引用，当在自身词法环境记录无法寻找到某个变量时，可以 根据 Outer 向外层寻找。在最外层的全局词法环境中，Outer 为 null
+
+当代码在一个环境中执行时，会通过 Outer 创建变量对象的一个作用域链，来保证对执行环境有权访问的 变量和函数的有序访问。每个 JavaScript 执行环境都有一个和它关联在一起的作用域链，这个作用域链是 一个对象列表或对象链。在函数执行过程中，变量的解析是沿着作用域链一级一级搜索的过程:
+ 从第一个对象开始，逐级向后回溯，直到找到同名变量为止
+ 找到后不再继续遍历，找不到就报错
+ 当函数执行结束之后，执行期上下文将被销毁(作用域链和激活对象均被销毁)
+
+
+闭包
+组成： 函数，以及创建该函数的环境
+本质： 函数内部可以读取函数外部的变量
+用途：
+- 用于从外部读取其他函数内部变量的函数
+ 可以使用闭包来模拟私有方法
+ 让这些变量的值始终保持在内存中(涉及垃圾回收机制，可能导致内存泄露问题)
+
+5. 执行栈
+函数执行过程会产生一个调用栈，调用栈可理解为一个存储函数调用的栈结构，遵循先进后出的原则
+
+ 每调用一个函数，该函数会被添加进调用栈，并开始执行
+ 如果正在调用栈中执行的A函数还调用了B函数，那么B函数也将会被添加进调用栈  一旦B函数被调用，便会立即执行
+ 当前函数执行完毕后，解释器将其清出调用栈，继续执行当前执行环境下的剩余的代码
+
+6. 事件循环
+<img src="../assets/img/js/eventloop.png" width="900px" hight="231px">
+如图，主线程运行的时候，会产生堆(heap)和栈(stack)，其中堆为内存、栈为函数调用栈。我们能看 到，Event Loop 负责执行代码、收集和处理事件以及执行队列中的子任务，具体包括:
+- Javascript有一个主线程和执行栈，所有的任务都会被放到调用栈等待主线程执行
+- 同步任务会被放在调用栈中，按照顺序等待主线程依次执行
+- 主线程之外存在一个任务队列，所有任务在主线程中以执行栈的方式运行
+- 同步任务都在主线程上执行，栈中代码在执行的时候会调用WebAPI，此时会产生一些异步任务
+- 异步任务会在有了结果(比如被监听的事件发生时)后，将注册的回调函数放入任务队列中
+- 执行栈中任务执行完毕后，此时主线程处于空闲状态，会从任务队列中获取任务进行处理 
+上述过程会不断重复，这就是 JavaScript 的运行机制，称为事件循环机制(Event Loop)
+
+7. 宏任务和微任务
+事件循环中的异步任务队列有两种:宏任务(MacroTask)和微任务(MicroTask)队列:
+- 宏任务:包括script全部代码、setTimeout、setInterval、setImmediate(Node.js)、 requestAnimationFrame(浏览器)、I/O 操作、UI 渲染(浏览器)
+- 微任务:包括process.nextTick(Node.js)、Promise、MutationObserver 
+
+在浏览器中，异步任务队列的执行过程如下:
+(1) 宏任务队列一次只从队列中取一个任务执行，执行完后就去执行微任务队列中的任务。
+(2) 微任务队列中所有的任务都会被依次取出来执行，直到微任务队列为空。
+(3) 在执行完所有的微任务之后，执行下一个宏任务之前，浏览器会执行 UI 渲染操作、更新界面。
+我们能看到，在浏览器中每个宏任务执行完成后，会执行微任务队列中的任务。而在 Node.js 中，事件循 环分为 6 个阶段，微任务会在事件循环的各个阶段之间执行。也就是说，每当一个阶段执行完毕，就会去 执行微任务队列的任务。
+
 
 ### 进阶
 1. 小程序为什么比H5性能要好
@@ -57,3 +118,55 @@
 * 对外提供配置项，来控制显示以及具体功能
 * 通过对外提供查询接口，可获取组件状态
 
+3. 输入url到响应的过程
+
+4. vue-route原理
+
+5. http协议
+
+6. webpack
+   Webpack 构建代码的过程大概如下:
+   (1) Compiler 模块是 webpack 的支柱引擎，它通过 CLI 或 Node API 传递的所有选项，创建出一个 Compilation
+   实例。
+   (2) Compilation 实例能够访问所有的模块和它们的依赖(大部分是循环依赖)，它会对应用程序的依赖图中 所有模块进行字面上的编译。
+   (3) 在编译阶段，模块会被加载(loaded)、封存(sealed)、优化(optimized)、分块(chunked)、哈希(hashed)和重
+   新创建(restored)。
+   (4) 最终 Webpack 整合各个依赖项，将所有这些模块打包为一个或多个 chunk/bundle 文件。
+   Webpack 递归地构建一个依赖图 ，这个依赖图包含着应用程序所需的每个模块。在使用 Webpack 时，我 们需要理解 4 个核心概念: 入口(entry)、输出(output)、Loader、插件(plugins)。
+
+(1) 入口(entry)。
+入口(entry)将您应用程序的入口起点认为是根上下文或 app 第一个启动文件。例如在 Vue 中是 new Vue() 位置所在的文件，在 Angular 中是启动.bootstrap()的文件，
+在 React 中则是 ReactDOM.render() 或者是 React.render()的启动文件。
+
+(2) 输出(output)。
+输出(output)属性描述了如何处理归拢在一起的代码(bundled code)，在哪里打包应用程序。简单来说，
+就是最终打包好的代码放哪。一般需要以下两点配置:
+ filename: 编译文件的文件名(main.js/bundle.js/index.js 等)
+ path:对应一个绝对路径，此路径是你希望一次性打包的目录
+
+(3) Loader。
+Webpack 把每个文件(.css, .html, .scss, .jpg 等) 都作为模块处理。如果你看过生成的 bundle.js 代码 就会发现，Webpack 将所有的模块打包一起，每个模块添加标记 id，通过这样一个 id 去获取所需模块的代 码。但实际上 Webpack 只理解 JavaScript，因此 Loader 的作用就是把不同的模块和文件转换为 JavaScript 模块。
+Loader 支持链式传递。能够对资源使用流水线()pipeline)。Loader 链式地按照先后顺序进行编译，从后 往前，最终需要返回 JavaScript。不同的应用场景需要不同的 Loader，常见的包括:
+
+* babel-loader:babel-loader将ES6/ES7语法编译生成ES5(有些特性还是需要babel-polyfill支持)  
+* CSS相关Loader
+  * css-loader: 处理 CSS 文件中的 url()
+  * style-loader: 将 CSS 插入到页面的<style>标签
+  * less-loader: Less 转换为 CSS
+  * postcss-loader(autoprefixer-loader): 自动添加兼容前缀(-webkit-、-moz-等)
+其他Loader
+  * url-loader/file-loader: 修改文件名，放在输出目录下，并返其对应的 url
+  * html-loader/raw-loader: 把 HTML 文件输出成字符串
+
+(4) 插件(plugins)。
+Loader 仅在每个文件的基础上执行转换，插件目的在于解决 Loader 无法实现的其他事。Webpack 插件由以 下组成:
+- 一个JavaScript命名函数
+- 在插件函数的prototype上定义一个apply方法  指定一个绑定到Webpcak自身的事件钩子
+- 处理Webpcak内部实例的特定数据
+- 功能完成后调用Webpcak提供的回调
+
+Webpack 插件是一个具有 apply 属性的 JavaScript 对象。apply 属性会被 webpack compiler 调用，并且 compiler 对象可在整个编译生命周期访问。
+一般来说，不同的框架有不同的异步加载解决方案，同时可以结合打包工具(Webpack 等)进行分块打包。 我们可以把首屏相关的东西打包到 bundle，其他模块分块打包到 chunk，来在需要的时候再进行加载。
+
+Tree-shaking
+当我们在引入一些开源代码或是公共库的时候，大多数时候我们都只是使用其中里面的一小部分代码。 Tree-shaking 通常指按需加载，即没有被引用的模块不会被打包进来，可有效地降低我们的包大小，减少 应用的加载时间，呈现给用户更佳的体验。
