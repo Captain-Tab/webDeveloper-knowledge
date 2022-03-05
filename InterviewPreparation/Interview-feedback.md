@@ -22,22 +22,22 @@
 
 盒模型包括： 内容(`content`)、填充(`padding`)、边界(`margin`)、 边框(`border`)；
 
-  `content-box`, `W3C`标准盒模型：
-  * 内容就是盒子的边界
-  * 属性`width`,`height`只包含内容`content`，不包含`border`和`padding`
-  * `width`=内容宽度
+`content-box`, `W3C`标准盒模型：
+* 内容就是盒子的边界
+* 属性`width`,`height`只包含内容`content`，不包含`border`和`padding`
+* `width`=内容宽度
   
-  `border-box`, `IE`盒子模型
-  * 边框才是盒子的边界
-  * 属性`width`,`height`包含`border`和`padding`，指的是`content`+`padding`+`border`。
-  * `width` = 内容宽度 + `padding` + `border`
+`border-box`, `IE`盒子模型
+* 边框才是盒子的边界
+* 属性`width`,`height`包含`border`和`padding`，指的是`content`+`padding`+`border`。
+* `width` = 内容宽度 + `padding` + `border`
 
-  `CSS`如何设置这两种模型：
-  * 设置当前盒子为 标准盒模型（默认）：`box-sizing: content-box`;
-  * 设置当前盒子为`IE`盒模型 ：`box-sizing: border-box`;
+`CSS`如何设置这两种模型：
+* 设置当前盒子为 标准盒模型（默认）：`box-sizing: content-box`;
+* 设置当前盒子为`IE`盒模型 ：`box-sizing: border-box`;
 
   比较
-  * `border-box` 更好用，比如同时使用`padding,width,border`来测试
+* `border-box` 更好用，比如同时使用`padding,width,border`来测试
 
 
 问题3. 简述伪类与伪元素的定义区别
