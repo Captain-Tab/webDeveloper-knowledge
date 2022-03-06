@@ -249,7 +249,7 @@ function vue2Diff(prevChildren, nextChildren, parent) {
 ```
 
 
-#### vue3的Diff
+### vue3的Diff
 那么相比vue2中的双端对比，在vue3中的diff算法，又做了哪些优化呢？
 
 以下面的例子来看：
