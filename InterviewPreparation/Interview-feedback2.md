@@ -224,3 +224,16 @@ Tree-shaking
 （6）协议标识符是ws（如果加密，则为wss），服务器网址就是 URL。
 
 9. cookie and session的关系
+session
+请求流程：当浏览器第一次发送请求时，服务器自动生成一个Session和一个Session ID用来唯一表示这个Session，并将其通过响应发送到浏览器，当浏览器第二次发送请求的时候，会将前一次服务器响应中Session ID放在请求中一并发送到服务器上，服务器从中提取出Session ID并和保存的所有Session ID进行对比，找到这个用户对应的Session
+
+Cookie和Session区别
+
+cookie存储在客户端（浏览器），session存储在服务端，简 单的说，当你登录一个网站的时候，如果web服务器端使用的是session,那么所有的数据都保存在服务器上面，客户端每次请求服务器的时候会发送 当前会话的sessionid，服务器根据当前sessionid判断相应的用户数据标志，以确定用户是否登录，或具有某种权限。由于数据是存储在服务器 上面，
+所以你不能伪造，但是如果你能够获取某个登录用户的sessionid，用特殊的浏览器伪造该用户的请求也是能够成功的。sessionid是服务 器和客户端链接时候随机分配的，一般来说是不会有重复，但如果有大量的并发请求，也不是没有重复的可能性
+
+cookie是属于session对象的一种，但有不同，Cookie不会占用服务器资源，是存在客户端内存或者一个cookie文本文件中，而“session”则会占用服务器资源，所以尽量不要使用session，而是用cookie，但我们一直认为cookie是不可靠的，session是可靠的，但是目前很多著名的站点都使用cookie，，有时候为了解决禁用cookie后的页面处理，通常采用url重写技术，
+调用session中大量有用的方法从session中获取数据后置入页面。
+
+
+>[Session和Cookie的区别与联系](#Session和Cookie的区别与联系)
