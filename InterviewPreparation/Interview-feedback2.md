@@ -235,5 +235,8 @@ cookie存储在客户端（浏览器），session存储在服务端，简 单的
 cookie是属于session对象的一种，但有不同，Cookie不会占用服务器资源，是存在客户端内存或者一个cookie文本文件中，而“session”则会占用服务器资源，所以尽量不要使用session，而是用cookie，但我们一直认为cookie是不可靠的，session是可靠的，但是目前很多著名的站点都使用cookie，，有时候为了解决禁用cookie后的页面处理，通常采用url重写技术，
 调用session中大量有用的方法从session中获取数据后置入页面。
 
+10. 强缓存和协商缓存
+
+
 
 >[Session和Cookie的区别与联系](#Session和Cookie的区别与联系)
