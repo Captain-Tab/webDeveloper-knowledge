@@ -247,6 +247,8 @@ const vm = new Vue({
 
 `Observer`类的作用是把一个`object`中所有的数据，包括子数据转化成响应式，就会监听`object`中所有数据，包括子数据的变化
 
+<img src="../assets/img/vue/object-defineproperty.png" width="900px" hight="231px">
+
 ### 相关代码
 ```
 <!DOCTYPE html>
