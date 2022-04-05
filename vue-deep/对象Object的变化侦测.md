@@ -4,7 +4,8 @@
 3. [什么是Watcher](#什么是Watcher)
 4. [递归侦测所有key](#递归侦测所有key)
 5. [关于object的问题](#关于object的问题)
-6. [相关代码](#相关代码)
+6. [总结](#总结)
+7. [相关代码](#相关代码)
 
 ### 什么是变化侦测
 通常在运行网页项目的时候，状态不停改变， 需要不停的重新渲染。但是如果确定什么时候该进行渲染呢?
@@ -232,6 +233,20 @@ const vm = new Vue({
 })
 ```
 在`action`中，我们在`obj`中新增了`name`属性，但是`Vue`无法追踪新增属性和删除属性，只能追踪一个数据是否被修改。为了解决这个问题，`vue.js`提供了`vm.$set`和`vm.$delete`
+
+### 总结
+`Object`可以通过`Object.defineProperty`将属性转换成`getter/setter`的形式来追踪变化。读取数据时会触发`getter`, 修改数据时会触发`setter`
+
+我们需要`getter`中收集有哪些数据使用了数据，当`setter`被触发时，去通知`getter`中收集的依赖告诉他依赖数据发生了变化
+
+`Dep`由此被创建，它用来收集依赖，删除依赖和向依赖发送消息
+
+`Watcher`就是依赖，只有`watcher`触发的`getter`才会收集依赖，哪个`watcher`触发了`getter`，就把哪个`watcher`收集到`dep`中，当数据发生变化，就会把
+所有的`watcher`都通知一遍。`watcher`的原理就是先把自己设置到全局唯一的位置，例如`window.target`， 然后读取数据。因为读取了数据，所有会触发这个数据的`getter`。
+接着`getter`中就会从全局唯一的那个位置读取当前读取数据的`watcher`, 并把这个`watcher`收集到`Dep`中，通过这样的方式，`watcher`可以主动订阅任意一个数据的变化。
+
+`Observer`类的作用是把一个`object`中所有的数据，包括子数据转化成响应式，就会监听`object`中所有数据，包括子数据的变化
+
 ### 相关代码
 ```
 <!DOCTYPE html>
