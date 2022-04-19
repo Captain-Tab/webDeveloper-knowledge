@@ -128,5 +128,22 @@ this.list
 收集
 ```
 function defineReactive(data, key, val) {
+    if(typeof val === 'object') new Observer(val)
+    let dep = new Dep()
+    Object.defineProperty(data, key, {
+        enumerable: true,
+        configurable: true,
+        get: function () {
+            dep.depend()
+            // 收集依赖
+            return val
+        },
+        set: function (newVal) {
+            if(val === newVal) return
+            dep.notify()
+            val = newVal
+        }
+    })
 }
 ```
+上面注释的地方，就是收集`Array`依赖的地方，所以`Array`也是在`getter`中收集依赖，但是在拦截器中触发依赖
