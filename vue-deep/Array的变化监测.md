@@ -3,8 +3,8 @@
 2. [如何追踪变化](#如何追踪变化)
 3. [拦截器](#拦截器)
 4. [使用拦截器覆盖Array原型](#使用拦截器覆盖Array原型)
-5. [拦截器方法挂载](#将拦截器方法挂载)
-
+5. [将拦截器方法挂载](#将拦截器方法挂载)
+6. [如何收集依赖](#如何收集依赖)
 
 
 ### 和Object的区别
@@ -114,5 +114,19 @@ export class Observer {
 }
 ```
 
-
 <img src="../assets/img/vue/array-data-listen3.png" width="900px" hight="231px">
+
+
+### 如何收集依赖
+前面我们介绍过`Object`是通知`Dep`中的依赖`Watcher`来实现依赖收集，具体是在`defineReactive`中的`getter`里使用`Dep`收集，然后
+每个`key`都有一个对应的`Dep`列表来存储依赖。简单来说就是`getter`中收集依赖，依赖被存储在`Dep`中。其实数组也是在`getter`中收集依赖的。
+
+```
+this.list
+```
+在上面的代码中，读取`list`是从`this.list`上读取的，出触发`list`这个属性的`getter`。`Array`的依赖和`Object`也一样，也是在`defineReactive`中
+收集
+```
+function defineReactive(data, key, val) {
+}
+```
