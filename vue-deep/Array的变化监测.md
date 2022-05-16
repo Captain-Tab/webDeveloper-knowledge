@@ -5,6 +5,7 @@
 4. [使用拦截器覆盖Array原型](#使用拦截器覆盖Array原型)
 5. [将拦截器方法挂载](#将拦截器方法挂载)
 6. [如何收集依赖](#如何收集依赖)
+7. [依赖列表存在哪儿](#依赖列表存在哪儿)
 
 
 ### 和Object的区别
@@ -147,3 +148,27 @@ function defineReactive(data, key, val) {
 }
 ```
 上面注释的地方，就是收集`Array`依赖的地方，所以`Array`也是在`getter`中收集依赖，但是在拦截器中触发依赖
+
+
+### 依赖列表存在哪儿
+知道了如何手机依赖，下一个要面对的问题是这些依赖列表存在哪儿。`vue.js`把`Array`的依赖存放在`Observer`中
+```
+export class Observer {
+    constructor (value) {
+        this.value = value
+        this.dep = new Dep() // 新增Dep
+
+        if(Array.isArray(value)) {
+            const argument = hasProto 
+            ? protoArgument
+            : copyArgument
+            argument(value, arrayMethods, arrayKeys)
+        } else {
+            this.walk(value)
+        }
+    }
+}
+```
+为什么数组的`Dep`依赖要保存在`Observer`实例上呢？
+
+因为数组在`getter`中收集依赖，在拦截器中触发依赖，所以这个依赖保存位置就比较关键，必须在`getter`和拦截器中都可以访问到。要在`getter`中可以访问到`Observer`实例，同时在`Array`拦截器中可以访问到`Observer`实例
