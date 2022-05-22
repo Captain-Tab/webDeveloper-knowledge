@@ -6,6 +6,8 @@
 5. [将拦截器方法挂载](#将拦截器方法挂载)
 6. [如何收集依赖](#如何收集依赖)
 7. [依赖列表存在哪儿](#依赖列表存在哪儿)
+8. [收集依赖](#收集依赖)
+
 
 
 ### 和Object的区别
@@ -172,3 +174,52 @@ export class Observer {
 为什么数组的`Dep`依赖要保存在`Observer`实例上呢？
 
 因为数组在`getter`中收集依赖，在拦截器中触发依赖，所以这个依赖保存位置就比较关键，必须在`getter`和拦截器中都可以访问到。要在`getter`中可以访问到`Observer`实例，同时在`Array`拦截器中可以访问到`Observer`实例
+
+
+### 收集依赖
+把`Dep`实例保存在`Observer`的属性上之后，我们可以在`getter`中访问并收集依赖
+```
+    function defineReactive (data, key, val) {
+        let childOb = observe(val) // 修改
+        let dep = new Dep()
+        Object.defineProperty(data, key, {
+            enumerable: true,
+            configurable: true,
+            get: function() {
+                dep.depend()
+                // 新增
+                if(childOb) {
+                    childOb.dep.depend()
+                }
+                return val
+            },
+            set: function (newVal) {
+                if(val === newVal) return
+                dep.notify()
+                val = newVal
+            }
+        })
+    }
+
+    /** 
+    * 尝试为value创建一个observer实例
+    * 如果创建成功，直接返回新创建的observer实例
+    * 如果value已经存在一个observer实例，则直接返回它
+    **/
+    export function observer (value, asRootData) {
+        if(!isObject(value)) return
+        let ob
+        if (hasOwn(value, '_ob_') && value._ob_instanceof Observer) {
+            ob = value._ob_
+        } else {
+            ob = new Observer(value)
+        }
+        return ob
+    }
+```
+
+在上面的代码中，我们新增了函数`observe`, 它尝试创建一个`Observer`实例。如果`value`已经是响应式数据，不需要再次创建`Observer`实例，直接返回创建的`Observer`实例即可，避免了重复侦测`value`变化的问题。在`defineReactive`函数中调用了`Observe`， 它把`val`当做参数传了进入并拿到一个返回值，那就是`Observer`实例
+
+之前介绍过数组为什么在`getter`中收集依赖，而`defineReactive`函数中的`val`很有可能会是一个数组。通过`observe`我们得到了数组的`Observer`实例(childOb), 最后通过`childOb`的`dep`执行`depend`方法来收集依赖
+
+通过这种方式，我们就可以实现在`getter`中将依赖收集到`Observer`实例的`dep`中。即通过这样的方式可以为数组收集依赖
