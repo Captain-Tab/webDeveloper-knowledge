@@ -129,6 +129,28 @@ const pipe = continous((prev, next) => {
     return next.call(this, prev.call(this, input))
   }
 })
+
+// 理解递归 
+const pipe = continous((prev, next) => {
+  console.log('prev', prev, 'next', next)
+  return function(input) {
+    console.log('next', next)
+    console.log('prev', prev)
+    return next.call(this, prev.call(this, input))
+  }
+})
+
+const double = (x) => x * 2;
+const half = (x) => x / 2;
+const pow2 = (x) => x ** 2;
+
+const cacl = pipe(double, pow2, half);
+cal(10)
+
+func2(fun1())
+func3(fun2(fun1()))
+
+
 ```
 
 ### compose函数
